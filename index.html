@@ -603,12 +603,16 @@ footer b {
 /* ══ WEEKS ══ */
 const WEEKS = [
   { num:1, name:'Rewire Your Thinking', short:'Rewire Your Thinking', dates:'Jul 13–17', accent:'var(--w1)',
+    days:['JUL 13','JUL 14','JUL 15','JUL 16','JUL 17'],
     intro:'Four thinking modes — challenge, translate, simplify, reverse-engineer — converging in Friday’s Situation Room. This week rewires how you think with AI, not just what you produce with it.' },
   { num:2, name:'Customer Intelligence', short:'Customer Intelligence', dates:'Jul 20–24', accent:'var(--w2)',
+    days:['JUL 20','JUL 21','JUL 22','JUL 23','JUL 24'],
     intro:'Engineer a dataset, hunt its patterns, wire in the real world, write the intelligence report — then bring the whole week to life in Friday’s live dashboard.' },
   { num:3, name:'From Idea to Production', short:'Idea to Production', dates:'Jul 27–31', accent:'var(--w3)',
+    days:['JUL 27','JUL 28','JUL 29','JUL 30','JUL 31'],
     intro:'A complete product lifecycle in five days: a hand-drawn CS process becomes a live application at a real URL. Every day has one job. All five connect.' },
   { num:4, name:'Absorb, Reflect, Multiply', short:'Absorb · Reflect · Multiply', dates:'Aug 3–7', accent:'var(--w4)',
+    days:['AUG 3','AUG 4','AUG 5','AUG 6','AUG 7'],
     intro:'Not a graduation week — a launch. Reflect on what you built, map where you’re going, design your own AI Activation Program, and present it to the cohort. The program multiplies.' },
 ];
 
@@ -769,7 +773,7 @@ function hexToRgba(hex, a) {
   return `rgba(${(n>>16)&255},${(n>>8)&255},${n&255},${a})`;
 }
 
-function cardHtml(a, accent, idx) {
+function cardHtml(a, accent, idx, date) {
   const chipStyle = a.mand
     ? 'color:var(--rose);border-color:rgba(251,113,133,.45);background:rgba(251,113,133,.08)'
     : `color:${accentHex(accent)};border-color:${hexToRgba(accentHex(accent),.4)};background:${hexToRgba(accentHex(accent),.07)}`;
@@ -782,7 +786,7 @@ function cardHtml(a, accent, idx) {
       <div class="face front">
         <div class="abar" style="background:${bar}"></div>
         <div class="f-top">
-          <span class="day-chip" style="${chipStyle}">${a.mand ? '🔴 ' : ''}${a.dow}</span>
+          <span class="day-chip" style="${chipStyle}">${a.mand ? '🔴 ' : ''}${a.dow} · ${date}</span>
           ${a.mand ? '<span class="req-mand">Mandatory</span>' : '<span class="req-opt">Optional</span>'}
           <span class="f-time">${a.time}</span>
         </div>
@@ -823,7 +827,7 @@ function render() {
   panels.innerHTML = WEEKS.map((w,i) => {
     const acts = ACTS.filter(a => a.week === w.num);
     const dows = ['MON','TUE','WED','THU','FRI 🔴'].map((d,j) =>
-      `<div class="dow-label${j===4?' fri':''}">${d}</div>`).join('');
+      `<div class="dow-label${j===4?' fri':''}">${d} · ${w.days[j]}${j===4?' 🔴':''}</div>`).join('');
     return `<section class="panel${i===0?' active':''}" id="panel-${w.num}">
       <div class="week-head">
         <div class="week-ghost">W${w.num}</div>
@@ -834,7 +838,7 @@ function render() {
       </div>
       <p class="week-intro">${w.intro}</p>
       <div class="dow-row">${dows}</div>
-      <div class="cgrid">${acts.map((a, j) => cardHtml(a, w.accent, j)).join('')}</div>
+      <div class="cgrid">${acts.map((a, j) => cardHtml(a, w.accent, j, w.days[j])).join('')}</div>
     </section>`;
   }).join('');
 }
