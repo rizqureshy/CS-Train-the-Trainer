@@ -3,7 +3,8 @@
 The standalone participant site for the Customer Success **Train-the-Trainer Cohort**
 (Jul 13 – Aug 7 · facilitated by Chris + Rizwan).
 
-One self-contained page, no dependencies:
+One page plus a vendored `three.min.js` (WebGL starfield background — the page
+degrades gracefully to a CSS star field without it):
 
 - **Track 1 — Weekly AI Practice**: all four weeks (AI Thinking Modes · Data
   Intelligence · Design It, Build It, Ship It · From Participant to Program
