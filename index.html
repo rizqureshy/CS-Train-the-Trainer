@@ -5,170 +5,454 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CS AI Activation — Train-the-Trainer Cohort</title>
 <meta name="description" content="Four weeks. Two tracks. A program you'll own. The Customer Success AI Activation Train-the-Trainer Cohort.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --ink: #0B0F0D;
-    --panel: #111814;
-    --panel-2: #16201A;
-    --line: #24332B;
-    --line-soft: #1B2721;
-    --text: #EAF2EC;
-    --muted: #9DB2A5;
-    --soft: #64796C;
-    --emerald: #34D399;
-    --emerald-deep: #10B981;
-    --emerald-soft: rgba(52, 211, 153, 0.10);
-    --gold: #E8C15A;
-    --gold-deep: #D4A62A;
-    --gold-soft: rgba(232, 193, 90, 0.10);
-    --red: #F87171;
-    --serif: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
-    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body { background: var(--ink); color: var(--text); font-family: var(--sans); line-height: 1.55; }
-  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+/* ══════════════════════════════════════
+   TOKENS — glass purple / studio theme
+══════════════════════════════════════ */
+:root {
+  --bg:      #07071a;
+  --bg2:     #0b0b22;
+  --glass:   rgba(255,255,255,0.04);
+  --glass2:  rgba(255,255,255,0.07);
+  --border:  rgba(255,255,255,0.09);
+  --border2: rgba(255,255,255,0.17);
+  --text:    #f2f1fb;
+  --text2:   #cdcbe8;
+  --muted:   #918fb8;
 
-  /* ── Hero ── */
-  .hero { padding: 72px 0 40px; border-bottom: 1px solid var(--line); background:
-    radial-gradient(ellipse 90% 70% at 70% -20%, rgba(52,211,153,0.10), transparent 60%),
-    radial-gradient(ellipse 60% 50% at 20% 0%, rgba(232,193,90,0.07), transparent 60%); }
-  .crest { display: flex; align-items: center; gap: 14px; margin-bottom: 26px; }
-  .crest-mark { width: 46px; height: 46px; border: 2px solid var(--gold); border-radius: 50%; display: grid; place-items: center; font-size: 22px; background: var(--gold-soft); }
-  .crest-line { font-family: var(--mono); font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); }
-  .crest-line span { color: var(--soft); }
-  h1 { font-family: var(--serif); font-size: clamp(34px, 5.4vw, 58px); line-height: 1.08; letter-spacing: -0.01em; font-weight: 700; max-width: 18ch; }
-  h1 em { font-style: italic; color: var(--emerald); }
-  .hero-sub { margin-top: 18px; font-size: 17px; color: var(--muted); max-width: 62ch; }
-  .hero-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
-  .meta-chip { font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.06em; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; }
-  .meta-chip b { color: var(--emerald); font-weight: 600; }
+  --vio:   #a78bfa;
+  --vio2:  #8b5cf6;
+  --lav:   #c4b5fd;
+  --pink:  #f472b6;
+  --rose:  #fb7185;   /* mandatory */
+  --teal:  #2dd4bf;
+  --sky:   #7dd3fc;
 
-  /* ── Week nav ── */
-  .nav { position: sticky; top: 0; z-index: 50; background: rgba(11,15,13,0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
-  .nav-inner { display: flex; gap: 4px; overflow-x: auto; padding: 10px 24px; max-width: 1080px; margin: 0 auto; }
-  .nav a { font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); text-decoration: none; padding: 8px 14px; border-radius: 999px; white-space: nowrap; }
-  .nav a:hover { color: var(--text); background: var(--panel-2); }
-  .nav a.gold { color: var(--gold); }
+  /* week accents */
+  --w1: #a78bfa;
+  --w2: #38bdf8;
+  --w3: #2dd4bf;
+  --w4: #f472b6;
 
-  /* ── Rhythm / info strip ── */
-  .info { padding: 34px 0; border-bottom: 1px solid var(--line); }
-  .info-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 18px; }
-  .info-card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; }
-  .info-card h3 { font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--emerald); margin-bottom: 10px; }
-  .info-card p, .info-card li { font-size: 13.5px; color: var(--muted); }
-  .info-card ul { list-style: none; }
-  .info-card li { padding: 3px 0 3px 16px; position: relative; }
-  .info-card li::before { content: ""; position: absolute; left: 0; top: 10px; width: 5px; height: 5px; border-radius: 50%; background: var(--emerald); }
-  .rhythm { display: flex; flex-direction: column; gap: 6px; }
-  .r-step { display: flex; gap: 10px; font-size: 13px; color: var(--muted); align-items: baseline; }
-  .r-step b { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); min-width: 86px; }
-  .guard { margin-top: 18px; border: 1px solid var(--gold-deep); background: var(--gold-soft); border-radius: 12px; padding: 14px 18px; font-size: 13.5px; color: var(--text); }
-  .guard b { color: var(--gold); }
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: 'DM Mono', ui-monospace, Menlo, monospace;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:var(--sans);
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.55;
+  min-height:100vh;
+  overflow-x:hidden;
+}
 
-  /* ── Weeks ── */
-  .week { padding: 52px 0 16px; }
-  .week-head { display: flex; align-items: center; gap: 18px; margin-bottom: 12px; }
-  .week-num { font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink); background: var(--emerald); border-radius: 6px; padding: 6px 12px; font-weight: 700; white-space: nowrap; }
-  .week-head h2 { font-family: var(--serif); font-size: clamp(24px, 3.4vw, 34px); line-height: 1.1; }
-  .week-dates { font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--soft); margin-top: 4px; }
-  .week-intro { color: var(--muted); font-size: 15px; max-width: 72ch; margin-bottom: 26px; }
+/* star field */
+body::before {
+  content:''; position:fixed; inset:0; z-index:0; pointer-events:none;
+  background-image:
+    radial-gradient(1px 1px at 15% 20%, rgba(255,255,255,.55) 0%, transparent 100%),
+    radial-gradient(1px 1px at 72% 8%,  rgba(255,255,255,.45) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 40% 55%, rgba(255,255,255,.35) 0%, transparent 100%),
+    radial-gradient(1px 1px at 88% 40%, rgba(255,255,255,.45) 0%, transparent 100%),
+    radial-gradient(1px 1px at 25% 75%, rgba(255,255,255,.28) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 60% 82%, rgba(255,255,255,.35) 0%, transparent 100%),
+    radial-gradient(1px 1px at 95% 65%, rgba(255,255,255,.45) 0%, transparent 100%),
+    radial-gradient(1px 1px at 5%  50%, rgba(255,255,255,.35) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 50% 30%, rgba(255,255,255,.28) 0%, transparent 100%),
+    radial-gradient(1px 1px at 33% 92%, rgba(255,255,255,.35) 0%, transparent 100%);
+}
+/* ambient purple glow */
+body::after {
+  content:''; position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 45% at 75% -8%,  rgba(139,92,246,.16), transparent 65%),
+    radial-gradient(ellipse 50% 40% at 12% 12%,  rgba(167,139,250,.09), transparent 60%),
+    radial-gradient(ellipse 70% 50% at 50% 110%, rgba(139,92,246,.10), transparent 65%);
+}
+.wrap { max-width:1240px; margin:0 auto; padding:0 32px; position:relative; z-index:1; }
 
-  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 18px; }
+/* ══════════════════════════════════════
+   HEADER
+══════════════════════════════════════ */
+header.top {
+  position:sticky; top:0; z-index:600;
+  background:rgba(7,7,26,.82);
+  backdrop-filter:blur(22px); -webkit-backdrop-filter:blur(22px);
+  border-bottom:1px solid var(--border);
+  height:62px;
+}
+.top-inner {
+  max-width:1240px; margin:0 auto; padding:0 32px; height:100%;
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+}
+.logo { display:flex; align-items:center; gap:12px; font-weight:800; font-size:15.5px; letter-spacing:-.01em; }
+.logo-mark {
+  width:34px; height:34px; border-radius:10px; flex-shrink:0;
+  background:linear-gradient(135deg,#c4b5fd,#8b5cf6);
+  display:grid; place-items:center; font-size:15px; color:#fff;
+  box-shadow:0 0 22px rgba(139,92,246,.45), inset 0 1px 0 rgba(255,255,255,.35);
+}
+.logo span.dim { color:var(--muted); font-weight:600; }
+.top-nav { display:flex; gap:4px; }
+.top-nav a {
+  font-size:12.5px; font-weight:600; color:var(--muted); text-decoration:none;
+  padding:7px 14px; border-radius:100px; transition:all .16s;
+}
+.top-nav a:hover { color:var(--text); background:var(--glass2); }
+.hbadge {
+  font-family:var(--mono); font-size:10px; letter-spacing:2px; text-transform:uppercase;
+  color:var(--lav); border:1px solid rgba(167,139,250,.35);
+  background:rgba(167,139,250,.08);
+  padding:5px 14px; border-radius:100px; white-space:nowrap;
+}
 
-  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 22px; display: flex; flex-direction: column; }
-  .card-top { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
-  .day { font-family: var(--mono); font-size: 10.5px; font-weight: 700; letter-spacing: 0.16em; padding: 4px 11px; border-radius: 999px; border: 1px solid var(--emerald); color: var(--emerald); background: var(--emerald-soft); }
-  .req { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--soft); border: 1px dashed var(--line); border-radius: 999px; padding: 4px 10px; }
-  .req.mand { color: var(--gold); border: 1px solid var(--gold-deep); background: var(--gold-soft); font-weight: 700; }
-  .time { margin-left: auto; font-family: var(--mono); font-size: 11px; color: var(--soft); }
-  .card-title { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-  .card-title .emoji { font-size: 26px; }
-  .card-title h3 { font-family: var(--serif); font-size: 21px; line-height: 1.15; }
-  .hook { font-style: italic; color: var(--emerald); font-size: 14px; margin-bottom: 10px; }
-  .mission { font-size: 13.5px; color: var(--muted); margin-bottom: 12px; }
-  .sec { margin-bottom: 10px; }
-  .sec h4 { font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--emerald); margin-bottom: 3px; }
-  .sec p { font-size: 13px; color: var(--muted); }
-  .sec.tip { background: var(--panel-2); border-left: 2px solid var(--gold-deep); border-radius: 0 8px 8px 0; padding: 9px 12px; }
-  .sec.tip h4 { color: var(--gold); }
-  .tools { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 10px; }
-  .tool { font-family: var(--mono); font-size: 10.5px; padding: 4px 11px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
-  .tool-chatgpt { color: #6EE7B7; border-color: #6EE7B7; }
-  .tool-copilot { color: #7DD3FC; border-color: #7DD3FC; }
-  .tool-claude  { color: #FCD34D; border-color: #FCD34D; }
-  .tool-gemini  { color: #A5B4FC; border-color: #A5B4FC; }
-  .tool-github  { color: var(--text); border-color: var(--soft); }
-  .tool-activationstudio { color: #C4B5FD; border-color: #C4B5FD; }
+/* ══════════════════════════════════════
+   HERO
+══════════════════════════════════════ */
+.hero { padding:72px 0 44px; position:relative; }
+.hero-eyebrow {
+  display:inline-flex; align-items:center; gap:9px;
+  font-family:var(--mono); font-size:10.5px; letter-spacing:3.5px; text-transform:uppercase;
+  color:var(--lav); margin-bottom:22px;
+}
+.eyebrow-dot { width:6px; height:6px; border-radius:50%; background:var(--vio);
+  box-shadow:0 0 12px var(--vio); animation:pulse 2.4s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
+h1.hero-title {
+  font-size:clamp(40px,6.2vw,76px); font-weight:800; letter-spacing:-0.035em;
+  line-height:1.04; max-width:20ch;
+}
+h1.hero-title .grad {
+  background:linear-gradient(100deg,#e9e4ff 0%,#c4b5fd 35%,#a78bfa 65%,#8b5cf6 100%);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 28px rgba(139,92,246,.35));
+}
+.hero-sub { margin-top:20px; font-size:16.5px; color:var(--text2); max-width:64ch; font-weight:400; }
 
-  .mandatory-card { border: 1px solid var(--gold-deep); background: linear-gradient(180deg, rgba(232,193,90,0.06), var(--panel) 40%); box-shadow: 0 0 40px -18px rgba(232,193,90,0.5); }
-  .mandatory-card .card-title h3 { font-size: 24px; }
+/* KPI glass row */
+.kpi-row {
+  display:inline-flex; flex-wrap:wrap; margin-top:32px;
+  background:var(--glass); border:1px solid var(--border);
+  border-radius:16px; overflow:hidden;
+  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  box-shadow:0 8px 40px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.07);
+}
+.kpi { padding:16px 26px; border-right:1px solid var(--border); text-align:center; }
+.kpi:last-child { border-right:none; }
+.kpi-n { font-size:26px; font-weight:800; letter-spacing:-.02em; line-height:1.1; }
+.kpi-l { font-family:var(--mono); font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-top:3px; }
 
-  /* ── Track 2 ── */
-  .track2 { padding: 64px 0; border-top: 1px solid var(--line); background: radial-gradient(ellipse 80% 60% at 50% 110%, rgba(232,193,90,0.06), transparent 60%); }
-  .t2-eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
-  .track2 h2 { font-family: var(--serif); font-size: clamp(26px, 4vw, 40px); margin-bottom: 12px; }
-  .t2-sub { color: var(--muted); font-size: 15.5px; max-width: 68ch; margin-bottom: 30px; }
-  .t2-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  .t2-card { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 28px; }
-  .t2-card .t2-icon { font-size: 34px; margin-bottom: 12px; }
-  .t2-card h3 { font-family: var(--serif); font-size: 24px; margin-bottom: 10px; }
-  .t2-card p { font-size: 14px; color: var(--muted); margin-bottom: 12px; }
-  .t2-card ul { list-style: none; margin-bottom: 14px; }
-  .t2-card li { font-size: 13.5px; color: var(--muted); padding: 4px 0 4px 18px; position: relative; }
-  .t2-card li::before { content: "✓"; position: absolute; left: 0; color: var(--emerald); font-size: 12px; }
-  .t2-badge { display: inline-block; font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); border: 1px solid var(--gold-deep); background: var(--gold-soft); border-radius: 999px; padding: 5px 12px; }
-  .t2-note { margin-top: 24px; text-align: center; font-size: 14px; color: var(--muted); }
-  .t2-note b { color: var(--gold); }
+/* ══════════════════════════════════════
+   INFO STRIP
+══════════════════════════════════════ */
+.info { padding:36px 0 8px; }
+.info-grid { display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:16px; }
+.info-card {
+  background:var(--glass); border:1px solid var(--border); border-radius:18px;
+  padding:22px 24px;
+  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
+}
+.info-card h3 {
+  font-family:var(--mono); font-size:10px; letter-spacing:2.5px; text-transform:uppercase;
+  color:var(--lav); margin-bottom:12px; font-weight:500;
+}
+.info-card p, .info-card li { font-size:13px; color:var(--text2); }
+.info-card ul { list-style:none; }
+.info-card li { padding:3px 0 3px 18px; position:relative; }
+.info-card li::before { content:""; position:absolute; left:0; top:11px; width:5px; height:5px; border-radius:50%;
+  background:var(--vio); box-shadow:0 0 8px rgba(167,139,250,.6); }
+.info-card a { color:var(--lav); text-decoration:none; font-weight:600; }
+.info-card a:hover { text-decoration:underline; }
+.rhythm { display:flex; flex-direction:column; gap:7px; }
+.r-step { display:flex; gap:10px; font-size:12.5px; color:var(--text2); align-items:baseline; }
+.r-step b { font-family:var(--mono); font-size:9.5px; letter-spacing:1.5px; text-transform:uppercase;
+  color:var(--vio); min-width:84px; font-weight:500; }
 
-  /* ── Timeline + footer ── */
-  .timeline { padding: 48px 0; border-top: 1px solid var(--line); }
-  .timeline h2 { font-family: var(--serif); font-size: 26px; margin-bottom: 20px; }
-  .tl-row { display: flex; gap: 16px; padding: 9px 0; border-bottom: 1px solid var(--line-soft); font-size: 14px; }
-  .tl-date { font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; color: var(--gold); min-width: 150px; padding-top: 2px; }
-  .tl-what { color: var(--muted); }
-  .tl-what b { color: var(--text); }
-  footer { padding: 36px 0 48px; text-align: center; font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--soft); border-top: 1px solid var(--line); }
-  footer b { color: var(--emerald); }
+.guard {
+  margin-top:16px; border:1px solid rgba(167,139,250,.35);
+  background:linear-gradient(135deg, rgba(139,92,246,.12), rgba(167,139,250,.05));
+  border-radius:16px; padding:15px 20px; font-size:13.5px; color:var(--text2);
+  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
+}
+.guard b { color:var(--lav); }
 
-  @media (max-width: 780px) {
-    .grid, .t2-grid, .info-grid { grid-template-columns: 1fr; }
-    .hero { padding: 48px 0 32px; }
-  }
+/* ══════════════════════════════════════
+   WEEK TABS
+══════════════════════════════════════ */
+.tabbar-outer {
+  position:sticky; top:62px; z-index:500;
+  background:rgba(7,7,26,.85);
+  backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  margin-top:34px;
+}
+.tabbar {
+  max-width:1240px; margin:0 auto; padding:12px 32px;
+  display:flex; gap:8px; overflow-x:auto; scrollbar-width:none;
+}
+.tabbar::-webkit-scrollbar { display:none; }
+.wtab {
+  appearance:none; background:var(--glass); border:1px solid var(--border);
+  font-family:var(--sans); font-size:12.5px; font-weight:600;
+  color:var(--muted); padding:9px 18px; border-radius:100px;
+  cursor:pointer; transition:all .18s; white-space:nowrap;
+  display:flex; align-items:center; gap:8px;
+}
+.wtab .wt-num {
+  font-family:var(--mono); font-size:9px; letter-spacing:1.5px; text-transform:uppercase;
+  opacity:.75;
+}
+.wtab:hover { color:var(--text); border-color:var(--border2); }
+.wtab.on {
+  color:#f4f1ff; border-color:rgba(167,139,250,.55);
+  background:linear-gradient(135deg, rgba(139,92,246,.30), rgba(167,139,250,.12));
+  box-shadow:0 0 24px rgba(139,92,246,.25), inset 0 1px 0 rgba(255,255,255,.12);
+}
+.wtab.on .wt-num { color:var(--lav); opacity:1; }
+
+/* ══════════════════════════════════════
+   WEEK PANELS
+══════════════════════════════════════ */
+.panel { display:none; padding:40px 0 8px; }
+.panel.active { display:block; animation:fadeUp .35s ease both; }
+@keyframes fadeUp { from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none} }
+
+.week-head { display:flex; align-items:center; gap:20px; margin-bottom:8px; }
+.week-ghost {
+  font-size:74px; font-weight:900; letter-spacing:-.04em; line-height:1;
+  color:transparent; -webkit-text-stroke:1px rgba(167,139,250,.28);
+  flex-shrink:0;
+}
+.week-meta h2 { font-size:clamp(22px,3vw,30px); font-weight:800; letter-spacing:-.02em; }
+.week-dates { font-family:var(--mono); font-size:11px; letter-spacing:2.5px; text-transform:uppercase; color:var(--muted); margin-top:3px; }
+.week-intro { color:var(--text2); font-size:14px; max-width:76ch; margin:12px 0 28px; }
+
+/* DOW header row */
+.dow-row { display:grid; grid-template-columns:repeat(5,1fr); gap:14px; margin-bottom:6px; padding:0 2px; }
+.dow-label {
+  font-family:var(--mono); font-size:9px; letter-spacing:2.5px; text-transform:uppercase;
+  color:var(--muted); padding-left:6px;
+}
+.dow-label.fri { color:var(--rose); font-weight:500; }
+
+/* ══════════════════════════════════════
+   FLIP CARDS
+══════════════════════════════════════ */
+.cgrid { display:grid; grid-template-columns:repeat(5,1fr); gap:14px; }
+
+.fcard { perspective:1400px; height:368px; cursor:pointer; position:relative; }
+.fcard-inner {
+  position:relative; width:100%; height:100%;
+  transform-style:preserve-3d;
+  transition:transform .55s cubic-bezier(.3,.9,.35,1);
+}
+.fcard.flipped .fcard-inner { transform:rotateY(180deg); }
+.face {
+  position:absolute; inset:0;
+  backface-visibility:hidden; -webkit-backface-visibility:hidden;
+  border-radius:18px; border:1px solid var(--border);
+  background:linear-gradient(165deg, var(--glass2), var(--glass) 55%);
+  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.07), 0 6px 28px rgba(0,0,0,.35);
+  display:flex; flex-direction:column;
+  overflow:hidden;
+}
+.fcard:hover .face { border-color:var(--border2); }
+.fcard:not(.flipped):hover .fcard-inner { transform:translateY(-4px); }
+.face.back { transform:rotateY(180deg); }
+
+/* accent bar */
+.abar { position:absolute; top:0; left:0; right:0; height:2.5px; border-radius:18px 18px 0 0; }
+
+/* FRONT */
+.face.front { padding:18px 18px 16px; }
+.f-top { display:flex; align-items:center; gap:6px; margin-bottom:14px; flex-wrap:wrap; }
+.day-chip {
+  font-family:var(--mono); font-size:9px; font-weight:500; letter-spacing:1.8px;
+  padding:4px 10px; border-radius:100px; border:1px solid;
+}
+.req-opt {
+  font-family:var(--mono); font-size:8.5px; letter-spacing:1.2px; text-transform:uppercase;
+  color:var(--muted); border:1px dashed var(--border2); border-radius:100px; padding:3.5px 9px;
+}
+.req-mand {
+  font-family:var(--mono); font-size:8.5px; font-weight:500; letter-spacing:1.2px; text-transform:uppercase;
+  color:#fff; background:linear-gradient(135deg,var(--rose),var(--pink));
+  border-radius:100px; padding:4px 10px;
+  box-shadow:0 0 16px rgba(251,113,133,.35);
+}
+.f-time { margin-left:auto; font-family:var(--mono); font-size:9.5px; color:var(--muted); }
+.f-emoji { font-size:30px; line-height:1; margin-bottom:10px; }
+.f-title { font-size:16.5px; font-weight:700; letter-spacing:-.01em; line-height:1.25; margin-bottom:8px; }
+.f-hook { font-size:12.5px; color:var(--lav); font-style:italic; line-height:1.5; }
+.f-foot { margin-top:auto; padding-top:12px; }
+.tools { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:10px; }
+.tool {
+  font-family:var(--mono); font-size:8.5px; letter-spacing:.5px;
+  padding:3px 9px; border-radius:100px; border:1px solid;
+}
+.flip-hint {
+  display:flex; align-items:center; gap:6px;
+  font-family:var(--mono); font-size:9px; letter-spacing:1.5px; text-transform:uppercase;
+  color:var(--muted); transition:color .18s;
+}
+.fcard:hover .flip-hint { color:var(--lav); }
+.flip-hint .arr { font-size:12px; }
+
+/* BACK */
+.face.back { padding:0; }
+.back-scroll { padding:18px; overflow-y:auto; height:100%; scrollbar-width:thin; scrollbar-color:rgba(167,139,250,.35) transparent; }
+.back-scroll::-webkit-scrollbar { width:4px; }
+.back-scroll::-webkit-scrollbar-thumb { background:rgba(167,139,250,.35); border-radius:100px; }
+.b-title { font-size:13px; font-weight:700; margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+.b-title .bt-emoji { font-size:16px; }
+.sec { margin-bottom:12px; }
+.sec h4 {
+  font-family:var(--mono); font-size:8.5px; letter-spacing:2px; text-transform:uppercase;
+  color:var(--lav); margin-bottom:4px; font-weight:500;
+}
+.sec p { font-size:11.5px; color:var(--text2); line-height:1.6; }
+.sec.tip {
+  background:rgba(167,139,250,.07); border-left:2px solid var(--vio);
+  border-radius:0 10px 10px 0; padding:9px 11px;
+}
+.back-foot {
+  font-family:var(--mono); font-size:9px; letter-spacing:1.5px; text-transform:uppercase;
+  color:var(--muted); padding-top:4px;
+}
+
+/* mandatory friday card */
+.fcard.mand .face {
+  border-color:rgba(251,113,133,.35);
+  background:linear-gradient(165deg, rgba(251,113,133,.10), var(--glass) 50%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08), 0 0 34px rgba(251,113,133,.12), 0 6px 28px rgba(0,0,0,.35);
+}
+.fcard.mand:hover .face { border-color:rgba(251,113,133,.55); }
+
+/* ══════════════════════════════════════
+   TRACK 2
+══════════════════════════════════════ */
+.track2 { padding:72px 0 24px; }
+.t2-eyebrow {
+  font-family:var(--mono); font-size:10.5px; letter-spacing:3.5px; text-transform:uppercase;
+  color:var(--lav); margin-bottom:14px; display:flex; align-items:center; gap:9px;
+}
+.track2 h2 { font-size:clamp(26px,3.6vw,38px); font-weight:800; letter-spacing:-.025em; margin-bottom:12px; }
+.t2-sub { color:var(--text2); font-size:14.5px; max-width:70ch; margin-bottom:30px; }
+.t2-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+.t2-card {
+  background:var(--glass); border:1px solid var(--border); border-radius:20px; padding:30px;
+  position:relative; overflow:hidden;
+  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
+}
+.t2-card .tbar { position:absolute; top:0; left:0; right:0; height:3px; }
+.t2-icon {
+  width:52px; height:52px; border-radius:14px; display:grid; place-items:center;
+  font-size:24px; margin-bottom:16px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.3), 0 0 26px rgba(139,92,246,.3);
+}
+.t2-card h3 { font-size:22px; font-weight:800; letter-spacing:-.015em; margin-bottom:10px; }
+.t2-card > p { font-size:13.5px; color:var(--text2); margin-bottom:14px; }
+.t2-card ul { list-style:none; margin-bottom:18px; }
+.t2-card li { font-size:13px; color:var(--text2); padding:4px 0 4px 20px; position:relative; }
+.t2-card li::before { content:"✓"; position:absolute; left:0; color:var(--vio); font-size:12px; font-weight:700; }
+.t2-badge {
+  display:inline-block; font-family:var(--mono); font-size:9.5px; letter-spacing:1.8px; text-transform:uppercase;
+  color:var(--lav); border:1px solid rgba(167,139,250,.4); background:rgba(167,139,250,.09);
+  border-radius:100px; padding:5px 13px;
+}
+.t2-note { margin-top:24px; text-align:center; font-size:13.5px; color:var(--muted); }
+.t2-note b { color:var(--lav); }
+
+/* ══════════════════════════════════════
+   TIMELINE + FOOTER
+══════════════════════════════════════ */
+.timeline { padding:56px 0 40px; }
+.timeline h2 { font-size:24px; font-weight:800; letter-spacing:-.02em; margin-bottom:22px; }
+.tl-card {
+  background:var(--glass); border:1px solid var(--border); border-radius:18px;
+  padding:8px 26px; backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+}
+.tl-row { display:flex; gap:18px; padding:13px 0; border-bottom:1px solid var(--border); font-size:13.5px; align-items:baseline; }
+.tl-row:last-child { border-bottom:none; }
+.tl-date { font-family:var(--mono); font-size:11px; letter-spacing:.5px; color:var(--lav); min-width:150px; }
+.tl-what { color:var(--text2); }
+.tl-what b { color:var(--text); }
+
+footer {
+  padding:40px 0 52px; text-align:center;
+  font-family:var(--mono); font-size:10px; letter-spacing:4px; text-transform:uppercase;
+  color:var(--muted); border-top:1px solid var(--border); position:relative; z-index:1;
+}
+footer b {
+  background:linear-gradient(100deg,var(--lav),var(--vio2));
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width:1120px) {
+  .cgrid { grid-template-columns:repeat(3,1fr); }
+  .dow-row { display:none; }
+}
+@media (max-width:900px) {
+  .info-grid, .t2-grid { grid-template-columns:1fr; }
+  .top-nav { display:none; }
+}
+@media (max-width:720px) {
+  .cgrid { grid-template-columns:repeat(2,1fr); }
+  .wrap, .top-inner, .tabbar { padding-left:18px; padding-right:18px; }
+  .hero { padding:52px 0 36px; }
+  .kpi { padding:12px 16px; }
+}
+@media (max-width:520px) {
+  .cgrid { grid-template-columns:1fr; }
+  .fcard { height:352px; }
+}
 </style>
 </head>
 <body>
 
-<header class="hero">
-  <div class="wrap">
-    <div class="crest">
-      <div class="crest-mark">🎓</div>
-      <div class="crest-line">CS AI Activation <span>· Train-the-Trainer Cohort · Jul 13 – Aug 7</span></div>
+<!-- HEADER -->
+<header class="top">
+  <div class="top-inner">
+    <div class="logo">
+      <div class="logo-mark">◈</div>
+      <div>CS AI Activation&nbsp;<span class="dim">· Train-the-Trainer</span></div>
     </div>
-    <h1>Four weeks. Two tracks. <em>A program you’ll own.</em></h1>
-    <p class="hero-sub">You were picked for this cohort because you’re already AI-versed. Over the next four weeks you’ll go deeper — thinking modes, data intelligence, shipping real tools — and finish by designing an AI Activation Program for your own sub-team. This is not a graduation. It’s a launch.</p>
-    <div class="hero-meta">
-      <span class="meta-chip">Facilitators <b>Chris + Rizwan</b></span>
-      <span class="meta-chip">Mon–Thu <b>optional</b> · 15–20 min</span>
-      <span class="meta-chip">Friday <b>mandatory</b> submission</span>
-      <span class="meta-chip">Weekly winner announced <b>Wednesdays</b></span>
-    </div>
+    <nav class="top-nav">
+      <a href="#weeks">Weekly Practice</a>
+      <a href="#track-2">Track 2</a>
+      <a href="#timeline">Key Dates</a>
+    </nav>
+    <div class="hbadge">Jul 13 – Aug 7</div>
   </div>
 </header>
 
-<nav class="nav">
-  <div class="nav-inner">
-    <a href="#week-1">Wk 1 · Thinking Modes</a>
-    <a href="#week-2">Wk 2 · Data Intelligence</a>
-    <a href="#week-3">Wk 3 · Ship It</a>
-    <a href="#week-4">Wk 4 · Program Designer</a>
-    <a href="#track-2" class="gold">Track 2 · Capstone / Cert</a>
-    <a href="#timeline">Timeline</a>
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-eyebrow"><span class="eyebrow-dot"></span>Train-the-Trainer Cohort · Facilitated by Chris + Rizwan</div>
+    <h1 class="hero-title">Four weeks. Two tracks. <span class="grad">A program you'll own.</span></h1>
+    <p class="hero-sub">You were picked for this cohort because you're already AI-versed. Over the next four weeks you'll go deeper — thinking modes, data intelligence, shipping real tools — and finish by designing an AI Activation Program for your own sub-team. This is not a graduation. It's a launch.</p>
+    <div class="kpi-row">
+      <div class="kpi"><div class="kpi-n" style="color:var(--lav)">4</div><div class="kpi-l">Weeks</div></div>
+      <div class="kpi"><div class="kpi-n">20</div><div class="kpi-l">Activities</div></div>
+      <div class="kpi"><div class="kpi-n" style="color:var(--rose)">4</div><div class="kpi-l">Mandatory Fridays</div></div>
+      <div class="kpi"><div class="kpi-n" style="color:var(--sky)">2</div><div class="kpi-l">Tracks</div></div>
+      <div class="kpi"><div class="kpi-n" style="color:var(--teal)">1</div><div class="kpi-l">Program You Own</div></div>
+    </div>
   </div>
-</nav>
+</section>
 
+<!-- INFO STRIP -->
 <section class="info">
   <div class="wrap">
     <div class="info-grid">
@@ -196,7 +480,7 @@
         <ul>
           <li><b>Track 1</b> — the weekly AI practice below</li>
           <li><b>Track 2</b> — your deeper path: a team capstone or a certification of your choice, completed within the four weeks</li>
-          <li><a href="#track-2" style="color: var(--gold);">Choose your Track 2 path ↓</a></li>
+          <li><a href="#track-2">Choose your Track 2 path ↓</a></li>
         </ul>
       </div>
     </div>
@@ -204,354 +488,24 @@
   </div>
 </section>
 
-<main class="wrap">
-  
-    <section class="week" id="week-1">
-      <header class="week-head">
-        <div class="week-num">Week 1</div>
-        <div>
-          <h2>AI Thinking Modes</h2>
-          <div class="week-dates">Jul 13–17</div>
-        </div>
-      </header>
-      <p class="week-intro">Four thinking modes — challenge, translate, simplify, reverse-engineer — converging in Friday’s Situation Room. This week rewires how you think with AI, not just what you produce with it.</p>
-      <div class="grid">
-        
-      <article class="card ">
-        <div class="card-top">
-          <span class="day day-mon">MON</span>
-          <span class="req">Optional</span>
-          <span class="time">20 min</span>
-        </div>
-        <div class="card-title"><span class="emoji">🧠</span><h3>The Challenger</h3></div>
-        <p class="hook">Use AI to attack your idea — not to validate it.</p>
-        <p class="mission">Bring one rough idea you&#39;re working on. Set AI up as a structured devil&#39;s advocate: find the weak points, expose the assumptions, argue the opposite position as hard as it can. Push back. Defend what deserves defending — let go of what doesn&#39;t.</p>
-        <div class="sec"><h4>Your submission</h4><p>A decision log: what you brought in, what AI challenged, what changed, and what you consciously kept — and why. Post in the channel.</p></div>
-        <div class="sec tip"><h4>💡 Pro tip</h4><p>When you&#39;ve finished the brainstorm, ask AI to generate a structured log of the whole session — what was discussed, challenged, and decided. Let AI do the documenting so you stay focused on the thinking.</p></div>
-        <div class="sec skill"><h4>The real skill</h4><p>Using AI as a critical evaluator. Most people use AI to confirm what they already think — this mode teaches you to stress-test it, and come out stronger.</p></div>
-        <div class="tools"><span class="tool tool-chatgpt">ChatGPT</span><span class="tool tool-copilot">Copilot</span><span class="tool tool-claude">Claude</span></div>
-      </article>
-      <article class="card ">
-        <div class="card-top">
-          <span class="day day-tue">TUE</span>
-          <span class="req">Optional</span>
-          <span class="time">20 min</span>
-        </div>
-        <div class="card-title"><span class="emoji">🎯</span><h3>The Translator</h3></div>
-        <p class="hook">Profile the audience before you write a single word.</p>
-        <p class="mission">Take Monday&#39;s idea and prepare it for three audiences: a senior leader, a customer, and a technical audience. Have AI profile each one FIRST — what they fear, what they want, what language lands, what loses them in ten seconds. Let the profile drive the message, not your instinct.</p>
-        <div class="sec"><h4>Your submission</h4><p>For each audience: the AI-generated profile, their likely concern, the positioning angle you chose, and the final message. Post all three.</p></div>
-        <div class="sec tip"><h4>💡 Pro tip</h4><p>Profile all three audiences in a single prompt first for a comparison view, then go deep on each one separately — the differences in what they need to hear are often surprising.</p></div>
-        <div class="sec skill"><h4>The real skill</h4><p>Using AI as a persona analyst before using it as a writer. The sequence matters: profile first, message second.</p></div>
-        <div class="tools"><span class="tool tool-chatgpt">ChatGPT</span><span class="tool tool-copilot">Copilot</span><span class="tool tool-claude">Claude</span></div>
-      </article>
-      <article class="card ">
-        <div class="card-top">
-          <span class="day day-wed">WED</span>
-          <span class="req">Optional</span>
-          <span class="time">20 min</span>
-        </div>
-        <div class="card-title"><span class="emoji">💡</span><h3>Make the Complex Simple</h3></div>
-        <p class="hook">Explain your idea with analogies — without making it wrong.</p>
-        <p class="mission">Take your idea, product, process, or concept and have AI explain it through analogies for three different audiences. The goal: easier to understand without becoming inaccurate.</p>
-        <div class="sec"><h4>Your submission</h4><p>Three audience-specific analogies + a short note on which worked best and what it may oversimplify. Post in the channel.</p></div>
-        <div class="sec tip"><h4>💡 Pro tip</h4><p>After the first set of analogies, ask: &quot;which of these could be misunderstood, and how?&quot; That follow-up is where the real refinement happens — and it writes your note for you.</p></div>
-        <div class="sec skill"><h4>The real skill</h4><p>Using AI as a translation engine, philosopher, and simplifier — a thinking partner across registers. It transfers to every deck and every stakeholder conversation you&#39;ll ever have.</p></div>
-        <div class="tools"><span class="tool tool-chatgpt">ChatGPT</span><span class="tool tool-copilot">Copilot</span><span class="tool tool-claude">Claude</span></div>
-      </article>
-      <article class="card ">
-        <div class="card-top">
-          <span class="day day-thu">THU</span>
-          <span class="req">Optional</span>
-          <span class="time">20 min</span>
-        </div>
-        <div class="card-title"><span class="emoji">🔍</span><h3>Reverse Engineer the Prompt</h3></div>
-        <p class="hook">Think backwards from great output to great input.</p>
-        <p class="mission">Find a strong piece of output — a compelling proposal, a sharp executive summary, a well-structured QBR, a clear slide outline. Ask AI what prompt most likely created it. Then improve that prompt, and keep iterating until it&#39;s genuinely better than where you started.</p>
-        <div class="sec"><h4>Your submission</h4><p>Three things: the likely original prompt, your improved version, and the three quality instructions that made the biggest difference. Post in the channel.</p></div>
-        <div class="sec tip"><h4>💡 Pro tip</h4><p>Ask for the reverse-engineering in four parts — &quot;what role, context, format instructions, and constraints would have produced this?&quot; — a much richer start than asking for one prompt in one shot.</p></div>
-        <div class="sec skill"><h4>The real skill</h4><p>The foundation of everyone who uses AI at a high level — and a skill you can teach others immediately.</p></div>
-        <div class="tools"><span class="tool tool-chatgpt">ChatGPT</span><span class="tool tool-copilot">Copilot</span><span class="tool tool-claude">Claude</span></div>
-      </article>
-      </div>
-      
-      <article class="card mandatory-card">
-        <div class="card-top">
-          <span class="day day-fri">FRI</span>
-          <span class="req mand">🔴 Mandatory</span>
-          <span class="time">45 min</span>
-        </div>
-        <div class="card-title"><span class="emoji">🎯</span><h3>The Situation Room</h3></div>
-        <p class="hook">Navigate one genuinely messy, real situation — with all four modes.</p>
-        <p class="mission">Take one ambiguous, multi-layered situation from your work: a relationship showing risk signals, a leadership ask with unclear scope, a proposal that must land with multiple stakeholders. Use all four modes from this week — Challenge the assumptions, Translate for your audiences, Simplify the core message, and Reverse-engineer what a great output looks like before building it.</p>
-        <div class="sec"><h4>Your submission</h4><p>Four parts: (1) your AI-assisted read of what&#39;s really going on, (2) your recommended path with rationale, (3) one stakeholder communication for the most important audience, (4) a one-page reflection — where AI helped you think better, where it led you astray, and where human judgment was irreplaceable. Post all four.</p></div>
-        <div class="sec tip"><h4>💡 Pro tip</h4><p>Start with an unfiltered brain dump — paste everything you know about the situation in one go, then ask AI to structure what matters most BEFORE touching solutions. That clarity is what separates the best submissions.</p></div>
-        <div class="sec skill"><h4>The real skill</h4><p>End-to-end AI-assisted judgment — not just production, navigation. You&#39;re building a repeatable thinking process you can use and teach for the rest of your career.</p></div>
-        <div class="tools"><span class="tool tool-chatgpt">ChatGPT</span><span class="tool tool-copilot">Copilot</span><span class="tool tool-claude">Claude</span></div>
-      </article>
-    </section>
-    <section class="week" id="week-2">
-      <header class="week-head">
-        <div class="week-num">Week 2</div>
-        <div>
-          <h2>Data Intelligence</h2>
-          <div class="week-dates">Jul 20–24</div>
-        </div>
-      </header>
-      <p class="week-intro">Engineer a dataset, hunt its patterns, wire in the real world, write the intelligence report — then bring the whole week to life in Friday’s live dashboard.</p>
-      <div class="grid">
-        
-      <article class="card ">
-        <div class="card-top">
-          <span class="day day-mon">MON</span>
-          <span class="req">Optional</span>
-          <span class="time">20 min</span>
-        </div>
-        <div class="card-title"><span class="emoji">📊</span><h3>Make the Data Real</h3></div>
-        <p class="hook">AI isn&#39;t just a content generator — make it engineer data.</p>
-        <p class="mission">Use AI to generate a clean, realistic synthetic dataset for a scenario from your role: customer health scores, renewal pipeline, support ticket trends, onboarding completion. Don&#39;t stop at rows — push AI to engineer patterns in: regional trends, time-based shifts, anomalies, outliers, correlations. This dataset is the prototype foundation for Friday&#39;s live dashboard. Before submitting, ask AI: what story does this data tell, and what should a dashboard surface first?</p>
-        <div class="sec"><h4>Your submission</h4><p>Your dataset (CSV or table) + the AI-generated pattern summary. Post in the channel.</p></div>
-        <div class="sec tip"><h4>💡 Pro tip</h4><p>Have AI build two competing patterns in — one that confirms what you&#39;d expect, one that surprises you. Pattern recognition only becomes a skill when the data doesn&#39;t behave the way you assumed.</p></div>
-        <div class="sec skill"><h4>The real skill</h4><p>AI can generate structured synthetic data engineered for pattern recognition and prototyping — a capability most professionals have never touched. It changes how you think about building with data.</p></div>
-        <div class="tools"><span class="tool tool-chatgpt">ChatGPT</span><span class="tool tool-claude">Claude</span><span class="tool tool-copilot">Copilot</span></div>
-      </article>
-      <article class="card ">
-        <div class="card-top">
-          <span class="day day-tue">TUE</span>
-          <span class="req">Optional</span>
-          <span class="time">20 min</span>
-        </div>
-        <div class="card-title"><span class="emoji">🔍</span><h3>Data Detective</h3></div>
-        <p class="hook">AI is built on pattern recognition. Point it at your data.</p>
-        <p class="mission">Take Monday&#39;s dataset — or real business data you have access to — and have AI digest it completely. Don&#39;t ask for a summary; ask for the what, how, where, why, and the prediction: what&#39;s happening, how it got here, where it&#39;s concentrated, why it looks this way, and where it&#39;s heading if nothing changes. Push until AI surfaces something you genuinely didn&#39;t see. Then push further: what would a skeptical CFO challenge? What can&#39;t the data explain? What additional data would change the picture entirely?</p>
-        <div class="sec"><h4>Your submission</h4><p>Your most powerful insight + the prompt sequence that unlocked it. Post in the channel.</p></div>
-        <div class="sec tip"><h4>💡 Pro tip</h4><p>After the first round of analysis, ask AI: &quot;what am I not asking that I should be?&quot; That single follow-up consistently unlocks the most valuable insight of the session.</p></div>
-        <div class="sec skill"><h4>The real skill</h4><p>AI was built on pattern recognition — most people never use it that way. Once you&#39;ve surfaced a hidden pattern in real data, you&#39;ll never look at a spreadsheet the same way again.</p></div>
-        <div class="tools"><span class="tool tool-chatgpt">ChatGPT</span><span class="tool tool-claude">Claude</span><span class="tool tool-copilot">Copilot</span></div>
-      </article>
-      <article class="card ">
-        <div class="card-top">
-          <span class="day day-wed">WED</span>
-          <span class="req">Optional</span>
-          <span class="time">25 min</span>
-        </div>
-        <div class="card-title"><span class="emoji">🌐</span><h3>Connect to the Real World</h3></div>
-        <p class="hook">Your data doesn&#39;t exist in a vacuum — wire it to the world.</p>
-        <p class="mission">Real data is shaped by forces outside the spreadsheet. Feed AI relevant outside signals — market shifts, industry news, economic indicators, competitor moves, sentiment trends — anything that could plausibly bend Tuesday&#39;s patterns. Ask it to connect those external forces to your internal data and project a future state: what does this data look like in 12 months if these forces continue? What risks emerge, what opportunities appear, and which of your data&#39;s assumptions become dangerous?</p>
-        <div class="sec"><h4>Your submission</h4><p>Your real-world connector summary + the AI-generated future-state projection. Post in the channel.</p></div>
-        <div class="sec tip"><h4>💡 Pro tip</h4><p>Ask for three future states — optimistic, pessimistic, and most likely. The gap between those three is where the most important strategic questions live.</p></div>
-        <div class="sec skill"><h4>The real skill</h4><p>AI as a signal synthesizer — connecting external reality to internal data for forward-looking intelligence. Analysts and strategists spend weeks doing this manually; with AI it&#39;s a session.</p></div>
-        <div class="tools"><span class="tool tool-chatgpt">ChatGPT</span><span class="tool tool-claude">Claude</span><span class="tool tool-gemini">Gemini</span></div>
-      </article>
-      <article class="card ">
-        <div class="card-top">
-          <span class="day day-thu">THU</span>
-          <span class="req">Optional</span>
-          <span class="time">30 min</span>
-        </div>
-        <div class="card-title"><span class="emoji">📝</span><h3>The Intelligence Report</h3></div>
-        <p class="hook">Turn the week&#39;s data work into a brief a leader can act on.</p>
-        <p class="mission">Write the analytical backbone of Friday&#39;s dashboard — a four-section Data Intelligence Report. 1) Data Analysis: what the dataset shows, key metrics, the overall picture. 2) Anomalies &amp; Hidden Patterns: what doesn&#39;t fit, what surprised you, what the human eye would have missed. 3) Key Insights &amp; Implications: the so-what and why it matters for the business. 4) Future State Argument: drawing on Wednesday&#39;s connectors, where this data is heading, what forces drive it, and what leadership should consider acting on now. The clearer this brief, the stronger your dashboard.</p>
-        <div class="sec"><h4>Your submission</h4><p>The full four-section report. Post in the channel.</p></div>
-        <div class="sec tip"><h4>💡 Pro tip</h4><p>After AI drafts each section, ask: &quot;what is the single most important sentence in this section — and is it currently the most prominent?&quot; Forcing AI to rank its own findings improves every section.</p></div>
-        <div class="sec skill"><h4>The real skill</h4><p>Synthesizing a week of data work into one coherent intelligence document. Data without a structured argument is just noise — this turns it into something a senior leader can read, trust, and act on.</p></div>
-        <div class="tools"><span class="tool tool-chatgpt">ChatGPT</span><span class="tool tool-claude">Claude</span><span class="tool tool-copilot">Copilot</span></div>
-      </article>
-      </div>
-      
-      <article class="card mandatory-card">
-        <div class="card-top">
-          <span class="day day-fri">FRI</span>
-          <span class="req mand">🔴 Mandatory</span>
-          <span class="time">60 min</span>
-        </div>
-        <div class="card-title"><span class="emoji">🖥️</span><h3>The Live Dashboard</h3></div>
-        <p class="hook">The week comes together: one live artifact that speaks for itself.</p>
-        <p class="mission">You have the data, the patterns, the real-world connections, and the intelligence report. Now build the dashboard that brings it all to life. Use AI to build a fully functional live dashboard that visualizes your dataset and tells the complete story — what the data shows, what&#39;s hidden inside it, what the world outside is doing to it, and where it&#39;s heading. Must include at least three chart types, a key-insights panel, an anomalies callout, and a future-state projection section. The bar: polished enough to open a leadership meeting without apology — credible enough that a CFO asks follow-up questions instead of dismissing it.</p>
-        <div class="sec"><h4>Your submission</h4><p>Your live dashboard link or HTML file + Thursday&#39;s Intelligence Report as the companion document. Post both in the channel.</p></div>
-        <div class="sec tip"><h4>💡 Pro tip</h4><p>Before building, paste Thursday&#39;s report into AI and ask: &quot;what must this dashboard communicate in the first ten seconds to a senior leader?&quot; Let that answer drive the layout, headline metrics, and visual hierarchy — not your instinct about what looks good.</p></div>
-        <div class="sec skill"><h4>The real skill</h4><p>Turning a week of thinking into a single artifact — data, patterns, real-world intelligence, narrative, and design, all in one place, all working together, ready for a leadership conversation.</p></div>
-        <div class="tools"><span class="tool tool-claude">Claude</span><span class="tool tool-chatgpt">ChatGPT</span></div>
-      </article>
-    </section>
-    <section class="week" id="week-3">
-      <header class="week-head">
-        <div class="week-num">Week 3</div>
-        <div>
-          <h2>Design It, Build It, Ship It</h2>
-          <div class="week-dates">Jul 27–31</div>
-        </div>
-      </header>
-      <p class="week-intro">A complete product lifecycle in five days: a hand-drawn CS process becomes a live application at a real URL. Every day has one job. All five connect.</p>
-      <div class="grid">
-        
-      <article class="card ">
-        <div class="card-top">
-          <span class="day day-mon">MON</span>
-          <span class="req">Optional</span>
-          <span class="time">25 min</span>
-        </div>
-        <div class="card-title"><span class="emoji">✏️</span><h3>Design the Process</h3></div>
-        <p class="hook">Think with your hands first — then let AI read the drawing.</p>
-        <p class="mission">Before touching any AI tool, design a new or improved CS process from scratch — a customer onboarding flow, a renewal readiness check, a health-score intervention path, an escalation framework. Draw it BY HAND: every stage, decision point, and handoff. Photograph it. Then feed the photo to an AI vision tool and ask it to interpret the drawing, refine the logic, and write a polished one-page process brief — what it is, how it flows, who owns each stage, and why it matters. Data note: if your scenario draws on real Equinix customers or internal data, use ACE, Copilot, or SideKick only — never external tools.</p>
-        <div class="sec"><h4>Your submission</h4><p>Two artifacts: the photo of your hand-drawn design + the AI-generated process brief. Post both in the channel.</p></div>
-        <div class="sec tip"><h4>💡 Pro tip</h4><p>Tell AI: &quot;interpret this hand-drawn process diagram, identify any gaps or logical inconsistencies, and write a structured one-page brief — what this process is, how it flows, and what value it delivers.&quot; The more specific the instruction, the more useful the brief.</p></div>
-        <div class="sec skill"><h4>The real skill</h4><p>AI as a visual interpreter and articulator. You provide the thinking in its rawest, most honest form; AI structures it and gives it language. Analog first, AI second — that sequence beats starting from a blank prompt, every time.</p></div>
-        <div class="tools"><span class="tool tool-chatgpt">ChatGPT</span><span class="tool tool-copilot">Copilot</span><span class="tool tool-gemini">Gemini</span></div>
-      </article>
-      <article class="card ">
-        <div class="card-top">
-          <span class="day day-tue">TUE</span>
-          <span class="req">Optional</span>
-          <span class="time">30 min</span>
-        </div>
-        <div class="card-title"><span class="emoji">🎬</span><h3>Build the App</h3></div>
-        <p class="hook">Yesterday&#39;s sketch becomes a living application today.</p>
-        <p class="mission">Feed Monday&#39;s photograph AND process brief into an AI builder tool — together. Ask for a fully functional animated HTML application that brings your process to life: each stage appearing in sequence with smooth transitions, interactive elements a user can click through, and a design polished enough to share with a colleague. Don&#39;t accept the first output — iterate until the animation matches your intent and the interactions feel intuitive. Same data rule as Monday: internal content stays in ACE, Copilot, or SideKick.</p>
-        <div class="sec"><h4>Your submission</h4><p>Your working HTML file. Post in the channel.</p></div>
-        <div class="sec tip"><h4>💡 Pro tip</h4><p>One prompt, both inputs: &quot;use the hand-drawn diagram as the structural reference and the brief as the content guide — build an animated interactive HTML flow a CS professional could walk through in under three minutes.&quot; Both inputs together produces a more faithful result than feeding them separately.</p></div>
-        <div class="sec skill"><h4>The real skill</h4><p>Transforming a hand-drawn concept into a functional interactive application without writing a single line of code. The distance between an idea on paper and a working app just collapsed to one well-constructed prompt and a willingness to iterate.</p></div>
-        <div class="tools"><span class="tool tool-claude">Claude</span><span class="tool tool-chatgpt">ChatGPT</span></div>
-      </article>
-      <article class="card ">
-        <div class="card-top">
-          <span class="day day-wed">WED</span>
-          <span class="req">Optional</span>
-          <span class="time">25 min</span>
-        </div>
-        <div class="card-title"><span class="emoji">🔧</span><h3>Perfect and Package</h3></div>
-        <p class="hook">A working app and a deployable app are two different things.</p>
-        <p class="mission">Close the gap between working and deployable. Three jobs: 1) Perfect the experience — fix anything that feels rough, unclear, or unfinished. 2) Clean the code — have AI review the HTML, remove redundancies, and make the file structure logical and maintainable. 3) Decompose it into a proper package — separate files, cleanly organized, ready to upload to a repository.</p>
-        <div class="sec"><h4>Your submission</h4><p>The finished packaged app as a compressed folder. Post in the channel.</p></div>
-        <div class="sec tip"><h4>💡 Pro tip</h4><p>Before finalizing, ask AI: &quot;review this application and tell me three things that would confuse a first-time user, three things that look unpolished, and three code-structure improvements before deployment.&quot; That one prompt surfaces more refinements than you&#39;d catch yourself.</p></div>
-        <div class="sec skill"><h4>The real skill</h4><p>AI as a quality-assurance and packaging tool. Building something is one skill — shipping something clean is another. Today you learn the difference.</p></div>
-        <div class="tools"><span class="tool tool-claude">Claude</span><span class="tool tool-chatgpt">ChatGPT</span></div>
-      </article>
-      <article class="card ">
-        <div class="card-top">
-          <span class="day day-thu">THU</span>
-          <span class="req">Optional</span>
-          <span class="time">30 min</span>
-        </div>
-        <div class="card-title"><span class="emoji">📺</span><h3>Learn GitHub</h3></div>
-        <p class="hook">Before you ship to the world, learn where your work will live.</p>
-        <p class="mission">Watch the beginner video &quot;GitHub Basics Made Easy&quot; by Skill Foundry (youtube.com/watch?v=Oaj3RBIoGFc) — what GitHub is, how it works, and how to clone, commit, push, and pull. No coding background needed. Watch it fully and take notes. No tools needed today — learn only.</p>
-        <div class="sec"><h4>Your submission</h4><p>One thing that surprised you + one question you still have. Post both in the channel.</p></div>
-        
-        
-        
-      </article>
-      </div>
-      
-      <article class="card mandatory-card">
-        <div class="card-top">
-          <span class="day day-fri">FRI</span>
-          <span class="req mand">🔴 Mandatory</span>
-          <span class="time">45 min</span>
-        </div>
-        <div class="card-title"><span class="emoji">🚀</span><h3>Ship It</h3></div>
-        <p class="hook">Sketch on Monday. Live URL on Friday. Ship it.</p>
-        <p class="mission">Everything this week has been building to this. Create your GitHub account using your Equinix credentials. Create a new public repository. Upload your Week 3 packaged application. Enable GitHub Pages and publish it live. You now have a real URL — a CS process tool you designed by hand on Monday, built with AI on Tuesday, refined on Wednesday, and shipped to the world on Friday.</p>
-        <div class="sec"><h4>Your submission</h4><p>Your live GitHub Pages link + Monday&#39;s process brief as the companion document. Post both in the channel.</p></div>
-        <div class="sec tip"><h4>💡 Pro tip</h4><p>Once your link is live, open it on your phone and share it with someone outside the program before you post it. If they understand what it does in 30 seconds without any explanation, it&#39;s ready. If not, add one clarifying element before submitting.</p></div>
-        <div class="sec skill"><h4>The real skill</h4><p>Taking an idea from analog sketch to live deployed application in five days — nothing but great thinking, smart prompting, and the right tools in the right sequence. That&#39;s not a training exercise. That&#39;s a professional capability.</p></div>
-        <div class="tools"><span class="tool tool-github">GitHub</span></div>
-      </article>
-    </section>
-    <section class="week" id="week-4">
-      <header class="week-head">
-        <div class="week-num">Week 4</div>
-        <div>
-          <h2>From Participant to Program Designer</h2>
-          <div class="week-dates">Aug 3–7</div>
-        </div>
-      </header>
-      <p class="week-intro">Not a graduation week — a launch. Reflect on what you built, map where you’re going, design your own AI Activation Program, and present it to the cohort. The program multiplies.</p>
-      <div class="grid">
-        
-      <article class="card ">
-        <div class="card-top">
-          <span class="day day-mon">MON</span>
-          <span class="req">Optional</span>
-          <span class="time">25 min</span>
-        </div>
-        <div class="card-title"><span class="emoji">🪞</span><h3>Reflect with AI</h3></div>
-        <p class="hook">Three weeks of assumptions, revisited honestly — with AI as your mirror.</p>
-        <p class="mission">Revisit the assumptions you started this program with. Pour your entire learning journey into AI — what clicked, what surprised you, what frustrated you, what shifted in how you think and work. Be specific: the moments, the activities, the outputs that changed something. Then ask AI for something most people never try: analyze what I&#39;ve shared and tell me what kind of AI thinker I&#39;m becoming, which skills are emerging strongest in me, and what natural next direction fits my role, my strengths, and where AI is heading. AI becomes your personal learning mirror.</p>
-        <div class="sec"><h4>Your submission</h4><p>Your reflection + AI&#39;s personalized growth read. Post in the channel.</p></div>
-        <div class="sec tip"><h4>💡 Pro tip</h4><p>Don&#39;t summarize your three weeks for AI — dump the raw, unfiltered version: what didn&#39;t work, the moments of genuine surprise, the activities you almost skipped. The more honest the input, the more useful the analysis.</p></div>
-        <div class="sec skill"><h4>The real skill</h4><p>Using AI as a personal development partner. Reflection without analysis stays in the past — reflection with AI points you toward what comes next.</p></div>
-        <div class="tools"><span class="tool tool-chatgpt">ChatGPT</span><span class="tool tool-copilot">Copilot</span><span class="tool tool-claude">Claude</span></div>
-      </article>
-      <article class="card ">
-        <div class="card-top">
-          <span class="day day-tue">TUE</span>
-          <span class="req">Optional</span>
-          <span class="time">25 min</span>
-        </div>
-        <div class="card-title"><span class="emoji">📈</span><h3>Level Up with AI</h3></div>
-        <p class="hook">Yesterday AI held up a mirror. Today it builds you a map.</p>
-        <p class="mission">Take Monday&#39;s reflection and growth read deeper. Have AI identify the two or three skills most worth polishing given where you are and where you want to go — then design a personalized upskilling track built around YOUR role, gaps, ambitions, and strengths: new activities, new challenges, new prompts, new tools. Not a generic learning plan. Then push further: what should someone at your level, in your role, on your trajectory be doing with AI six months from now that they aren&#39;t doing today?</p>
-        <div class="sec"><h4>Your submission</h4><p>Your personalized upskilling track + your six-month AI vision. Post in the channel.</p></div>
-        <div class="sec tip"><h4>💡 Pro tip</h4><p>After AI builds your track, ask: &quot;which single activity here would create the most visible impact for my team in the shortest time?&quot; Start there — the best development plans have an immediate win built into the first week.</p></div>
-        <div class="sec skill"><h4>The real skill</h4><p>Using AI as a personalized curriculum designer. Generic learning paths are built for everyone. This one is built for you.</p></div>
-        <div class="tools"><span class="tool tool-chatgpt">ChatGPT</span><span class="tool tool-copilot">Copilot</span><span class="tool tool-claude">Claude</span></div>
-      </article>
-      <article class="card ">
-        <div class="card-top">
-          <span class="day day-wed">WED</span>
-          <span class="req">Optional</span>
-          <span class="time">30 min</span>
-        </div>
-        <div class="card-title"><span class="emoji">🎨</span><h3>Design Your Program</h3></div>
-        <p class="hook">You lived the program from the inside. Now design one from the outside.</p>
-        <p class="mission">Using everything you&#39;ve learned — the thinking modes, the data skills, the building capabilities, the reflection practice — design 3–4 themed tracks for your own AI Activation Program. Each track needs a clear theme, a weekly arc, and 3–5 activities that build on each other. Design for your specific sub-team: what they need most, what would land, what pushes them just far enough without losing them. Use AI as your curriculum partner throughout — have it challenge your activity ideas, improve the sequencing, find the gaps, and kill anything that&#39;s a time-waster rather than a skill-builder. (Internal or customer specifics? ACE, Copilot, or SideKick only.)</p>
-        <div class="sec"><h4>Your submission</h4><p>Your 3–4 track designs with themes, arcs, and activities. Post in the channel.</p></div>
-        <div class="sec tip"><h4>💡 Pro tip</h4><p>Before designing any activity, ask AI: &quot;what is the one AI skill that would create the most immediate productivity lift for a CS professional who has never used AI seriously?&quot; Anchor your first track there — start where the participant is, not where the designer wishes they were.</p></div>
-        <div class="sec skill"><h4>The real skill</h4><p>Using AI as a curriculum design and quality-assurance partner. Designing a program for others forces you to deeply understand what you&#39;ve learned yourself — and that understanding is exactly what Train the Trainer is built on.</p></div>
-        <div class="tools"><span class="tool tool-chatgpt">ChatGPT</span><span class="tool tool-claude">Claude</span><span class="tool tool-copilot">Copilot</span></div>
-      </article>
-      <article class="card ">
-        <div class="card-top">
-          <span class="day day-thu">THU</span>
-          <span class="req">Optional</span>
-          <span class="time">45 min</span>
-        </div>
-        <div class="card-title"><span class="emoji">🏗️</span><h3>Build the Foundation</h3></div>
-        <p class="hook">From tracks on paper to a program your team could start Monday.</p>
-        <p class="mission">Take Wednesday&#39;s tracks and build the complete, ready-to-run program — in AI or the Activation Studio. Every element: the program name and identity, the weekly themes and how they connect, the Mon–Thu optional activities with full briefs, the Friday mandatory challenges and what they produce, the submission format and what good looks like, the tone and culture you want, and the one thing every participant walks away with. Not a slide-deck outline — a working blueprint your sub-team could start the following Monday. Pressure-test every decision with AI: what would make a participant drop out by Week 2? Which activities feel like homework rather than genuine learning? Which Friday challenge would make someone genuinely proud of what they built?</p>
-        <div class="sec"><h4>Your submission</h4><p>Your complete program blueprint. Post in the channel.</p></div>
-        <div class="sec tip"><h4>💡 Pro tip</h4><p>Have AI roleplay a skeptical participant — busy, tried AI before, found it underwhelming, needs immediate value or they disengage. Ask that persona to review your program and say where they&#39;d check out. Fix those moments before Friday.</p></div>
-        <div class="sec skill"><h4>The real skill</h4><p>Using AI to build and stress-test a complete learning experience. You&#39;re not just a participant anymore — you&#39;re a program designer, and this blueprint is the proof.</p></div>
-        <div class="tools"><span class="tool tool-activationstudio">Activation Studio</span><span class="tool tool-chatgpt">ChatGPT</span><span class="tool tool-claude">Claude</span></div>
-      </article>
-      </div>
-      
-      <article class="card mandatory-card">
-        <div class="card-top">
-          <span class="day day-fri">FRI</span>
-          <span class="req mand">🔴 Mandatory</span>
-          <span class="time">60 min</span>
-        </div>
-        <div class="card-title"><span class="emoji">🎤</span><h3>Present Your AI Activation Plan</h3></div>
-        <p class="hook">Not a summary. A launch. Present the program you own.</p>
-        <p class="mission">The moment the entire program has been building toward: present your AI Activation Program to Chris and the cohort. Not a summary of what you learned. Not a reflection on three weeks. A real, deployable program you could run with your sub-team starting next week. Cover four things: what your program achieves and for whom; your 3–4 tracks and why you sequenced them that way; one activity from each track you&#39;re most proud of and the skill it builds; and your personal commitment — what you&#39;re doing differently from this point forward as an AI practitioner AND an AI activator. The program doesn&#39;t end today. It multiplies — every person leaves with a program they own and a team they&#39;re ready to activate.</p>
-        <div class="sec"><h4>Your submission</h4><p>Your program blueprint + your presentation. Post in the channel — with the live link if your blueprint ships on GitHub Pages.</p></div>
-        <div class="sec tip"><h4>💡 Pro tip</h4><p>Open with the one moment from the past three weeks where AI genuinely surprised you — not the best output, the moment something shifted. That&#39;s the moment your audience will remember, and the most honest answer to why any of this matters.</p></div>
-        <div class="sec skill"><h4>The real skill</h4><p>Turning three weeks of learning into a program you can run, a capability you can teach, and a commitment you can keep. That&#39;s what Train the Trainer looks like in the AI era.</p></div>
-        <div class="tools"><span class="tool tool-copilot">Copilot</span><span class="tool tool-chatgpt">ChatGPT</span></div>
-      </article>
-    </section>
-</main>
+<!-- WEEK TABS -->
+<div class="tabbar-outer" id="weeks">
+  <div class="tabbar" id="tabbar"></div>
+</div>
 
+<!-- WEEK PANELS -->
+<main class="wrap" id="panels"></main>
+
+<!-- TRACK 2 -->
 <section class="track2" id="track-2">
   <div class="wrap">
-    <div class="t2-eyebrow">Track 2 · Your Deeper Path</div>
+    <div class="t2-eyebrow"><span class="eyebrow-dot"></span>Track 2 · Your Deeper Path</div>
     <h2>Choose one. Own it. Finish it inside the four weeks.</h2>
     <p class="t2-sub">Alongside the weekly practice, every participant commits to one deeper path. Both are completed within the program window — and both get live support at the Tuesday and Friday drop-in sessions. Pick early in Week 1 so the sessions can support you from the start.</p>
     <div class="t2-grid">
       <div class="t2-card">
-        <div class="t2-icon">🏗️</div>
+        <div class="tbar" style="background:linear-gradient(90deg,var(--vio2),transparent)"></div>
+        <div class="t2-icon" style="background:linear-gradient(135deg,#c4b5fd,#8b5cf6)">🏗️</div>
         <h3>Team Capstone Project</h3>
         <p>Form a team of <b>3–5 people</b> and build or design an applied AI solution — a working tool, a workflow, a prototype, or a business-improvement concept your team could actually use.</p>
         <ul>
@@ -563,7 +517,8 @@
         <span class="t2-badge">Team path</span>
       </div>
       <div class="t2-card">
-        <div class="t2-icon">📜</div>
+        <div class="tbar" style="background:linear-gradient(90deg,var(--pink),transparent)"></div>
+        <div class="t2-icon" style="background:linear-gradient(135deg,#f9a8d4,#db2777)">📜</div>
         <h3>Certification of Choice</h3>
         <p>Pursue an AI-related certification or learning credential — <b>your choice</b>, aligned to your own development goals and where you want your AI capability to go next.</p>
         <ul>
@@ -579,21 +534,288 @@
   </div>
 </section>
 
+<!-- TIMELINE -->
 <section class="timeline" id="timeline">
   <div class="wrap">
     <h2>Key dates</h2>
-    <div class="tl-row"><span class="tl-date">Thu · Jul 9</span><span class="tl-what">Teaser announcement + <b>AI Journey Assessment</b></span></div>
-    <div class="tl-row"><span class="tl-date">Mon · Jul 13</span><span class="tl-what"><b>Program launch</b> — welcome + Day 1 activity</span></div>
-    <div class="tl-row"><span class="tl-date">Fri · Jul 17</span><span class="tl-what">First mandatory Friday submission</span></div>
-    <div class="tl-row"><span class="tl-date">Tue · Jul 21 EOD</span><span class="tl-what">First round of grading complete</span></div>
-    <div class="tl-row"><span class="tl-date">Wed · Jul 22</span><span class="tl-what">🏆 First weekly winner announced</span></div>
-    <div class="tl-row"><span class="tl-date">Fri · Aug 7</span><span class="tl-what"><b>Final Friday</b> — present your AI Activation Program</span></div>
+    <div class="tl-card">
+      <div class="tl-row"><span class="tl-date">Thu · Jul 9</span><span class="tl-what">Teaser announcement + <b>AI Journey Assessment</b></span></div>
+      <div class="tl-row"><span class="tl-date">Mon · Jul 13</span><span class="tl-what"><b>Program launch</b> — welcome + Day 1 activity</span></div>
+      <div class="tl-row"><span class="tl-date">Fri · Jul 17</span><span class="tl-what">First mandatory Friday submission</span></div>
+      <div class="tl-row"><span class="tl-date">Tue · Jul 21 EOD</span><span class="tl-what">First round of grading complete</span></div>
+      <div class="tl-row"><span class="tl-date">Wed · Jul 22</span><span class="tl-what">🏆 First weekly winner announced</span></div>
+      <div class="tl-row"><span class="tl-date">Fri · Aug 7</span><span class="tl-what"><b>Final Friday</b> — present your AI Activation Program</span></div>
+    </div>
   </div>
 </section>
 
 <footer>
   <b>CS AI Activation</b> · Train the Trainer · The program multiplies
 </footer>
+
+<script>
+/* ══ TOOL CHIP STYLES ══ */
+const TOOLS = {
+  chatgpt: { label:'ChatGPT',           color:'#5eead4' },
+  copilot: { label:'Copilot',           color:'#7dd3fc' },
+  claude:  { label:'Claude',            color:'#fcd34d' },
+  gemini:  { label:'Gemini',            color:'#a5b4fc' },
+  github:  { label:'GitHub',            color:'#e2e8f0' },
+  studio:  { label:'Activation Studio', color:'#c084fc' },
+};
+
+/* ══ WEEKS ══ */
+const WEEKS = [
+  { num:1, name:'AI Thinking Modes', short:'Thinking Modes', dates:'Jul 13–17', accent:'var(--w1)',
+    intro:'Four thinking modes — challenge, translate, simplify, reverse-engineer — converging in Friday’s Situation Room. This week rewires how you think with AI, not just what you produce with it.' },
+  { num:2, name:'Data Intelligence', short:'Data Intelligence', dates:'Jul 20–24', accent:'var(--w2)',
+    intro:'Engineer a dataset, hunt its patterns, wire in the real world, write the intelligence report — then bring the whole week to life in Friday’s live dashboard.' },
+  { num:3, name:'Design It, Build It, Ship It', short:'Ship It', dates:'Jul 27–31', accent:'var(--w3)',
+    intro:'A complete product lifecycle in five days: a hand-drawn CS process becomes a live application at a real URL. Every day has one job. All five connect.' },
+  { num:4, name:'From Participant to Program Designer', short:'Program Designer', dates:'Aug 3–7', accent:'var(--w4)',
+    intro:'Not a graduation week — a launch. Reflect on what you built, map where you’re going, design your own AI Activation Program, and present it to the cohort. The program multiplies.' },
+];
+
+/* ══ ACTIVITIES ══ */
+const ACTS = [
+  /* ── WEEK 1 ── */
+  { week:1, dow:'MON', mand:false, time:'20 min', emoji:'🧠', title:'The Challenger',
+    hook:'Use AI to attack your idea — not to validate it.',
+    mission:'Bring one rough idea you’re working on. Set AI up as a structured devil’s advocate: find the weak points, expose the assumptions, argue the opposite position as hard as it can. Push back. Defend what deserves defending — let go of what doesn’t.',
+    submission:'A decision log: what you brought in, what AI challenged, what changed, and what you consciously kept — and why. Post in the channel.',
+    tip:'When you’ve finished the brainstorm, ask AI to generate a structured log of the whole session — what was discussed, challenged, and decided. Let AI do the documenting so you stay focused on the thinking.',
+    skill:'Using AI as a critical evaluator. Most people use AI to confirm what they already think — this mode teaches you to stress-test it, and come out stronger.',
+    tools:['chatgpt','copilot','claude'] },
+  { week:1, dow:'TUE', mand:false, time:'20 min', emoji:'🎯', title:'The Translator',
+    hook:'Profile the audience before you write a single word.',
+    mission:'Take Monday’s idea and prepare it for three audiences: a senior leader, a customer, and a technical audience. Have AI profile each one FIRST — what they fear, what they want, what language lands, what loses them in ten seconds. Let the profile drive the message, not your instinct.',
+    submission:'For each audience: the AI-generated profile, their likely concern, the positioning angle you chose, and the final message. Post all three.',
+    tip:'Profile all three audiences in a single prompt first for a comparison view, then go deep on each one separately — the differences in what they need to hear are often surprising.',
+    skill:'Using AI as a persona analyst before using it as a writer. The sequence matters: profile first, message second.',
+    tools:['chatgpt','copilot','claude'] },
+  { week:1, dow:'WED', mand:false, time:'20 min', emoji:'💡', title:'Make the Complex Simple',
+    hook:'Explain your idea with analogies — without making it wrong.',
+    mission:'Take your idea, product, process, or concept and have AI explain it through analogies for three different audiences. The goal: easier to understand without becoming inaccurate.',
+    submission:'Three audience-specific analogies + a short note on which worked best and what it may oversimplify. Post in the channel.',
+    tip:'After the first set of analogies, ask: “which of these could be misunderstood, and how?” That follow-up is where the real refinement happens — and it writes your note for you.',
+    skill:'Using AI as a translation engine, philosopher, and simplifier — a thinking partner across registers. It transfers to every deck and every stakeholder conversation you’ll ever have.',
+    tools:['chatgpt','copilot','claude'] },
+  { week:1, dow:'THU', mand:false, time:'20 min', emoji:'🔍', title:'Reverse Engineer the Prompt',
+    hook:'Think backwards from great output to great input.',
+    mission:'Find a strong piece of output — a compelling proposal, a sharp executive summary, a well-structured QBR, a clear slide outline. Ask AI what prompt most likely created it. Then improve that prompt, and keep iterating until it’s genuinely better than where you started.',
+    submission:'Three things: the likely original prompt, your improved version, and the three quality instructions that made the biggest difference. Post in the channel.',
+    tip:'Ask for the reverse-engineering in four parts — “what role, context, format instructions, and constraints would have produced this?” — a much richer start than asking for one prompt in one shot.',
+    skill:'The foundation of everyone who uses AI at a high level — and a skill you can teach others immediately.',
+    tools:['chatgpt','copilot','claude'] },
+  { week:1, dow:'FRI', mand:true, time:'45 min', emoji:'🎯', title:'The Situation Room',
+    hook:'Navigate one genuinely messy, real situation — with all four modes.',
+    mission:'Take one ambiguous, multi-layered situation from your work: a relationship showing risk signals, a leadership ask with unclear scope, a proposal that must land with multiple stakeholders. Use all four modes from this week — Challenge the assumptions, Translate for your audiences, Simplify the core message, and Reverse-engineer what a great output looks like before building it.',
+    submission:'Four parts: (1) your AI-assisted read of what’s really going on, (2) your recommended path with rationale, (3) one stakeholder communication for the most important audience, (4) a one-page reflection — where AI helped you think better, where it led you astray, and where human judgment was irreplaceable. Post all four.',
+    tip:'Start with an unfiltered brain dump — paste everything you know about the situation in one go, then ask AI to structure what matters most BEFORE touching solutions. That clarity is what separates the best submissions.',
+    skill:'End-to-end AI-assisted judgment — not just production, navigation. You’re building a repeatable thinking process you can use and teach for the rest of your career.',
+    tools:['chatgpt','copilot','claude'] },
+
+  /* ── WEEK 2 ── */
+  { week:2, dow:'MON', mand:false, time:'20 min', emoji:'📊', title:'Make the Data Real',
+    hook:'AI isn’t just a content generator — make it engineer data.',
+    mission:'Use AI to generate a clean, realistic synthetic dataset for a scenario from your role: customer health scores, renewal pipeline, support ticket trends, onboarding completion. Don’t stop at rows — push AI to engineer patterns in: regional trends, time-based shifts, anomalies, outliers, correlations. This dataset is the prototype foundation for Friday’s live dashboard. Before submitting, ask AI: what story does this data tell, and what should a dashboard surface first?',
+    submission:'Your dataset (CSV or table) + the AI-generated pattern summary. Post in the channel.',
+    tip:'Have AI build two competing patterns in — one that confirms what you’d expect, one that surprises you. Pattern recognition only becomes a skill when the data doesn’t behave the way you assumed.',
+    skill:'AI can generate structured synthetic data engineered for pattern recognition and prototyping — a capability most professionals have never touched. It changes how you think about building with data.',
+    tools:['chatgpt','claude','copilot'] },
+  { week:2, dow:'TUE', mand:false, time:'20 min', emoji:'🔍', title:'Data Detective',
+    hook:'AI is built on pattern recognition. Point it at your data.',
+    mission:'Take Monday’s dataset — or real business data you have access to — and have AI digest it completely. Don’t ask for a summary; ask for the what, how, where, why, and the prediction: what’s happening, how it got here, where it’s concentrated, why it looks this way, and where it’s heading if nothing changes. Push until AI surfaces something you genuinely didn’t see. Then push further: what would a skeptical CFO challenge? What can’t the data explain? What additional data would change the picture entirely?',
+    submission:'Your most powerful insight + the prompt sequence that unlocked it. Post in the channel.',
+    tip:'After the first round of analysis, ask AI: “what am I not asking that I should be?” That single follow-up consistently unlocks the most valuable insight of the session.',
+    skill:'AI was built on pattern recognition — most people never use it that way. Once you’ve surfaced a hidden pattern in real data, you’ll never look at a spreadsheet the same way again.',
+    tools:['chatgpt','claude','copilot'] },
+  { week:2, dow:'WED', mand:false, time:'25 min', emoji:'🌐', title:'Connect to the Real World',
+    hook:'Your data doesn’t exist in a vacuum — wire it to the world.',
+    mission:'Real data is shaped by forces outside the spreadsheet. Feed AI relevant outside signals — market shifts, industry news, economic indicators, competitor moves, sentiment trends — anything that could plausibly bend Tuesday’s patterns. Ask it to connect those external forces to your internal data and project a future state: what does this data look like in 12 months if these forces continue? What risks emerge, what opportunities appear, and which of your data’s assumptions become dangerous?',
+    submission:'Your real-world connector summary + the AI-generated future-state projection. Post in the channel.',
+    tip:'Ask for three future states — optimistic, pessimistic, and most likely. The gap between those three is where the most important strategic questions live.',
+    skill:'AI as a signal synthesizer — connecting external reality to internal data for forward-looking intelligence. Analysts and strategists spend weeks doing this manually; with AI it’s a session.',
+    tools:['chatgpt','claude','gemini'] },
+  { week:2, dow:'THU', mand:false, time:'30 min', emoji:'📝', title:'The Intelligence Report',
+    hook:'Turn the week’s data work into a brief a leader can act on.',
+    mission:'Write the analytical backbone of Friday’s dashboard — a four-section Data Intelligence Report. 1) Data Analysis: what the dataset shows, key metrics, the overall picture. 2) Anomalies &amp; Hidden Patterns: what doesn’t fit, what surprised you, what the human eye would have missed. 3) Key Insights &amp; Implications: the so-what and why it matters for the business. 4) Future State Argument: drawing on Wednesday’s connectors, where this data is heading, what forces drive it, and what leadership should consider acting on now. The clearer this brief, the stronger your dashboard.',
+    submission:'The full four-section report. Post in the channel.',
+    tip:'After AI drafts each section, ask: “what is the single most important sentence in this section — and is it currently the most prominent?” Forcing AI to rank its own findings improves every section.',
+    skill:'Synthesizing a week of data work into one coherent intelligence document. Data without a structured argument is just noise — this turns it into something a senior leader can read, trust, and act on.',
+    tools:['chatgpt','claude','copilot'] },
+  { week:2, dow:'FRI', mand:true, time:'60 min', emoji:'🖥️', title:'The Live Dashboard',
+    hook:'The week comes together: one live artifact that speaks for itself.',
+    mission:'You have the data, the patterns, the real-world connections, and the intelligence report. Now build the dashboard that brings it all to life. Use AI to build a fully functional live dashboard that visualizes your dataset and tells the complete story — what the data shows, what’s hidden inside it, what the world outside is doing to it, and where it’s heading. Must include at least three chart types, a key-insights panel, an anomalies callout, and a future-state projection section. The bar: polished enough to open a leadership meeting without apology — credible enough that a CFO asks follow-up questions instead of dismissing it.',
+    submission:'Your live dashboard link or HTML file + Thursday’s Intelligence Report as the companion document. Post both in the channel.',
+    tip:'Before building, paste Thursday’s report into AI and ask: “what must this dashboard communicate in the first ten seconds to a senior leader?” Let that answer drive the layout, headline metrics, and visual hierarchy — not your instinct about what looks good.',
+    skill:'Turning a week of thinking into a single artifact — data, patterns, real-world intelligence, narrative, and design, all in one place, all working together, ready for a leadership conversation.',
+    tools:['claude','chatgpt'] },
+
+  /* ── WEEK 3 ── */
+  { week:3, dow:'MON', mand:false, time:'25 min', emoji:'✏️', title:'Design the Process',
+    hook:'Think with your hands first — then let AI read the drawing.',
+    mission:'Before touching any AI tool, design a new or improved CS process from scratch — a customer onboarding flow, a renewal readiness check, a health-score intervention path, an escalation framework. Draw it BY HAND: every stage, decision point, and handoff. Photograph it. Then feed the photo to an AI vision tool and ask it to interpret the drawing, refine the logic, and write a polished one-page process brief — what it is, how it flows, who owns each stage, and why it matters. Data note: if your scenario draws on real Equinix customers or internal data, use ACE, Copilot, or SideKick only — never external tools.',
+    submission:'Two artifacts: the photo of your hand-drawn design + the AI-generated process brief. Post both in the channel.',
+    tip:'Tell AI: “interpret this hand-drawn process diagram, identify any gaps or logical inconsistencies, and write a structured one-page brief — what this process is, how it flows, and what value it delivers.” The more specific the instruction, the more useful the brief.',
+    skill:'AI as a visual interpreter and articulator. You provide the thinking in its rawest, most honest form; AI structures it and gives it language. Analog first, AI second — that sequence beats starting from a blank prompt, every time.',
+    tools:['chatgpt','copilot','gemini'] },
+  { week:3, dow:'TUE', mand:false, time:'30 min', emoji:'🎬', title:'Build the App',
+    hook:'Yesterday’s sketch becomes a living application today.',
+    mission:'Feed Monday’s photograph AND process brief into an AI builder tool — together. Ask for a fully functional animated HTML application that brings your process to life: each stage appearing in sequence with smooth transitions, interactive elements a user can click through, and a design polished enough to share with a colleague. Don’t accept the first output — iterate until the animation matches your intent and the interactions feel intuitive. Same data rule as Monday: internal content stays in ACE, Copilot, or SideKick.',
+    submission:'Your working HTML file. Post in the channel.',
+    tip:'One prompt, both inputs: “use the hand-drawn diagram as the structural reference and the brief as the content guide — build an animated interactive HTML flow a CS professional could walk through in under three minutes.” Both inputs together produces a more faithful result than feeding them separately.',
+    skill:'Transforming a hand-drawn concept into a functional interactive application without writing a single line of code. The distance between an idea on paper and a working app just collapsed to one well-constructed prompt and a willingness to iterate.',
+    tools:['claude','chatgpt'] },
+  { week:3, dow:'WED', mand:false, time:'25 min', emoji:'🔧', title:'Perfect and Package',
+    hook:'A working app and a deployable app are two different things.',
+    mission:'Close the gap between working and deployable. Three jobs: 1) Perfect the experience — fix anything that feels rough, unclear, or unfinished. 2) Clean the code — have AI review the HTML, remove redundancies, and make the file structure logical and maintainable. 3) Decompose it into a proper package — separate files, cleanly organized, ready to upload to a repository.',
+    submission:'The finished packaged app as a compressed folder. Post in the channel.',
+    tip:'Before finalizing, ask AI: “review this application and tell me three things that would confuse a first-time user, three things that look unpolished, and three code-structure improvements before deployment.” That one prompt surfaces more refinements than you’d catch yourself.',
+    skill:'AI as a quality-assurance and packaging tool. Building something is one skill — shipping something clean is another. Today you learn the difference.',
+    tools:['claude','chatgpt'] },
+  { week:3, dow:'THU', mand:false, time:'30 min', emoji:'📺', title:'Learn GitHub',
+    hook:'Before you ship to the world, learn where your work will live.',
+    mission:'Watch the beginner video “GitHub Basics Made Easy” by Skill Foundry (youtube.com/watch?v=Oaj3RBIoGFc) — what GitHub is, how it works, and how to clone, commit, push, and pull. No coding background needed. Watch it fully and take notes. No tools needed today — learn only.',
+    submission:'One thing that surprised you + one question you still have. Post both in the channel.',
+    tip:null, skill:null,
+    tools:[] },
+  { week:3, dow:'FRI', mand:true, time:'45 min', emoji:'🚀', title:'Ship It',
+    hook:'Sketch on Monday. Live URL on Friday. Ship it.',
+    mission:'Everything this week has been building to this. Create your GitHub account using your Equinix credentials. Create a new public repository. Upload your Week 3 packaged application. Enable GitHub Pages and publish it live. You now have a real URL — a CS process tool you designed by hand on Monday, built with AI on Tuesday, refined on Wednesday, and shipped to the world on Friday.',
+    submission:'Your live GitHub Pages link + Monday’s process brief as the companion document. Post both in the channel.',
+    tip:'Once your link is live, open it on your phone and share it with someone outside the program before you post it. If they understand what it does in 30 seconds without any explanation, it’s ready. If not, add one clarifying element before submitting.',
+    skill:'Taking an idea from analog sketch to live deployed application in five days — nothing but great thinking, smart prompting, and the right tools in the right sequence. That’s not a training exercise. That’s a professional capability.',
+    tools:['github'] },
+
+  /* ── WEEK 4 ── */
+  { week:4, dow:'MON', mand:false, time:'25 min', emoji:'🪞', title:'Reflect with AI',
+    hook:'Three weeks of assumptions, revisited honestly — with AI as your mirror.',
+    mission:'Revisit the assumptions you started this program with. Pour your entire learning journey into AI — what clicked, what surprised you, what frustrated you, what shifted in how you think and work. Be specific: the moments, the activities, the outputs that changed something. Then ask AI for something most people never try: analyze what I’ve shared and tell me what kind of AI thinker I’m becoming, which skills are emerging strongest in me, and what natural next direction fits my role, my strengths, and where AI is heading. AI becomes your personal learning mirror.',
+    submission:'Your reflection + AI’s personalized growth read. Post in the channel.',
+    tip:'Don’t summarize your three weeks for AI — dump the raw, unfiltered version: what didn’t work, the moments of genuine surprise, the activities you almost skipped. The more honest the input, the more useful the analysis.',
+    skill:'Using AI as a personal development partner. Reflection without analysis stays in the past — reflection with AI points you toward what comes next.',
+    tools:['chatgpt','copilot','claude'] },
+  { week:4, dow:'TUE', mand:false, time:'25 min', emoji:'📈', title:'Level Up with AI',
+    hook:'Yesterday AI held up a mirror. Today it builds you a map.',
+    mission:'Take Monday’s reflection and growth read deeper. Have AI identify the two or three skills most worth polishing given where you are and where you want to go — then design a personalized upskilling track built around YOUR role, gaps, ambitions, and strengths: new activities, new challenges, new prompts, new tools. Not a generic learning plan. Then push further: what should someone at your level, in your role, on your trajectory be doing with AI six months from now that they aren’t doing today?',
+    submission:'Your personalized upskilling track + your six-month AI vision. Post in the channel.',
+    tip:'After AI builds your track, ask: “which single activity here would create the most visible impact for my team in the shortest time?” Start there — the best development plans have an immediate win built into the first week.',
+    skill:'Using AI as a personalized curriculum designer. Generic learning paths are built for everyone. This one is built for you.',
+    tools:['chatgpt','copilot','claude'] },
+  { week:4, dow:'WED', mand:false, time:'30 min', emoji:'🎨', title:'Design Your Program',
+    hook:'You lived the program from the inside. Now design one from the outside.',
+    mission:'Using everything you’ve learned — the thinking modes, the data skills, the building capabilities, the reflection practice — design 3–4 themed tracks for your own AI Activation Program. Each track needs a clear theme, a weekly arc, and 3–5 activities that build on each other. Design for your specific sub-team: what they need most, what would land, what pushes them just far enough without losing them. Use AI as your curriculum partner throughout — have it challenge your activity ideas, improve the sequencing, find the gaps, and kill anything that’s a time-waster rather than a skill-builder. (Internal or customer specifics? ACE, Copilot, or SideKick only.)',
+    submission:'Your 3–4 track designs with themes, arcs, and activities. Post in the channel.',
+    tip:'Before designing any activity, ask AI: “what is the one AI skill that would create the most immediate productivity lift for a CS professional who has never used AI seriously?” Anchor your first track there — start where the participant is, not where the designer wishes they were.',
+    skill:'Using AI as a curriculum design and quality-assurance partner. Designing a program for others forces you to deeply understand what you’ve learned yourself — and that understanding is exactly what Train the Trainer is built on.',
+    tools:['chatgpt','claude','copilot'] },
+  { week:4, dow:'THU', mand:false, time:'45 min', emoji:'🏗️', title:'Build the Foundation',
+    hook:'From tracks on paper to a program your team could start Monday.',
+    mission:'Take Wednesday’s tracks and build the complete, ready-to-run program — in AI or the Activation Studio. Every element: the program name and identity, the weekly themes and how they connect, the Mon–Thu optional activities with full briefs, the Friday mandatory challenges and what they produce, the submission format and what good looks like, the tone and culture you want, and the one thing every participant walks away with. Not a slide-deck outline — a working blueprint your sub-team could start the following Monday. Pressure-test every decision with AI: what would make a participant drop out by Week 2? Which activities feel like homework rather than genuine learning? Which Friday challenge would make someone genuinely proud of what they built?',
+    submission:'Your complete program blueprint. Post in the channel.',
+    tip:'Have AI roleplay a skeptical participant — busy, tried AI before, found it underwhelming, needs immediate value or they disengage. Ask that persona to review your program and say where they’d check out. Fix those moments before Friday.',
+    skill:'Using AI to build and stress-test a complete learning experience. You’re not just a participant anymore — you’re a program designer, and this blueprint is the proof.',
+    tools:['studio','chatgpt','claude'] },
+  { week:4, dow:'FRI', mand:true, time:'60 min', emoji:'🎤', title:'Present Your AI Activation Plan',
+    hook:'Not a summary. A launch. Present the program you own.',
+    mission:'The moment the entire program has been building toward: present your AI Activation Program to Chris and the cohort. Not a summary of what you learned. Not a reflection on three weeks. A real, deployable program you could run with your sub-team starting next week. Cover four things: what your program achieves and for whom; your 3–4 tracks and why you sequenced them that way; one activity from each track you’re most proud of and the skill it builds; and your personal commitment — what you’re doing differently from this point forward as an AI practitioner AND an AI activator. The program doesn’t end today. It multiplies — every person leaves with a program they own and a team they’re ready to activate.',
+    submission:'Your program blueprint + your presentation. Post in the channel — with the live link if your blueprint ships on GitHub Pages.',
+    tip:'Open with the one moment from the past three weeks where AI genuinely surprised you — not the best output, the moment something shifted. That’s the moment your audience will remember, and the most honest answer to why any of this matters.',
+    skill:'Turning three weeks of learning into a program you can run, a capability you can teach, and a commitment you can keep. That’s what Train the Trainer looks like in the AI era.',
+    tools:['copilot','chatgpt'] },
+];
+
+/* ══ RENDER ══ */
+function hexToRgba(hex, a) {
+  const n = parseInt(hex.slice(1), 16);
+  return `rgba(${(n>>16)&255},${(n>>8)&255},${n&255},${a})`;
+}
+function toolChip(k) {
+  const t = TOOLS[k];
+  return `<span class="tool" style="color:${t.color};border-color:${hexToRgba(t.color,.4)};background:${hexToRgba(t.color,.07)}">${t.label}</span>`;
+}
+
+function cardHtml(a, accent) {
+  const chipStyle = a.mand
+    ? 'color:var(--rose);border-color:rgba(251,113,133,.45);background:rgba(251,113,133,.08)'
+    : `color:${accentHex(accent)};border-color:${hexToRgba(accentHex(accent),.4)};background:${hexToRgba(accentHex(accent),.07)}`;
+  const bar = a.mand ? 'linear-gradient(90deg,var(--rose),var(--pink))' : accentHex(accent);
+
+  return `<div class="fcard${a.mand ? ' mand' : ''}" tabindex="0" role="button" aria-pressed="false"
+       onclick="this.classList.toggle('flipped')"
+       onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.classList.toggle('flipped');}">
+    <div class="fcard-inner">
+      <div class="face front">
+        <div class="abar" style="background:${bar}"></div>
+        <div class="f-top">
+          <span class="day-chip" style="${chipStyle}">${a.mand ? '🔴 ' : ''}${a.dow}</span>
+          ${a.mand ? '<span class="req-mand">Mandatory</span>' : '<span class="req-opt">Optional</span>'}
+          <span class="f-time">${a.time}</span>
+        </div>
+        <div class="f-emoji">${a.emoji}</div>
+        <div class="f-title">${a.title}</div>
+        <p class="f-hook">${a.hook}</p>
+        <div class="f-foot">
+          <div class="tools">${a.tools.map(toolChip).join('') || '<span class="tool" style="color:var(--muted);border-color:var(--border)">No tools — learn only</span>'}</div>
+          <div class="flip-hint"><span class="arr">⟳</span> Tap for the full brief</div>
+        </div>
+      </div>
+      <div class="face back">
+        <div class="abar" style="background:${bar}"></div>
+        <div class="back-scroll">
+          <div class="b-title"><span class="bt-emoji">${a.emoji}</span>${a.title}</div>
+          <div class="sec"><h4>Mission</h4><p>${a.mission}</p></div>
+          <div class="sec"><h4>Your submission</h4><p>${a.submission}</p></div>
+          ${a.tip ? `<div class="sec tip"><h4>💡 Pro tip</h4><p>${a.tip}</p></div>` : ''}
+          ${a.skill ? `<div class="sec"><h4>The real skill</h4><p>${a.skill}</p></div>` : ''}
+          <div class="back-foot">⟳ Tap to flip back</div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function accentHex(v) {
+  return { 'var(--w1)':'#a78bfa', 'var(--w2)':'#38bdf8', 'var(--w3)':'#2dd4bf', 'var(--w4)':'#f472b6' }[v] || '#a78bfa';
+}
+
+function render() {
+  const tabbar = document.getElementById('tabbar');
+  tabbar.innerHTML = WEEKS.map((w,i) =>
+    `<button class="wtab${i===0?' on':''}" id="wtab-${w.num}" onclick="setWeek(${w.num})">
+       <span class="wt-num">Week ${w.num}</span>${w.short}
+     </button>`).join('');
+
+  const panels = document.getElementById('panels');
+  panels.innerHTML = WEEKS.map((w,i) => {
+    const acts = ACTS.filter(a => a.week === w.num);
+    const dows = ['MON','TUE','WED','THU','FRI 🔴'].map((d,j) =>
+      `<div class="dow-label${j===4?' fri':''}">${d}</div>`).join('');
+    return `<section class="panel${i===0?' active':''}" id="panel-${w.num}">
+      <div class="week-head">
+        <div class="week-ghost">W${w.num}</div>
+        <div class="week-meta">
+          <h2>${w.name}</h2>
+          <div class="week-dates">${w.dates}</div>
+        </div>
+      </div>
+      <p class="week-intro">${w.intro}</p>
+      <div class="dow-row">${dows}</div>
+      <div class="cgrid">${acts.map(a => cardHtml(a, w.accent)).join('')}</div>
+    </section>`;
+  }).join('');
+}
+
+function setWeek(n) {
+  document.querySelectorAll('.wtab').forEach(b => b.classList.remove('on'));
+  document.getElementById('wtab-' + n).classList.add('on');
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + n).classList.add('active');
+}
+
+render();
+</script>
 
 </body>
 </html>
