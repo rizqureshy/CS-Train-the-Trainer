@@ -72,6 +72,9 @@ body::after {
     radial-gradient(ellipse 50% 40% at 12% 12%,  rgba(167,139,250,.09), transparent 60%),
     radial-gradient(ellipse 70% 50% at 50% 110%, rgba(139,92,246,.10), transparent 65%);
 }
+/* WebGL starfield canvas — sits above the CSS fallback stars, below content */
+#stars-canvas { position:fixed; inset:0; z-index:0; pointer-events:none; }
+
 .wrap { max-width:1240px; margin:0 auto; padding:0 32px; position:relative; z-index:1; }
 
 /* ══════════════════════════════════════
@@ -156,10 +159,11 @@ h1.hero-title .grad {
 .info { padding:36px 0 8px; }
 .info-grid { display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:16px; }
 .info-card {
-  background:var(--glass); border:1px solid var(--border); border-radius:18px;
+  background:linear-gradient(160deg, rgba(255,255,255,.07), rgba(255,255,255,.025));
+  border:1px solid rgba(255,255,255,.12); border-radius:18px;
   padding:22px 24px;
-  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
+  backdrop-filter:blur(18px) saturate(140%); -webkit-backdrop-filter:blur(18px) saturate(140%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.10);
 }
 .info-card h3 {
   font-family:var(--mono); font-size:10px; letter-spacing:2.5px; text-transform:uppercase;
@@ -260,12 +264,17 @@ h1.hero-title .grad {
 .face {
   position:absolute; inset:0;
   backface-visibility:hidden; -webkit-backface-visibility:hidden;
-  border-radius:18px; border:1px solid var(--border);
-  background:linear-gradient(165deg, var(--glass2), var(--glass) 55%);
-  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.07), 0 6px 28px rgba(0,0,0,.35);
+  border-radius:18px; border:1px solid rgba(255,255,255,.14);
+  background:linear-gradient(160deg, rgba(255,255,255,.10), rgba(255,255,255,.03) 60%);
+  backdrop-filter:blur(24px) saturate(160%); -webkit-backdrop-filter:blur(24px) saturate(160%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.14), 0 8px 32px rgba(0,0,0,.42);
   display:flex; flex-direction:column;
   overflow:hidden;
+}
+/* frosted sheen */
+.face::after {
+  content:''; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+  background:linear-gradient(115deg, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 32%, rgba(255,255,255,0) 68%, rgba(167,139,250,.07) 100%);
 }
 .fcard:hover .face { border-color:var(--border2); }
 .fcard:not(.flipped):hover .fcard-inner { transform:translateY(-4px); }
@@ -352,10 +361,11 @@ h1.hero-title .grad {
 .t2-sub { color:var(--text2); font-size:14.5px; max-width:70ch; margin-bottom:30px; }
 .t2-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
 .t2-card {
-  background:var(--glass); border:1px solid var(--border); border-radius:20px; padding:30px;
+  background:linear-gradient(160deg, rgba(255,255,255,.07), rgba(255,255,255,.025));
+  border:1px solid rgba(255,255,255,.12); border-radius:20px; padding:30px;
   position:relative; overflow:hidden;
-  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
+  backdrop-filter:blur(18px) saturate(140%); -webkit-backdrop-filter:blur(18px) saturate(140%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.10);
 }
 .t2-card .tbar { position:absolute; top:0; left:0; right:0; height:3px; }
 .t2-icon {
@@ -382,8 +392,10 @@ h1.hero-title .grad {
 .timeline { padding:56px 0 40px; }
 .timeline h2 { font-size:24px; font-weight:800; letter-spacing:-.02em; margin-bottom:22px; }
 .tl-card {
-  background:var(--glass); border:1px solid var(--border); border-radius:18px;
-  padding:8px 26px; backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  background:linear-gradient(160deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  border:1px solid rgba(255,255,255,.12); border-radius:18px;
+  padding:8px 26px;
+  backdrop-filter:blur(18px) saturate(140%); -webkit-backdrop-filter:blur(18px) saturate(140%);
 }
 .tl-row { display:flex; gap:18px; padding:13px 0; border-bottom:1px solid var(--border); font-size:13.5px; align-items:baseline; }
 .tl-row:last-child { border-bottom:none; }
@@ -426,6 +438,8 @@ footer b {
 </style>
 </head>
 <body>
+
+<canvas id="stars-canvas" aria-hidden="true"></canvas>
 
 <!-- HEADER -->
 <header class="top">
@@ -807,6 +821,126 @@ function setWeek(n) {
 }
 
 render();
+</script>
+
+<script src="three.min.js" defer></script>
+<script>
+/* ══ WEBGL STARFIELD ══
+   Shader-based twinkling stars with depth + mouse parallax.
+   Degrades gracefully: if three.js or WebGL is unavailable,
+   the CSS star field behind it still shows. */
+window.addEventListener('load', function initStars() {
+  if (typeof THREE === 'undefined') return;
+  const canvas = document.getElementById('stars-canvas');
+  let renderer;
+  try {
+    renderer = new THREE.WebGLRenderer({ canvas, alpha:true, antialias:true });
+  } catch (e) { return; }
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+
+  const scene  = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 1, 2000);
+  camera.position.z = 320;
+
+  // star palette: mostly white-lavender, accents of violet / sky / pink
+  const PALETTE = [
+    [0.92,0.91,1.00], [0.92,0.91,1.00], [0.92,0.91,1.00], [0.92,0.91,1.00],
+    [0.82,0.76,1.00],                      // lavender
+    [0.65,0.55,0.98],                      // violet
+    [0.49,0.83,0.99],                      // sky
+    [0.96,0.67,0.99],                      // orchid
+  ];
+
+  const N = Math.min(2400, Math.max(900, Math.floor(window.innerWidth * window.innerHeight / 800)));
+  const pos    = new Float32Array(N*3);
+  const col    = new Float32Array(N*3);
+  const size   = new Float32Array(N);
+  const phase  = new Float32Array(N);
+  const speed  = new Float32Array(N);
+
+  for (let i = 0; i < N; i++) {
+    pos[i*3]   = (Math.random()-0.5) * 1400;
+    pos[i*3+1] = (Math.random()-0.5) * 900;
+    pos[i*3+2] = -Math.random() * 700 + 150;
+    const c = PALETTE[Math.floor(Math.random()*PALETTE.length)];
+    col[i*3] = c[0]; col[i*3+1] = c[1]; col[i*3+2] = c[2];
+    // a small population of bright "hero" stars, the rest fine dust
+    size[i]  = Math.random() < 0.06 ? 4.5 + Math.random()*3.5 : 1.1 + Math.random()*2.2;
+    phase[i] = Math.random() * Math.PI * 2;
+    speed[i] = 0.4 + Math.random() * 1.6;
+  }
+
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  geo.setAttribute('color',    new THREE.BufferAttribute(col, 3));
+  geo.setAttribute('aSize',    new THREE.BufferAttribute(size, 1));
+  geo.setAttribute('aPhase',   new THREE.BufferAttribute(phase, 1));
+  geo.setAttribute('aSpeed',   new THREE.BufferAttribute(speed, 1));
+
+  const mat = new THREE.ShaderMaterial({
+    transparent: true,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
+    uniforms: { uTime: { value: 0 } },
+    vertexShader: `
+      attribute float aSize;
+      attribute float aPhase;
+      attribute float aSpeed;
+      attribute vec3  color;
+      varying vec3  vColor;
+      varying float vPhase;
+      varying float vSpeed;
+      void main() {
+        vColor = color; vPhase = aPhase; vSpeed = aSpeed;
+        vec4 mv = modelViewMatrix * vec4(position, 1.0);
+        gl_PointSize = aSize * (300.0 / -mv.z);
+        gl_Position = projectionMatrix * mv;
+      }`,
+    fragmentShader: `
+      uniform float uTime;
+      varying vec3  vColor;
+      varying float vPhase;
+      varying float vSpeed;
+      void main() {
+        float d = length(gl_PointCoord - 0.5);
+        if (d > 0.5) discard;
+        float glow = pow(smoothstep(0.5, 0.0, d), 2.2);
+        float tw = 0.55 + 0.45 * sin(uTime * vSpeed + vPhase);
+        gl_FragColor = vec4(vColor, glow * tw * 0.9);
+      }`
+  });
+
+  const stars = new THREE.Points(geo, mat);
+  scene.add(stars);
+
+  // mouse parallax
+  let tx = 0, ty = 0;
+  window.addEventListener('pointermove', e => {
+    tx = (e.clientX / window.innerWidth  - 0.5) * 24;
+    ty = (e.clientY / window.innerHeight - 0.5) * 14;
+  }, { passive:true });
+
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced) { mat.uniforms.uTime.value = 1; renderer.render(scene, camera); return; }
+
+  const clock = new THREE.Clock();
+  (function tick() {
+    requestAnimationFrame(tick);
+    mat.uniforms.uTime.value = clock.getElapsedTime();
+    stars.rotation.z += 0.00012;
+    camera.position.x += (tx - camera.position.x) * 0.03;
+    camera.position.y += (-ty - camera.position.y) * 0.03;
+    camera.lookAt(0, 0, -200);
+    renderer.render(scene, camera);
+  })();
+});
 </script>
 
 </body>
