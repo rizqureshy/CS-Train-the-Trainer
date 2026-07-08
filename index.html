@@ -193,12 +193,15 @@ h1.hero-title .grad {
 /* ══════════════════════════════════════
    WEEK TABS
 ══════════════════════════════════════ */
+.track1 { padding:52px 0 8px; position:relative; z-index:1; scroll-margin-top:70px; }
+.track1 h2 { font-size:clamp(26px,3.6vw,38px); font-weight:800; letter-spacing:-.025em; }
+
 .tabbar-outer {
   position:sticky; top:62px; z-index:500;
   background:rgba(7,7,26,.85);
   backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
   border-bottom:1px solid var(--border);
-  margin-top:34px;
+  margin-top:26px;
 }
 .tabbar {
   max-width:1240px; margin:0 auto; padding:12px 32px;
@@ -506,8 +509,16 @@ footer b {
   </div>
 </section>
 
+<!-- TRACK 1 -->
+<section class="track1" id="weeks">
+  <div class="wrap">
+    <div class="t2-eyebrow"><span class="eyebrow-dot"></span>Track 1 · Weekly Activities</div>
+    <h2>Four weeks. Twenty activities. One tab per week.</h2>
+  </div>
+</section>
+
 <!-- WEEK TABS -->
-<div class="tabbar-outer" id="weeks">
+<div class="tabbar-outer">
   <div class="tabbar" id="tabbar"></div>
 </div>
 
