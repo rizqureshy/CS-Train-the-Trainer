@@ -135,11 +135,9 @@ h2 { font-size:clamp(30px,3.8vw,52px); font-weight:800; letter-spacing:-.03em; l
 
 .card-head { display:flex; align-items:center; gap:12px; margin-bottom:10px; }
 .card-head h4 { margin-bottom:0; }
-.cicon { width:36px; height:36px; border-radius:10px; display:grid; place-items:center; flex-shrink:0;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.3), 0 0 20px rgba(139,92,246,.25); }
-.cicon svg { width:19px; height:19px; }
-.cicon.teams { background:linear-gradient(135deg,#7B83EB,#4B53BC); }
-.cicon.cal { background:linear-gradient(135deg,#c4b5fd,#8b5cf6); }
+.cicon { width:40px; height:40px; display:grid; place-items:center; flex-shrink:0;
+  filter:drop-shadow(0 3px 10px rgba(0,0,0,.45)); }
+.cicon svg { width:38px; height:38px; }
 
 .track-tag {
   display:inline-block; font-family:var(--mono); font-size:10px; font-weight:500;
@@ -379,11 +377,13 @@ h2 { font-size:clamp(30px,3.8vw,52px); font-weight:800; letter-spacing:-.03em; l
       <div class="duo">
         <div class="gcard pop">
           <div class="card-head">
-            <div class="cicon teams" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
-              <circle cx="18" cy="6.8" r="2.4" fill="#fff" opacity=".9"/>
-              <path d="M15.2 10.4h5.3c.5 0 .9.4.9.9v4.2c0 2.3-1.9 4.2-4.2 4.2-.8 0-1.6-.2-2.2-.7z" fill="#fff" opacity=".75"/>
-              <rect x="2.6" y="4.6" width="11.2" height="14.8" rx="2" fill="#fff" opacity=".95"/>
-              <path d="M5.4 9h6v1.8h-2v6H7.4v-6H5.4z" fill="#4B53BC"/>
+            <div class="cicon" aria-hidden="true"><svg viewBox="0 0 96 96">
+              <circle cx="55" cy="26" r="15" fill="#7B83EB"/>
+              <circle cx="81" cy="30" r="10" fill="#5059C9"/>
+              <path d="M70 44h20a4 4 0 0 1 4 4v16a17 17 0 0 1-17 17h-1a17 17 0 0 1-8-2z" fill="#5059C9"/>
+              <path d="M34 44h40a4 4 0 0 1 4 4v18a22 22 0 0 1-22 22h-4a22 22 0 0 1-22-22V48a4 4 0 0 1 4-4z" fill="#7B83EB"/>
+              <rect x="6" y="28" width="46" height="46" rx="7" fill="#4B53BC"/>
+              <path d="M17 41h24v7h-8.4v19h-7.2V48H17z" fill="#fff"/>
             </svg></div>
             <h4>Where submissions go — MS Teams</h4>
           </div>
@@ -391,11 +391,17 @@ h2 { font-size:clamp(30px,3.8vw,52px); font-weight:800; letter-spacing:-.03em; l
         </div>
         <div class="gcard pop">
           <div class="card-head">
-            <div class="cicon cal" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round">
-              <rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/>
-              <path d="M3.5 9.5h17"/>
-              <path d="M8 3v3.4M16 3v3.4"/>
-              <path d="M7.5 13h3M13.5 13h3M7.5 16.5h3M13.5 16.5h3" stroke-width="1.6" opacity=".9"/>
+            <div class="cicon" aria-hidden="true"><svg viewBox="0 0 96 96">
+              <rect x="36" y="8" width="54" height="62" rx="6" fill="#1490DF"/>
+              <path d="M36 14a6 6 0 0 1 6-6h42a6 6 0 0 1 6 6v8H36z" fill="#0364B8"/>
+              <rect x="36" y="22" width="27" height="16" fill="#0F78D4"/>
+              <rect x="63" y="22" width="27" height="16" fill="#28A8EA"/>
+              <rect x="36" y="38" width="27" height="16" fill="#28A8EA"/>
+              <rect x="63" y="38" width="27" height="16" fill="#50D9FF" opacity=".85"/>
+              <path d="M36 46h54v18a6 6 0 0 1-6 6H42a6 6 0 0 1-6-6z" fill="#14447D" opacity=".55"/>
+              <path d="M36 46l27 18 27-18v18a6 6 0 0 1-6 6H42a6 6 0 0 1-6-6z" fill="#28A8EA"/>
+              <rect x="6" y="26" width="42" height="42" rx="7" fill="#0F6CBD"/>
+              <ellipse cx="27" cy="47" rx="12" ry="13" fill="none" stroke="#fff" stroke-width="6.5"/>
             </svg></div>
             <h4>AI Drop-In · optional support</h4>
           </div>
@@ -502,12 +508,12 @@ h2 { font-size:clamp(30px,3.8vw,52px); font-weight:800; letter-spacing:-.03em; l
     </div>
   </section>
 
-  <!-- 11 · CLOSING -->
+  <!-- 11 · QUESTIONS -->
   <section class="slide" data-slide="10">
     <div class="slide-inner center-inner closing">
-      <span class="kicker reveal" style="justify-content:center"><span class="kdot"></span>The finish line is a starting line</span>
-      <h2 class="reveal">This is not a graduation.<br><span class="grad">It's a launch.</span></h2>
-      <p class="lede reveal">Every participant leaves with a program they own and a team they're ready to activate. The program multiplies.</p>
+      <span class="kicker reveal" style="justify-content:center"><span class="kdot"></span>Over to you</span>
+      <h2 class="reveal" style="font-size:clamp(44px,6.5vw,84px)"><span class="grad">Questions?</span></h2>
+      <p class="lede reveal">The weeks, the tracks, the drop-ins, Track 2 — ask away.</p>
       <span class="verbs reveal">Come · Learn · Play · Build · Share</span>
       <div class="fine reveal">CS AI Activation · Train the Trainer · Jul 13 – Aug 7</div>
     </div>
