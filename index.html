@@ -133,6 +133,20 @@ h2 { font-size:clamp(30px,3.8vw,52px); font-weight:800; letter-spacing:-.03em; l
 .why-close { font-size:clamp(14px,1.6vw,19px); color:var(--text2); max-width:58ch; }
 .why-close b { color:var(--lav); }
 
+.track-tag {
+  display:inline-block; font-family:var(--mono); font-size:10px; font-weight:500;
+  letter-spacing:2px; text-transform:uppercase; margin-bottom:10px;
+  color:var(--lav); border:1px solid rgba(167,139,250,.45); background:rgba(167,139,250,.1);
+  border-radius:100px; padding:4px 13px;
+}
+.track-tag.rose { color:var(--rose); border-color:rgba(251,113,133,.45); background:rgba(251,113,133,.09); }
+.wk-summary { font-size:clamp(16px,1.9vw,22px); font-weight:700; color:var(--text);
+  letter-spacing:-.01em; margin-top:10px; max-width:64ch; }
+.rf-day.big { padding:26px 26px 24px; text-align:left; }
+.rf-day.big .d { font-size:13px; }
+.rf-day.big .t { font-size:14px; color:var(--text2); margin-top:7px; font-weight:600; }
+.rf-day.big .s { font-size:13px; color:var(--muted); margin-top:6px; }
+
 /* survey slide — the graphs are the hero */
 .insights { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:16px 0 18px; }
 .insight { padding:16px 18px; }
@@ -305,7 +319,27 @@ h2 { font-size:clamp(30px,3.8vw,52px); font-weight:800; letter-spacing:-.03em; l
     <div class="slide-inner">
       <span class="kicker reveal"><span class="kdot"></span>What it is</span>
       <h2 class="reveal">A four-week <span class="grad">Monthly Marathon</span> of learning by doing.</h2>
-      <p class="lede reveal">You were picked because you're already AI-versed. Each week takes one capability deeper — thinking, customer intelligence, shipping, program design — and ends with something real that you built. <b>Train the trainer: you learn it, then you multiply it.</b></p>
+      <p class="lede reveal">Two tracks run side by side — daily skill sprints that end in Friday deliverables, and one deeper commitment you own. <b>Train the trainer: you learn it, then you multiply it.</b></p>
+      <div class="t2-grid" style="margin-top:20px; margin-bottom:22px">
+        <div class="gcard pop">
+          <span class="track-tag">Track 1</span>
+          <h3>Weekly Skill Sprints</h3>
+          <ul>
+            <li>Mon–Thu micro-activities · 15–20 min a day</li>
+            <li>Every Friday — one mandatory deliverable</li>
+            <li>Four weeks, four skill arcs — up next</li>
+          </ul>
+        </div>
+        <div class="gcard pop">
+          <span class="track-tag rose">Track 2</span>
+          <h3>Your Deeper Path</h3>
+          <ul>
+            <li>Team capstone or a certification of choice</li>
+            <li>Declared in Week 1 · runs alongside the weeks</li>
+            <li>The full detail comes later in this deck</li>
+          </ul>
+        </div>
+      </div>
       <div class="kpi-row reveal">
         <div class="kpi"><div class="kpi-n" style="color:var(--lav)">4</div><div class="kpi-l">Weeks</div></div>
         <div class="kpi"><div class="kpi-n">15–20</div><div class="kpi-l">Min / Day</div></div>
@@ -322,12 +356,17 @@ h2 { font-size:clamp(30px,3.8vw,52px); font-weight:800; letter-spacing:-.03em; l
       <span class="kicker reveal"><span class="kdot"></span>The weekly rhythm</span>
       <h2 class="reveal">Weekdays build. <span class="grad">Fridays deliver.</span></h2>
       <div class="rhythm-flow reveal">
-        <div class="rf-day"><div class="d">MON</div><div class="t">Optional · 15–20 min</div></div>
-        <div class="rf-day"><div class="d">TUE</div><div class="t">Optional · 15–20 min</div></div>
-        <div class="rf-day"><div class="d">WED</div><div class="t">Optional · 15–20 min</div></div>
-        <div class="rf-day"><div class="d">THU</div><div class="t">Optional · 15–20 min</div></div>
+        <div class="rf-day big">
+          <div class="d">WEEKDAYS · MON–THU</div>
+          <div class="t">Optional · 15–20 min a day</div>
+          <div class="s">Small daily reps — each one a building block for Friday</div>
+        </div>
         <div class="rf-arrow">→</div>
-        <div class="rf-day fri"><div class="d">FRI 🔴</div><div class="t">Mandatory · the deliverable</div></div>
+        <div class="rf-day fri big">
+          <div class="d">FRIDAY 🔴</div>
+          <div class="t">Mandatory · the week's deliverable</div>
+          <div class="s">Everything the weekdays built comes together</div>
+        </div>
       </div>
       <div class="duo">
         <div class="gcard pop"><h4>Where submissions go</h4><p>Every activity — optional or mandatory — is <b>posted in the cohort channel</b>. Your work is visible; the cohort learns from each other's outputs.</p></div>
@@ -341,12 +380,13 @@ h2 { font-size:clamp(30px,3.8vw,52px); font-weight:800; letter-spacing:-.03em; l
     <div class="slide-inner">
       <span class="kicker reveal"><span class="kdot"></span>Track 1 · Week 1 · The skills you build</span>
       <div class="wk-head reveal"><span class="wk-num">W1</span><h2 style="margin:0">Rewire Your Thinking</h2><span class="wk-dates">Jul 13–17</span></div>
+      <p class="wk-summary reveal">You can operate AI as a thinking partner — challenge, translate, simplify, reverse-engineer.</p>
       <div class="skills">
-        <div class="skill pop"><div class="sbar" style="background:var(--vio)"></div><h3>Critical Evaluation</h3><p>Use AI to stress-test your ideas — not to validate them. Seek the counter-argument, not the confirmation.</p></div>
-        <div class="skill pop"><div class="sbar" style="background:var(--vio)"></div><h3>Audience Intelligence</h3><p>Profile the leader, the customer, the technologist — before you write a word. Profile first, message second.</p></div>
-        <div class="skill pop"><div class="sbar" style="background:var(--vio)"></div><h3>Radical Simplification</h3><p>Analogies that clarify without becoming wrong — for any audience, any register.</p></div>
-        <div class="skill pop"><div class="sbar" style="background:var(--vio)"></div><h3>Prompt Reverse-Engineering</h3><p>Work backwards from great output to great input — the foundation of high-level AI use.</p></div>
-        <div class="skill fri-skill pop"><h3>AI-Assisted Judgment</h3><p>All four modes converge on one genuinely messy, real situation — navigation, not just production.</p></div>
+        <div class="skill pop"><div class="sbar" style="background:var(--vio)"></div><h3>Critical Evaluation</h3><p>Stress-test ideas — don’t validate them.</p></div>
+        <div class="skill pop"><div class="sbar" style="background:var(--vio)"></div><h3>Audience Intelligence</h3><p>Profile the audience before you write.</p></div>
+        <div class="skill pop"><div class="sbar" style="background:var(--vio)"></div><h3>Radical Simplification</h3><p>Analogies that clarify, never distort.</p></div>
+        <div class="skill pop"><div class="sbar" style="background:var(--vio)"></div><h3>Prompt Reverse-Engineering</h3><p>From great output back to great input.</p></div>
+        <div class="skill fri-skill pop"><h3>AI-Assisted Judgment</h3><p>One messy, real situation — all four modes.</p></div>
       </div>
       <div class="fri-note reveal">Friday deliverable · <b>The Situation Room</b></div>
     </div>
@@ -357,12 +397,13 @@ h2 { font-size:clamp(30px,3.8vw,52px); font-weight:800; letter-spacing:-.03em; l
     <div class="slide-inner">
       <span class="kicker reveal"><span class="kdot"></span>Track 1 · Week 2 · The skills you build</span>
       <div class="wk-head reveal"><span class="wk-num">W2</span><h2 style="margin:0">Customer Intelligence</h2><span class="wk-dates">Jul 20–24</span></div>
+      <p class="wk-summary reveal">You can turn raw data into leadership-ready customer intelligence.</p>
       <div class="skills">
-        <div class="skill pop"><div class="sbar" style="background:var(--sky)"></div><h3>Synthetic Data Engineering</h3><p>Generate realistic datasets with trends, anomalies, and correlations engineered in.</p></div>
-        <div class="skill pop"><div class="sbar" style="background:var(--sky)"></div><h3>Pattern Hunting</h3><p>Point AI at data and push until it surfaces what you genuinely didn't see.</p></div>
-        <div class="skill pop"><div class="sbar" style="background:var(--sky)"></div><h3>Signal Synthesis</h3><p>Wire market shifts and competitor moves into your internal data for forward-looking projections.</p></div>
-        <div class="skill pop"><div class="sbar" style="background:var(--sky)"></div><h3>Intelligence Reporting</h3><p>A four-section brief a senior leader can read, trust, and act on.</p></div>
-        <div class="skill fri-skill pop"><h3>Data Storytelling</h3><p>A live dashboard credible enough that a CFO asks follow-up questions instead of dismissing it.</p></div>
+        <div class="skill pop"><div class="sbar" style="background:var(--sky)"></div><h3>Synthetic Data Engineering</h3><p>Realistic datasets, patterns engineered in.</p></div>
+        <div class="skill pop"><div class="sbar" style="background:var(--sky)"></div><h3>Pattern Hunting</h3><p>Surface what you didn’t see.</p></div>
+        <div class="skill pop"><div class="sbar" style="background:var(--sky)"></div><h3>Signal Synthesis</h3><p>Wire the outside world into your data.</p></div>
+        <div class="skill pop"><div class="sbar" style="background:var(--sky)"></div><h3>Intelligence Reporting</h3><p>A brief a leader can act on.</p></div>
+        <div class="skill fri-skill pop"><h3>Data Storytelling</h3><p>A live dashboard a CFO takes seriously.</p></div>
       </div>
       <div class="fri-note reveal">Friday deliverable · <b>The Live Dashboard</b></div>
     </div>
@@ -373,12 +414,13 @@ h2 { font-size:clamp(30px,3.8vw,52px); font-weight:800; letter-spacing:-.03em; l
     <div class="slide-inner">
       <span class="kicker reveal"><span class="kdot"></span>Track 1 · Week 3 · The skills you build</span>
       <div class="wk-head reveal"><span class="wk-num">W3</span><h2 style="margin:0">From Idea to Production</h2><span class="wk-dates">Jul 27–31</span></div>
+      <p class="wk-summary reveal">You can take an idea from hand sketch to a live, shipped application.</p>
       <div class="skills">
-        <div class="skill pop"><div class="sbar" style="background:var(--teal)"></div><h3>Analog-First Design</h3><p>Think with your hands — draw the process, then let AI vision read the drawing.</p></div>
-        <div class="skill pop"><div class="sbar" style="background:var(--teal)"></div><h3>No-Code Building</h3><p>Turn a sketch and a brief into a working, animated, interactive application.</p></div>
-        <div class="skill pop"><div class="sbar" style="background:var(--teal)"></div><h3>Ship-Ready Quality</h3><p>The difference between working and deployable: perfect, clean, package.</p></div>
-        <div class="skill pop"><div class="sbar" style="background:var(--teal)"></div><h3>Git &amp; GitHub</h3><p>The vocabulary of modern shipping — repos, commits, pushes, pulls.</p></div>
-        <div class="skill fri-skill pop"><h3>Publishing</h3><p>GitHub Pages, live URL. Sketched by hand on Monday — shipped to the world by Friday.</p></div>
+        <div class="skill pop"><div class="sbar" style="background:var(--teal)"></div><h3>Analog-First Design</h3><p>Draw it by hand — AI reads the drawing.</p></div>
+        <div class="skill pop"><div class="sbar" style="background:var(--teal)"></div><h3>No-Code Building</h3><p>Sketch + brief → a working app.</p></div>
+        <div class="skill pop"><div class="sbar" style="background:var(--teal)"></div><h3>Ship-Ready Quality</h3><p>From working to deployable.</p></div>
+        <div class="skill pop"><div class="sbar" style="background:var(--teal)"></div><h3>Git &amp; GitHub</h3><p>Where modern work ships.</p></div>
+        <div class="skill fri-skill pop"><h3>Publishing</h3><p>A live URL by Friday.</p></div>
       </div>
       <div class="fri-note reveal">Friday deliverable · <b>Ship It — a live URL</b></div>
     </div>
@@ -389,12 +431,13 @@ h2 { font-size:clamp(30px,3.8vw,52px); font-weight:800; letter-spacing:-.03em; l
     <div class="slide-inner">
       <span class="kicker reveal"><span class="kdot"></span>Track 1 · Week 4 · The skills you build</span>
       <div class="wk-head reveal"><span class="wk-num">W4</span><h2 style="margin:0">Absorb, Reflect, Multiply</h2><span class="wk-dates">Aug 3–7</span></div>
+      <p class="wk-summary reveal">You can design, build, and launch an AI program of your own.</p>
       <div class="skills">
-        <div class="skill pop"><div class="sbar" style="background:var(--pink)"></div><h3>Reflection with AI</h3><p>AI as your learning mirror — what kind of AI thinker you're becoming.</p></div>
-        <div class="skill pop"><div class="sbar" style="background:var(--pink)"></div><h3>Personalized Upskilling</h3><p>A development track built around your role, gaps, and ambitions.</p></div>
-        <div class="skill pop"><div class="sbar" style="background:var(--pink)"></div><h3>Curriculum Design</h3><p>Design 3–4 themed tracks for your own sub-team, with AI as your quality gate.</p></div>
-        <div class="skill pop"><div class="sbar" style="background:var(--pink)"></div><h3>Program Building</h3><p>A ready-to-run blueprint your sub-team could start the following Monday.</p></div>
-        <div class="skill fri-skill pop"><h3>Activation</h3><p>Present the program you own. Not a summary of what you learned — a launch.</p></div>
+        <div class="skill pop"><div class="sbar" style="background:var(--pink)"></div><h3>Reflection with AI</h3><p>AI as your learning mirror.</p></div>
+        <div class="skill pop"><div class="sbar" style="background:var(--pink)"></div><h3>Personalized Upskilling</h3><p>An upskilling track built for you.</p></div>
+        <div class="skill pop"><div class="sbar" style="background:var(--pink)"></div><h3>Curriculum Design</h3><p>3–4 themed tracks for your sub-team.</p></div>
+        <div class="skill pop"><div class="sbar" style="background:var(--pink)"></div><h3>Program Building</h3><p>A blueprint ready to run on Monday.</p></div>
+        <div class="skill fri-skill pop"><h3>Activation</h3><p>Present the program you own.</p></div>
       </div>
       <div class="fri-note reveal">Friday deliverable · <b>Present Your AI Activation Plan</b></div>
     </div>
