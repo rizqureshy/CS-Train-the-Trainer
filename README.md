@@ -1,23 +1,16 @@
-# CS AI Activation — Train-the-Trainer Cohort
+# CS AI Activation — Train-the-Trainer · Presentation Deck
 
-The standalone participant site for the Customer Success **Train-the-Trainer Cohort**
-(Jul 13 – Aug 7 · facilitated by Chris + Rizwan).
+This branch contains only the cohort presentation deck, served as `index.html`
+(plus the vendored `three.min.js` for the WebGL starfield — the page degrades
+gracefully to CSS stars without it).
 
-One page plus a vendored `three.min.js` (WebGL starfield background — the page
-degrades gracefully to a CSS star field without it):
+## Make it live
 
-- **Track 1 — Weekly AI Practice**: all four weeks (AI Thinking Modes · Data
-  Intelligence · Design It, Build It, Ship It · From Participant to Program
-  Designer), 20 activities with full briefs, recommended AI tools, and the
-  Mon–Thu optional / Friday mandatory rhythm.
-- **Track 2 — Capstone or Certification**: the deeper-path choice, at the
-  bottom of the page.
-- Weekly rhythm, AI drop-in sessions, the Equinix data rule, and key dates.
+GitHub Pages → Settings → Pages → deploy from the `cohort-presentation`
+branch, root. Note: a repo serves one Pages site — pointing Pages here
+replaces the cohort site from `main`. To serve both at once, keep Pages on
+`main` (the deck is also there as `deck.html`).
 
-## Publish
+Navigate with → / Space / ↓, arrow keys to go back, or the dot rail.
 
-GitHub Pages → Settings → Pages → deploy from the `cs-ttt-cohort` branch, root.
-Or copy `index.html` anywhere — it's fully self-contained.
-
-*This branch intentionally contains only the cohort site. The AI Activation
-Studio lives on `main`.*
+*The cohort participant site lives on `main`.*
