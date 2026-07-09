@@ -393,8 +393,7 @@ export class Cosmos {
        7  week 3     — stream: idea flowing into production
        8  week 4     — clusters(3): the tracks you design
        9  track 2    — split: two paths, one choice
-      10  rules      — core: focus and guardrails
-      11  closing    — burst: the launch                      */
+      10  closing    — burst: the launch                      */
   setSlide(index, gsap) {
     this.gsap = gsap;
 
@@ -439,11 +438,7 @@ export class Cosmos {
         this._morphTo(this._formSplit(), { spin: 0.0, arc: 1.6, dur: 1.8 });
         this._camTo(0, 0.2, 13.6);
         break;
-      case 10: // ground rules — focus and guardrails
-        this._morphTo(this._formCore(), { spin: 0.0, arc: 1.3 });
-        this._camTo(-0.6, 0.1, 13.2);
-        break;
-      case 11: // closing — the launch
+      case 10: // closing — the launch
         this._morphTo(this._formBurst(), { spin: 0.06, arc: 2.6, dur: 1.7, ease: "power2.out" });
         this._camTo(0, 0.0, 13);
         break;
