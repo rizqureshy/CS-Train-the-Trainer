@@ -1,23 +1,24 @@
-# CS AI Activation — Train-the-Trainer Cohort
+# Sales Operations — AI Activation Program
 
-The standalone participant site for the Customer Success **Train-the-Trainer Cohort**
-(Jul 13 – Aug 7 · facilitated by Chris + Rizwan).
+The standalone participant site for the **Sales Operations AI Activation Program**
+(four weeks · you judge, you find, you build, you defend).
 
-One page plus a vendored `three.min.js` (WebGL starfield background — the page
-degrades gracefully to a CSS star field without it):
+One fully self-contained page — no dependencies, no build step. The animated
+"pipeline network" background is plain canvas 2D and degrades gracefully to a
+CSS graph-paper grid.
 
-- **Track 1 — Weekly AI Practice**: all four weeks (AI Thinking Modes · Data
-  Intelligence · Design It, Build It, Ship It · From Participant to Program
-  Designer), 20 activities with full briefs, recommended AI tools, and the
-  Mon–Thu optional / Friday mandatory rhythm.
-- **Track 2 — Capstone or Certification**: the deeper-path choice, at the
-  bottom of the page.
-- Weekly rhythm, AI drop-in sessions, the Equinix data rule, and key dates.
+- **Track 1 — Weekly Activities**: all four weeks (Rewire Your Thinking ·
+  Pipeline Intelligence · Build the Sales Ops Tool · The Executive Business
+  Review), 20 flip-card activities with what to bring, the mission, the
+  submission, and a pro tip — Mon–Thu optional / Friday mandatory.
+- **Track 2 — Capstone or Certification**: the optional deeper path, picked in
+  Week 1.
+- Weekly rhythm, checkpoints, the data rule, and the month at a glance.
 
 ## Publish
 
-GitHub Pages → Settings → Pages → deploy from the `cs-ttt-cohort` branch, root.
+GitHub Pages → Settings → Pages → deploy from the `sales-ops-cohort` branch, root.
 Or copy `index.html` anywhere — it's fully self-contained.
 
-*This branch intentionally contains only the cohort site. The AI Activation
-Studio lives on `main`.*
+*This branch intentionally contains only the Sales Ops program site. The CS
+Train-the-Trainer cohort site lives on `main`.*
