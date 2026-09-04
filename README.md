@@ -13,7 +13,8 @@ CSS graph-paper grid.
   submission, and a pro tip — Mon–Thu optional / Friday mandatory.
 - **Track 2 — Capstone or Certification**: the optional deeper path, picked in
   Week 1.
-- Weekly rhythm, checkpoints, the data rule, and the month at a glance.
+- Weekly rhythm, twice-weekly AI Drop-In office hours, the data rule, and the
+  month at a glance.
 
 ## Publish
 
