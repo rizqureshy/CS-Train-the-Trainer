@@ -472,7 +472,7 @@ footer b {
       <a href="#track-2">Track 2</a>
       <a href="#glance">The Month</a>
     </nav>
-    <div class="hbadge">4 Weeks · 2 Tracks</div>
+    <div class="hbadge">Sep 7 – Oct 2</div>
   </div>
 </header>
 
@@ -583,11 +583,11 @@ footer b {
   <div class="wrap">
     <h2>The month at a glance</h2>
     <div class="tl-card">
-      <div class="tl-row"><span class="tl-date">Kickoff</span><span class="tl-what"><b>Welcome + the kickoff dataset</b> — and your Track 2 choice</span></div>
-      <div class="tl-row"><span class="tl-date">Fri · Week 1</span><span class="tl-what"><b>The Situation Room</b> — all four thinking moves on one messy situation, on one page</span></div>
-      <div class="tl-row"><span class="tl-date">Fri · Week 2</span><span class="tl-what"><b>The Live Pipeline Dashboard</b> — one live artifact, good enough to open a forecast meeting</span></div>
-      <div class="tl-row"><span class="tl-date">Fri · Week 3</span><span class="tl-what"><b>Ship It</b> — a live URL and a teammate using your tool without you</span></div>
-      <div class="tl-row"><span class="tl-date">Fri · Week 4</span><span class="tl-what"><b>The Executive Business Review</b> — sponsor judges; the winner presents at the next sales leadership meeting</span></div>
+      <div class="tl-row"><span class="tl-date">Mon · Sep 7</span><span class="tl-what"><b>Kickoff</b> — welcome, the kickoff dataset, and your Track 2 choice</span></div>
+      <div class="tl-row"><span class="tl-date">Fri · Sep 11</span><span class="tl-what">Friday submission · <b>Week 1</b> — The Situation Room</span></div>
+      <div class="tl-row"><span class="tl-date">Fri · Sep 18</span><span class="tl-what">Friday submission · <b>Week 2</b> — The Live Pipeline Dashboard</span></div>
+      <div class="tl-row"><span class="tl-date">Fri · Sep 25</span><span class="tl-what">Friday submission · <b>Week 3</b> — Ship It: a live URL a teammate can use</span></div>
+      <div class="tl-row"><span class="tl-date">Fri · Oct 2</span><span class="tl-what">Friday submission · <b>Week 4</b> — The Executive Business Review; sponsor judges, the winner presents at the next sales leadership meeting</span></div>
       <div class="tl-row"><span class="tl-date">Twice a week</span><span class="tl-what"><b>Optional AI Drop-In sessions</b> — questions, discussions, and AI talk</span></div>
     </div>
   </div>
@@ -600,13 +600,17 @@ footer b {
 <script>
 /* ══ WEEKS ══ */
 const WEEKS = [
-  { num:1, name:'Rewire Your Thinking', short:'Rewire Your Thinking', tag:'You judge', accent:'var(--w1)',
+  { num:1, name:'Rewire Your Thinking', short:'Rewire Your Thinking', tag:'You judge', dates:'Sep 7–11', accent:'var(--w1)',
+    days:['SEP 7','SEP 8','SEP 9','SEP 10','SEP 11'],
     intro:'You judge. Every activity this week uses the forecast — attack it, translate it, find the signal in it, work back to the prompt behind great work. No live forecast? Each card gives alternatives, and the kickoff dataset always works.' },
-  { num:2, name:'Pipeline Intelligence', short:'Pipeline Intelligence', tag:'You find', accent:'var(--w2)',
+  { num:2, name:'Pipeline Intelligence', short:'Pipeline Intelligence', tag:'You find', dates:'Sep 14–18', accent:'var(--w2)',
+    days:['SEP 14','SEP 15','SEP 16','SEP 17','SEP 18'],
     intro:'You find. Engineer a pipeline realistic enough to fool you, hunt its patterns, test them against the outside world, brief a leader — then turn the week into Friday’s live dashboard. Bring the kickoff dataset and one external lens you care about.' },
-  { num:3, name:'Build the Sales Ops Tool', short:'Build the Tool', tag:'You build', accent:'var(--w3)',
+  { num:3, name:'Build the Sales Ops Tool', short:'Build the Tool', tag:'You build', dates:'Sep 21–25', accent:'var(--w3)',
+    days:['SEP 21','SEP 22','SEP 23','SEP 24','SEP 25'],
     intro:'You build. Bring paper and a pen, one recurring process you own, and a GitHub account by Thursday. A hand-drawn process becomes a live tool at a real URL — everything you build uses synthetic data only.' },
-  { num:4, name:'The Executive Business Review', short:'The Executive Review', tag:'You defend', accent:'var(--w4)',
+  { num:4, name:'The Executive Business Review', short:'The Executive Review', tag:'You defend', dates:'Sep 28 – Oct 2', accent:'var(--w4)',
+    days:['SEP 28','SEP 29','SEP 30','OCT 1','OCT 2'],
     intro:'You defend. Bring a real or synthetic business review, your Week 2 dashboard, your Week 3 tool — and your team for Friday. Audit the claims, find the story, make the recommendation, survive the hard questions. Sponsor judges.' },
 ];
 
@@ -790,7 +794,7 @@ function accentHex(v) {
   return { 'var(--w1)':'#6ee7b7', 'var(--w2)':'#22d3ee', 'var(--w3)':'#a3e635', 'var(--w4)':'#fbbf24' }[v] || '#6ee7b7';
 }
 
-function cardHtml(a, accent, idx) {
+function cardHtml(a, accent, idx, date) {
   const chipStyle = a.mand
     ? 'color:var(--oran);border-color:rgba(251,146,60,.45);background:rgba(251,146,60,.08)'
     : `color:${accentHex(accent)};border-color:${hexToRgba(accentHex(accent),.4)};background:${hexToRgba(accentHex(accent),.07)}`;
@@ -803,7 +807,7 @@ function cardHtml(a, accent, idx) {
       <div class="face front">
         <div class="abar" style="background:${bar}"></div>
         <div class="f-top">
-          <span class="day-chip" style="${chipStyle}">${a.mand ? '🔶 ' : ''}${a.dow}</span>
+          <span class="day-chip" style="${chipStyle}">${a.mand ? '🔶 ' : ''}${a.dow} · ${date}</span>
           ${a.mand ? '<span class="req-mand">Mandatory</span>' : '<span class="req-opt">Optional</span>'}
           <span class="f-time">${a.time}</span>
         </div>
@@ -841,18 +845,18 @@ function render() {
   panels.innerHTML = WEEKS.map((w,i) => {
     const acts = ACTS.filter(a => a.week === w.num);
     const dows = ['MON','TUE','WED','THU','FRI'].map((d,j) =>
-      `<div class="dow-label${j===4?' fri':''}">${d}${j===4?' · Mandatory 🔶':''}</div>`).join('');
+      `<div class="dow-label${j===4?' fri':''}">${d} · ${w.days[j]}${j===4?' 🔶':''}</div>`).join('');
     return `<section class="panel${i===0?' active':''}" id="panel-${w.num}">
       <div class="week-head">
         <div class="week-ghost">W${w.num}</div>
         <div class="week-meta">
           <h2>${w.name}</h2>
-          <div class="week-dates">Week ${w.num} · ${w.tag}</div>
+          <div class="week-dates">${w.dates} · ${w.tag}</div>
         </div>
         <p class="week-intro">${w.intro}</p>
       </div>
       <div class="dow-row">${dows}</div>
-      <div class="cgrid">${acts.map((a, j) => cardHtml(a, w.accent, j)).join('')}</div>
+      <div class="cgrid">${acts.map((a, j) => cardHtml(a, w.accent, j, w.days[j])).join('')}</div>
     </section>`;
   }).join('');
 }

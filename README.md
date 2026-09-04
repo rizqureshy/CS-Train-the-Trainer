@@ -1,7 +1,7 @@
 # Sales Operations — AI Activation Program
 
 The standalone participant site for the **Sales Operations AI Activation Program**
-(four weeks · you judge, you find, you build, you defend).
+(Sep 7 – Oct 2 · you judge, you find, you build, you defend).
 
 One fully self-contained page — no dependencies, no build step. The animated
 "pipeline network" background is plain canvas 2D and degrades gracefully to a
