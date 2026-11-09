@@ -238,8 +238,6 @@ h1.band-title .grad {
 .chip.today { border-color:rgba(233,28,36,.5); color:var(--red); }
 .chip.synth { border-color:transparent; color:#fff;
   background:linear-gradient(135deg, var(--navy-2), var(--blue)); }
-.chip.mandy { border-color:transparent; color:#fff;
-  background:linear-gradient(135deg, #ff3b43, var(--red-dk)); }
 .d-actions { position:absolute; top:14px; right:18px; display:flex; gap:8px; }
 .act-btn { appearance:none; cursor:pointer; font-family:var(--sans);
   font-size:10px; font-weight:700; letter-spacing:.8px; text-transform:uppercase;
@@ -465,14 +463,14 @@ footer b { color:var(--text-2); }
       <div class="facts-grid">
         <div><div class="fact-n" data-n="4">0</div><div class="fact-l">Weeks</div></div>
         <div><div class="fact-n" data-n="20">0</div><div class="fact-l">Activities</div></div>
-        <div><div class="fact-n" data-n="4">0</div><div class="fact-l">Mandatory Fridays</div></div>
+        <div><div class="fact-n" data-n="4">0</div><div class="fact-l">Friday Submissions</div></div>
         <div><div class="fact-n" data-n="2">0</div><div class="fact-l">Tracks</div></div>
       </div>
       <dl>
         <div><dt>Dates</dt><dd>Mon · Nov 9 to Fri · Dec 11</dd></div>
         <div><dt>Break</dt><dd>Thanksgiving week, Nov 23–27</dd></div>
         <div><dt>Cohort</dt><dd>Customer Success · Cohort 2</dd></div>
-        <div><dt>Format</dt><dd>Mon–Thu optional, 15–20 min · Friday mandatory · AI drop-ins four times a week</dd></div>
+        <div><dt>Format</dt><dd>Mon–Thu, 15–20 min a day · Friday submission · AI drop-ins four times a week</dd></div>
       </dl>
     </aside>
   </div>
@@ -484,7 +482,7 @@ footer b { color:var(--text-2); }
   <div class="wrap">
     <div class="sect-eyebrow">Track 1 · Weekly activities</div>
     <h2 class="sect-title">Four weeks. Twenty activities. One day at a time.</h2>
-    <p class="sect-line">Pick a week, then open a day. Mon–Thu activities are optional and build toward Friday; the Friday activity is mandatory and gets submitted in the channel.</p>
+    <p class="sect-line">Pick a week, then open a day. Mon–Thu activities build toward Friday; the Friday activity is the week’s synthesis, submitted in the channel.</p>
     <div class="rulecard"><b>Data rule for every activity:</b> all activities can be completed using sample scenarios, synthetic data, or publicly available information. If you plan on using anything proprietary (Equinix information, internal-only documents, data, customer information, or PII) restrict yourself to <b>internal approved tools only: Copilot, ACE, or SideKick</b>.</div>
   </div>
 </section>
@@ -546,8 +544,6 @@ footer b { color:var(--text-2); }
       <div class="tl-row"><span class="tl-date">Mon · Nov 30</span><span class="tl-what"><b>Back from the break</b> · Week 3 begins</span></div>
       <div class="tl-row"><span class="tl-date">Fri · Dec 4</span><span class="tl-what">Friday submission · <b>Week 3</b></span></div>
       <div class="tl-row"><span class="tl-date">Fri · Dec 11</span><span class="tl-what">Friday submission · <b>Week 4</b> · present your AI Activation Plan</span></div>
-      <div class="tl-row"><span class="tl-date">Dec 14–18</span><span class="tl-what"><b>Catch-up week</b> · finish anything outstanding</span></div>
-      <div class="tl-row"><span class="tl-date">Early January</span><span class="tl-what"><b>AI Demo Day &amp; Reflections</b> · closing ceremony and callouts <span style="color:var(--muted)">(tentative)</span></span></div>
     </div>
   </div>
 </section>
@@ -708,7 +704,7 @@ const ACTS = [
     },
   { week:4, dow:'THU', mand:false, time:'45 min', emoji:'🏗️', title:'Build the Foundation',
     hook:'From tracks on paper to a program your team could start Monday.',
-    mission:'Take Wednesday’s tracks and build the complete, ready-to-run program — in AI or the Activation Studio. Every element: the program name and identity, the weekly themes and how they connect, the Mon–Thu optional activities with full briefs, the Friday mandatory challenges and what they produce, the submission format and what good looks like, the tone and culture you want, and the one thing every participant walks away with. Not a slide-deck outline — a working blueprint your sub-team could start the following Monday. Pressure-test every decision with AI: what would make a participant drop out by Week 2? Which activities feel like homework rather than genuine learning? Which Friday challenge would make someone genuinely proud of what they built?',
+    mission:'Take Wednesday’s tracks and build the complete, ready-to-run program — in AI or the Activation Studio. Every element: the program name and identity, the weekly themes and how they connect, the Mon–Thu activities with full briefs, the Friday challenges and what they produce, the submission format and what good looks like, the tone and culture you want, and the one thing every participant walks away with. Not a slide-deck outline — a working blueprint your sub-team could start the following Monday. Pressure-test every decision with AI: what would make a participant drop out by Week 2? Which activities feel like homework rather than genuine learning? Which Friday challenge would make someone genuinely proud of what they built?',
     submission:'Your complete program blueprint. Post in the channel.',
     tip:'Have AI roleplay a skeptical participant — busy, tried AI before, found it underwhelming, needs immediate value or they disengage. Ask that persona to review your program and say where they’d check out. Fix those moments before Friday.',
     skill:'Using AI to build and stress-test a complete learning experience. You’re not just a participant anymore — you’re a program designer, and this blueprint is the proof.',
@@ -767,7 +763,7 @@ function stepsHtml(text) {
 /* ══ AUDIO BRIEFS ══ */
 const DUR = { welcome:42, w1:26, w2:22, w3:25, w4:22,
   w1d1:33, w1d2:32, w1d3:30, w1d4:31, w1d5:38,
-  w2d1:33, w2d2:32, w2d3:30, w2d4:32, w2d5:38,
+  w2d1:33, w2d2:32, w2d3:30, w2d4:32, w2d5:37,
   w3d1:31, w3d2:28, w3d3:29, w3d4:24, w3d5:29,
   w4d1:31, w4d2:30, w4d3:28, w4d4:29, w4d5:33 };
 let curAudio = null, curBtn = null;
@@ -837,7 +833,7 @@ function cardHtml(d) {
         <span class="chip${isToday ? ' today' : ''}">${d.dlabel}</span>
         <span class="chip dashed">Day ${d.dayN} of 20</span>
         <span class="chip dashed">${d.time}</span>
-        ${d.mand ? '<span class="chip mandy">Mandatory</span><span class="chip synth">Week synthesis</span>' : ''}
+        ${d.mand ? '<span class="chip synth">Week synthesis</span>' : ''}
       </div>
       <div class="d-actions">
         <button class="act-btn" onclick="copyLink('${d.id}', this)">Copy link</button>
@@ -857,7 +853,7 @@ function cardHtml(d) {
         <div class="keep">
           <div class="kl"><span class="ki">↑</span>Your submission</div>
           <p>${esc(d.submission)}</p>
-          <div class="kf">${d.mand ? 'Mandatory · the week’s synthesis' : 'Optional · builds toward Friday'}</div>
+          <div class="kf">${d.mand ? 'The week’s synthesis' : 'Builds toward Friday'}</div>
         </div>
         ${d.tip ? `<div class="tipp"><div class="tl">Pro tip</div><p>${esc(d.tip)}</p></div>` : ''}
       </div>
@@ -990,19 +986,19 @@ function initPill() {
   } else if (todayDay) {
     tag.textContent = 'Today';
     title.textContent = 'Day ' + todayDay.dayN + ' · ' + todayDay.title;
-    sum.textContent = todayDay.dlabel + ' · ' + (todayDay.mand ? 'Mandatory' : 'Optional') + ' · ' + todayDay.time;
+    sum.textContent = todayDay.dlabel + ' · ' + todayDay.time;
     btn.textContent = 'Jump to today';
     btn.onclick = () => jumpTo(todayDay.week, todayDay.di);
   } else if (afterEnd) {
     tag.textContent = 'Wrapped';
     title.textContent = 'Cohort 2 is complete';
-    sum.textContent = 'Final submissions landed Fri · Dec 11 · demo day to come';
+    sum.textContent = 'Final submissions landed Fri · Dec 11';
     btn.textContent = 'Review Week 4';
     btn.onclick = () => jumpTo(4, 4);
   } else if (nextDay) {
     tag.textContent = 'Next up';
     title.textContent = 'Day ' + nextDay.dayN + ' · ' + nextDay.title;
-    sum.textContent = nextDay.dlabel + ' · ' + (nextDay.mand ? 'Mandatory' : 'Optional') + ' · ' + nextDay.time;
+    sum.textContent = nextDay.dlabel + ' · ' + nextDay.time;
     btn.textContent = 'Preview it';
     btn.onclick = () => jumpTo(nextDay.week, nextDay.di);
   }
