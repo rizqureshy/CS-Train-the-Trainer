@@ -238,12 +238,6 @@ h1.band-title .grad {
 .chip.today { border-color:rgba(233,28,36,.5); color:var(--red); }
 .chip.synth { border-color:transparent; color:#fff;
   background:linear-gradient(135deg, var(--navy-2), var(--blue)); }
-.d-actions { position:absolute; top:14px; right:18px; display:flex; gap:8px; }
-.act-btn { appearance:none; cursor:pointer; font-family:var(--sans);
-  font-size:10px; font-weight:700; letter-spacing:.8px; text-transform:uppercase;
-  background:var(--surface); border:1px solid var(--line-2); border-radius:100px;
-  color:var(--text-2); padding:6px 12px; }
-.act-btn:hover { border-color:var(--muted); color:var(--text); }
 .d-title { margin-top:12px; font-size:clamp(22px,2.3vw,28px); font-weight:700;
   letter-spacing:-.025em; line-height:1.12; position:relative; z-index:1; max-width:78%; }
 .d-hook { margin-top:5px; font-size:13.5px; color:var(--text-2); position:relative; z-index:1; max-width:70%; }
@@ -413,7 +407,6 @@ footer b { color:var(--text-2); }
   .cell.open .dcard { display:flex; opacity:1; height:auto; }
   .dbody { overflow:visible; }
   .d-title, .d-hook { max-width:100%; }
-  .d-actions { position:static; margin-top:10px; }
   .dn-hint { display:none; }
   .today-pill { flex-wrap:wrap; }
 }
@@ -875,9 +868,6 @@ function cardHtml(d) {
         <span class="chip dashed">${d.time}</span>
         ${d.mand ? '<span class="chip synth">Week synthesis</span>' : ''}
       </div>
-      <div class="d-actions">
-        <button class="act-btn" onclick="copyLink('${d.id}', this)">Copy link</button>
-      </div>
       <h3 class="d-title">${esc(d.title)}</h3>
       <p class="d-hook">${esc(d.hook)}</p>
       <div class="d-listen">${listenHtml(d.id, 'Daily brief', 'Kristen \u00b7 today in half a minute', isToday ? 'red' : '')}</div>
@@ -1004,12 +994,6 @@ function setWeek(n, silent) {
 function jumpTo(w, j) {
   setWeek(w); setOpen(w, j);
   document.getElementById('weeks').scrollIntoView({ behavior:'smooth' });
-}
-
-function copyLink(id, btn) {
-  const url = location.origin + location.pathname + '#/day/' + id;
-  const done = () => { const o = btn.textContent; btn.textContent = 'Copied'; setTimeout(() => btn.textContent = o, 1400); };
-  if (navigator.clipboard) navigator.clipboard.writeText(url).then(done, done); else done();
 }
 
 /* keyboard */
