@@ -349,6 +349,35 @@ footer { margin-top:48px; padding:36px 0 46px; text-align:center;
   font-size:10px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:var(--muted); }
 footer b { color:var(--text-2); }
 
+/* ══ LISTEN BUTTONS ══ */
+.listen { display:inline-flex; align-items:center; gap:10px; cursor:pointer; appearance:none;
+  font-family:var(--sans); text-align:left;
+  background:var(--surface); border:1px solid var(--line-2); border-radius:100px;
+  padding:5px 16px 5px 5px; position:relative; overflow:hidden; }
+.listen:hover { border-color:var(--muted); }
+.listen .lfill { position:absolute; inset:0; width:0%;
+  background:linear-gradient(90deg, rgba(42,111,214,.16), rgba(42,111,214,.05)); pointer-events:none; }
+.listen .licon { width:34px; height:34px; border-radius:50%; flex-shrink:0; display:grid; place-items:center;
+  color:#fff; font-size:11px; position:relative; z-index:1;
+  background:linear-gradient(135deg, var(--blue-2), var(--navy)); box-shadow:0 4px 10px rgba(31,78,156,.3); }
+.listen.red .licon { background:linear-gradient(135deg, #ff3b43, var(--red-dk)); box-shadow:0 4px 10px rgba(233,28,36,.3); }
+.listen.playing .licon::after { content:""; position:absolute; inset:-5px; border-radius:50%;
+  border:2px solid rgba(42,111,214,.4); animation:lring 1.6s ease-out infinite; }
+.listen.red.playing .licon::after { border-color:rgba(233,28,36,.45); }
+@keyframes lring { from{transform:scale(.82); opacity:1} to{transform:scale(1.3); opacity:0} }
+.listen .lmeta { position:relative; z-index:1; }
+.listen .ll { display:block; font-size:12px; font-weight:700; color:var(--text); line-height:1.25; }
+.listen .ls { display:block; font-size:10.5px; color:var(--muted); }
+.listen .ltime { position:relative; z-index:1; margin-left:4px; font-size:10.5px; font-weight:600; color:var(--muted); }
+.listen.onband { background:linear-gradient(90deg, rgba(255,255,255,.14), rgba(255,255,255,.06));
+  border-color:rgba(255,255,255,.22); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); }
+.listen.onband:hover { border-color:rgba(255,255,255,.4); }
+.listen.onband .ll { color:#fff; }
+.listen.onband .ls, .listen.onband .ltime { color:var(--on-navy); }
+.listen.onband .lfill { background:linear-gradient(90deg, rgba(255,255,255,.16), rgba(255,255,255,.04)); }
+.week-head .listen { flex-shrink:0; }
+.d-listen { margin-top:12px; position:relative; z-index:1; }
+
 /* ══ RESPONSIVE ══ */
 @media (max-width:1120px) {
   .dbody { grid-template-columns:1fr; gap:18px; }
@@ -386,6 +415,7 @@ footer b { color:var(--text-2); }
   .tp-dot { animation:none; }
   .wpanel.active { animation:none; }
   .dayrow, .spine, .dcard, .dn-dot { transition:none; }
+  .listen.playing .licon::after { animation:none; }
   html { scroll-behavior:auto; }
 }
 </style>
@@ -421,6 +451,14 @@ footer b { color:var(--text-2); }
           <div class="tp-sum" id="tp-sum"></div>
         </div>
         <button class="tp-btn" id="tp-btn"></button>
+      </div>
+      <div style="margin-top:14px">
+        <button class="listen red onband" onclick="toggleBrief('welcome', this)">
+          <span class="lfill"></span>
+          <span class="licon"><span class="lic">&#9654;</span></span>
+          <span class="lmeta"><span class="ll">Listen: the welcome</span><span class="ls">Kristen &middot; how the program works</span></span>
+          <span class="ltime" data-d="0:42">0:42</span>
+        </button>
       </div>
     </div>
     <aside class="facts" id="facts">
@@ -726,6 +764,54 @@ function stepsHtml(text) {
   ).join('');
 }
 
+/* ══ AUDIO BRIEFS ══ */
+const DUR = { welcome:42, w1:26, w2:22, w3:25, w4:22,
+  w1d1:33, w1d2:32, w1d3:30, w1d4:31, w1d5:38,
+  w2d1:33, w2d2:32, w2d3:30, w2d4:32, w2d5:38,
+  w3d1:31, w3d2:28, w3d3:29, w3d4:24, w3d5:29,
+  w4d1:31, w4d2:30, w4d3:28, w4d4:29, w4d5:33 };
+let curAudio = null, curBtn = null;
+function fmtTime(s) { s = Math.max(0, Math.round(s)); return Math.floor(s/60) + ':' + String(s%60).padStart(2,'0'); }
+function stopBrief() {
+  if (curAudio) { curAudio.pause(); curAudio.src = ''; curAudio = null; }
+  if (curBtn) {
+    curBtn.classList.remove('playing');
+    const i = curBtn.querySelector('.lic'); if (i) i.innerHTML = '&#9654;';
+    const f = curBtn.querySelector('.lfill'); if (f) f.style.width = '0%';
+    const t = curBtn.querySelector('.ltime'); if (t) t.textContent = t.dataset.d || '';
+    curBtn = null;
+  }
+}
+function toggleBrief(key, btn) {
+  if (curBtn === btn && curAudio) {
+    if (curAudio.paused) curAudio.play(); else curAudio.pause();
+    return;
+  }
+  stopBrief();
+  curBtn = btn;
+  curAudio = new Audio('audio/' + key + '.mp3');
+  const icon = btn.querySelector('.lic'), fill = btn.querySelector('.lfill'), time = btn.querySelector('.ltime');
+  curAudio.addEventListener('timeupdate', () => {
+    if (!curAudio || !curAudio.duration) return;
+    if (fill) fill.style.width = (curAudio.currentTime / curAudio.duration * 100) + '%';
+    if (time) time.textContent = fmtTime(curAudio.duration - curAudio.currentTime);
+  });
+  curAudio.addEventListener('play',  () => { btn.classList.add('playing');  if (icon) icon.textContent = '\u275A\u275A'; });
+  curAudio.addEventListener('pause', () => { btn.classList.remove('playing'); if (icon) icon.innerHTML = '&#9654;'; });
+  curAudio.addEventListener('ended', stopBrief);
+  curAudio.addEventListener('error', stopBrief);
+  curAudio.play().catch(stopBrief);
+}
+function listenHtml(key, label, sub, extra) {
+  const d = fmtTime(DUR[key] || 0);
+  return `<button class="listen${extra ? ' ' + extra : ''}" onclick="toggleBrief('${key}', this)">
+    <span class="lfill"></span>
+    <span class="licon"><span class="lic">&#9654;</span></span>
+    <span class="lmeta"><span class="ll">${label}</span><span class="ls">${sub}</span></span>
+    <span class="ltime" data-d="${d}">${d}</span>
+  </button>`;
+}
+
 /* ══ RENDER ══ */
 const open = { 1:0, 2:0, 3:0, 4:0 };
 let curWeek = 1;
@@ -758,6 +844,7 @@ function cardHtml(d) {
       </div>
       <h3 class="d-title">${esc(d.title)}</h3>
       <p class="d-hook">${esc(d.hook)}</p>
+      <div class="d-listen">${listenHtml(d.id, 'Daily brief', 'Kristen \u00b7 today in half a minute', isToday ? 'red' : '')}</div>
       <div class="d-wm">${d.dayN}</div>
     </div>
     <div class="dbody">
@@ -804,6 +891,7 @@ function render() {
           <div class="wline">${fmt(start)} – ${fmt(end)} · ${META[w.num].verbs}</div>
         </div>
         <p class="woutcome">${w.intro}</p>
+        ${listenHtml('w' + w.num, 'Week ' + w.num + ' brief', 'Kristen \u00b7 what this week builds')}
       </div>
       <div class="progress">${segs}</div>
       <div class="dayrow" id="dayrow-${w.num}">
@@ -840,6 +928,7 @@ function applyOpen(w) {
 
 function setOpen(w, j, silent) {
   if (j < 0 || j > 4) return;
+  stopBrief();
   open[w] = j;
   applyOpen(w);
   const d = DAYS.find(x => x.week === w && x.di === j);
@@ -847,6 +936,7 @@ function setOpen(w, j, silent) {
 }
 
 function setWeek(n, silent) {
+  stopBrief();
   curWeek = n;
   document.querySelectorAll('.wtab').forEach(b => b.classList.remove('on'));
   const t = document.getElementById('wtab-' + n);

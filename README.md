@@ -12,6 +12,11 @@ current week with today's card open, pauses over the Thanksgiving break, and
 `?date=YYYY-MM-DD` previews any day. Every day has a shareable `#/day/...`
 link and arrow keys move between days.
 
+Audio briefs live in `audio/` — a one-minute welcome in the band, a coach
+brief per week, and a ~30-second brief per day (25 clips, ElevenLabs voice
+"Kristen", model eleven_v4; scripts in `audio/scripts.json`). One plays at a
+time, and changing week or day stops playback.
+
 - **Track 1 — Weekly AI Practice**: W1 Rewire Your Thinking (Nov 9–13) ·
   W2 Customer Intelligence (Nov 16–20) · 🦃 Thanksgiving break (Nov 23–27) ·
   W3 From Idea to Production (Nov 30 – Dec 4) · W4 Absorb, Reflect, Multiply
