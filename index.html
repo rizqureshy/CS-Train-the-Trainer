@@ -558,7 +558,7 @@ footer b { color:var(--text-2); }
       <div class="tl-row brk"><span class="tl-date">Nov 23–27</span><span class="tl-what"><b>Thanksgiving break</b> · no activities, the program pauses for the week</span></div>
       <div class="tl-row"><span class="tl-date">Mon · Nov 30</span><span class="tl-what"><b>Back from the break</b> · Week 3 begins</span></div>
       <div class="tl-row"><span class="tl-date">Fri · Dec 4</span><span class="tl-what">Friday submission · <b>Week 3</b></span></div>
-      <div class="tl-row"><span class="tl-date">Fri · Dec 11</span><span class="tl-what">Friday submission · <b>Week 4</b> · present your AI Activation Plan</span></div>
+      <div class="tl-row"><span class="tl-date">Fri · Dec 11</span><span class="tl-what">Friday submission · <b>Week 4</b> · your agent runs the QBR live</span></div>
     </div>
   </div>
 </section>
@@ -578,9 +578,9 @@ const WEEKS = [
   { num:3, name:'From Idea to Production', short:'Idea to Production', dates:'Nov 30 – Dec 4', accent:'var(--w3)',
     days:['NOV 30','DEC 1','DEC 2','DEC 3','DEC 4'],
     intro:'A complete product lifecycle in five days: a hand-drawn CS process becomes a live application at a real URL. Every day has one job. All five connect.' },
-  { num:4, name:'Absorb, Reflect, Multiply', short:'Absorb · Reflect · Multiply', dates:'Dec 7–11', accent:'var(--w4)',
+  { num:4, name:'Build Your CS Agent', short:'Build Your CS Agent', dates:'Dec 7–11', accent:'var(--w4)',
     days:['DEC 7','DEC 8','DEC 9','DEC 10','DEC 11'],
-    intro:'Not a graduation week — a launch. Reflect on what you built, map where you’re going, design your own AI Activation Program, and present it to the cohort. Finish strong.' },
+    intro:'The payoff week: everything from the first three weeks becomes an agent you keep. Define its job, write its brain, stress-test it on accounts you engineered, package it for your team — then watch it run a live QBR on Friday.' },
 ];
 
 const ACTS = [
@@ -696,40 +696,40 @@ const ACTS = [
     },
 
   /* ── WEEK 4 ── */
-  { week:4, dow:'MON', mand:false, time:'25 min', emoji:'🪞', title:'Reflect with AI',
-    hook:'Three weeks of assumptions, revisited honestly — with AI as your mirror.',
-    mission:'Revisit the assumptions you started this program with. Pour your entire learning journey into AI — what clicked, what surprised you, what frustrated you, what shifted in how you think and work. Be specific: the moments, the activities, the outputs that changed something. Then ask AI for something most people never try: analyze what I’ve shared and tell me what kind of AI thinker I’m becoming, which skills are emerging strongest in me, and what natural next direction fits my role, my strengths, and where AI is heading. AI becomes your personal learning mirror.',
-    submission:'Your reflection + AI’s personalized growth read. Post in the channel.',
-    tip:'Don’t summarize your three weeks for AI — dump the raw, unfiltered version: what didn’t work, the moments of genuine surprise, the activities you almost skipped. The more honest the input, the more useful the analysis.',
-    skill:'Using AI as a personal development partner. Reflection without analysis stays in the past — reflection with AI points you toward what comes next.',
+  { week:4, dow:'MON', mand:false, time:'25 min', emoji:'🤖', title:'Define the Agent’s Job',
+    hook:'Before you build an agent, write its job description.',
+    mission:'Every good agent starts as a clear job description, not a prompt. Pick your agent: a QBR Agent that turns account data into a business review, an Account 360 Agent that produces an always-on health, risk, and whitespace read — or scope one that does both. Then write its job description by hand: the inputs it receives, the outputs it must produce, the questions it should always ask, and what a great result looks like. Be specific — “surface the three biggest renewal risks with evidence” beats “analyze the account.” Your agent will only ever see synthetic or sample accounts, so design for that from day one.',
+    submission:'Your agent’s one-page job description: name, purpose, inputs, outputs, and the definition of a great result. Post in the channel.',
+    tip:'Ask AI to interview YOU first: “ask me ten questions a prompt engineer would ask before building a QBR agent for a CS professional.” Your answers become the job description almost verbatim.',
+    skill:'Scoping an AI agent like a hiring manager, not a prompter. The clearer the job description, the better every downstream prompt becomes — and it’s the step most people skip.',
     },
-  { week:4, dow:'TUE', mand:false, time:'25 min', emoji:'📈', title:'Level Up with AI',
-    hook:'Yesterday AI held up a mirror. Today it builds you a map.',
-    mission:'Take Monday’s reflection and growth read deeper. Have AI identify the two or three skills most worth polishing given where you are and where you want to go — then design a personalized upskilling track built around YOUR role, gaps, ambitions, and strengths: new activities, new challenges, new prompts, new tools. Not a generic learning plan. Then push further: what should someone at your level, in your role, on your trajectory be doing with AI six months from now that they aren’t doing today?',
-    submission:'Your personalized upskilling track + your six-month AI vision. Post in the channel.',
-    tip:'After AI builds your track, ask: “which single activity here would create the most visible impact for my team in the shortest time?” Start there — the best development plans have an immediate win built into the first week.',
-    skill:'Using AI as a personalized curriculum designer. Generic learning paths are built for everyone. This one is built for you.',
+  { week:4, dow:'TUE', mand:false, time:'30 min', emoji:'🧠', title:'Build the Brain',
+    hook:'The master prompt is the agent. Write it like an operating manual.',
+    mission:'Turn Monday’s job description into the agent’s brain: one master prompt that defines its role, its step-by-step operating procedure, its output formats, its tone, and its guardrails — synthetic data only, flag what it doesn’t know, never invent numbers. Reverse-engineer from quality like you did in Week 1: find one great QBR or account brief, ask AI what instructions would reliably produce it, and fold those into the manual. Then run it once on a quick test account and watch where it drifts.',
+    submission:'Your agent’s master prompt + one example output from a first test run. Post in the channel.',
+    tip:'End your master prompt with “before answering, list any information you are missing and ask for it.” That single guardrail turns a guessing machine into a consultant.',
+    skill:'Prompt engineering at the system level — writing instructions that hold up run after run, not just once. This is the difference between using AI and operating it.',
     },
-  { week:4, dow:'WED', mand:false, time:'30 min', emoji:'🎨', title:'Design Your Program',
-    hook:'You lived the program from the inside. Now design one from the outside.',
-    mission:'Using everything you’ve learned — the thinking modes, the data skills, the building capabilities, the reflection practice — design 3–4 themed tracks for your own AI Activation Program. Each track needs a clear theme, a weekly arc, and 3–5 activities that build on each other. Design for your specific sub-team: what they need most, what would land, what pushes them just far enough without losing them. Use AI as your curriculum partner throughout — have it challenge your activity ideas, improve the sequencing, find the gaps, and kill anything that’s a time-waster rather than a skill-builder. (Internal or customer specifics? ACE, Copilot, or SideKick only.)',
-    submission:'Your 3–4 track designs with themes, arcs, and activities. Post in the channel.',
-    tip:'Before designing any activity, ask AI: “what is the one AI skill that would create the most immediate productivity lift for a CS professional who has never used AI seriously?” Anchor your first track there — start where the participant is, not where the designer wishes they were.',
-    skill:'Using AI as a curriculum design and quality-assurance partner. Designing a program for others forces you to deeply understand what you’ve learned yourself — and that understanding is exactly what turns a participant into an activator.',
+  { week:4, dow:'WED', mand:false, time:'30 min', emoji:'📊', title:'Feed It Accounts',
+    hook:'An agent is only as good as its test data. Stress-test it.',
+    mission:'Engineer two or three synthetic accounts with Week 2 skills — one healthy, one quietly at risk, one messy and contradictory. Run each through your agent. Does it surface the hidden risk, or just summarize? Does the value story hold up, or does it pad? Tune the master prompt after every run: tighten the operating steps, sharpen the output format, add the checks it missed. Keep iterating until the agent finds what you planted — and at least one thing you didn’t.',
+    submission:'Your test accounts, the agent’s output on the at-risk account, and the three biggest tuning changes you made. Post in the channel.',
+    tip:'Plant one deliberate trap in your messy account — a glowing sentiment quote next to declining usage. An agent that reconciles the contradiction is ready; one that quotes the praise and moves on needs another lap.',
+    skill:'Evaluating and tuning an AI system against known ground truth. You engineered the data, so you know what it should find — the professional way to test any agent before trusting it.',
     },
-  { week:4, dow:'THU', mand:false, time:'45 min', emoji:'🏗️', title:'Build the Foundation',
-    hook:'From tracks on paper to a program your team could start Monday.',
-    mission:'Take Wednesday’s tracks and build the complete, ready-to-run program — in AI or the Activation Studio. Every element: the program name and identity, the weekly themes and how they connect, the Mon–Thu activities with full briefs, the Friday challenges and what they produce, the submission format and what good looks like, the tone and culture you want, and the one thing every participant walks away with. Not a slide-deck outline — a working blueprint your sub-team could start the following Monday. Pressure-test every decision with AI: what would make a participant drop out by Week 2? Which activities feel like homework rather than genuine learning? Which Friday challenge would make someone genuinely proud of what they built?',
-    submission:'Your complete program blueprint. Post in the channel.',
-    tip:'Have AI roleplay a skeptical participant — busy, tried AI before, found it underwhelming, needs immediate value or they disengage. Ask that persona to review your program and say where they’d check out. Fix those moments before Friday.',
-    skill:'Using AI to build and stress-test a complete learning experience. You’re not just a participant anymore — you’re a program designer, and this blueprint is the proof.',
+  { week:4, dow:'THU', mand:false, time:'30 min', emoji:'📦', title:'Package the Agent',
+    hook:'A prompt in your notes helps you. A packaged agent helps your team.',
+    mission:'Make the agent reusable and shareable. Set it up in an approved tool — Copilot, ACE, or SideKick — or package it as a documented playbook: the master prompt, how to run it, what inputs to prepare, and what to check before trusting the output. The bar from Week 3 applies: a teammate should be able to run your agent without you in the room. Pressure-test the documentation by asking AI to role-play that teammate and follow your instructions literally.',
+    submission:'Your packaged agent — the setup in an approved tool, or the complete playbook. Post in the channel.',
+    tip:'Include a “trust, but verify” section: the three outputs a human must always check before the deck leaves the building. The best agent documentation says where NOT to trust the agent.',
+    skill:'Turning a personal AI workflow into a team asset. Packaging is what separates a clever trick from a capability your whole team inherits.',
     },
-  { week:4, dow:'FRI', mand:true, time:'60 min', emoji:'🎤', title:'Present Your AI Activation Plan',
-    hook:'Not a summary. A launch. Present the program you own.',
-    mission:'The moment the entire program has been building toward: present your AI Activation Program to Chris and the cohort. Not a summary of what you learned. Not a reflection on three weeks. A real, deployable program you could run with your sub-team starting next week. Cover four things: what your program achieves and for whom; your 3–4 tracks and why you sequenced them that way; one activity from each track you’re most proud of and the skill it builds; and your personal commitment — what you’re doing differently from this point forward as an AI practitioner AND an AI activator. The program doesn’t end today. It multiplies — every person leaves with a program they own and a team they’re ready to activate.',
-    submission:'Your program blueprint + your presentation. Post in the channel — with the live link if your blueprint ships on GitHub Pages.',
-    tip:'Open with the one moment from the past three weeks where AI genuinely surprised you — not the best output, the moment something shifted. That’s the moment your audience will remember, and the most honest answer to why any of this matters.',
-    skill:'Turning three weeks of learning into a program you can run, a capability you can teach, and a commitment you can keep. That’s what AI activation looks like in practice.',
+  { week:4, dow:'FRI', mand:true, time:'60 min', emoji:'🎤', title:'Your Agent Runs the QBR',
+    hook:'The finale: a fresh account in, a business review out — live.',
+    mission:'The moment the program has been building toward. Hand your agent a fresh synthetic account it has never seen and let it produce the business review: the account story, the risks, the value narrative, the recommendation. Then present to the cohort: the agent’s output, what you would trust as-is, what you would override and why, and one live demo of the agent at work. Close with where your agent goes next — the account, the renewal, the review it runs for real, with real guardrails, starting Monday.',
+    submission:'The agent’s QBR output + your presentation + your packaged agent from Thursday. Post all three in the channel.',
+    tip:'Present the override moment proudly — the spot where the agent was wrong and your judgment caught it. That moment is the whole point: AI runs the review, you run the business.',
+    skill:'Operating an AI agent with professional judgment: delegating the production, owning the decision. Four weeks ago you were prompting a chatbot — today you shipped a colleague.',
     },
 ];
 
@@ -739,7 +739,7 @@ const META = {
   1: { start:'2026-11-09', verbs:'Challenge · Translate · Simplify · Reverse-engineer' },
   2: { start:'2026-11-16', verbs:'Generate · Investigate · Connect · Report · Build' },
   3: { start:'2026-11-30', verbs:'Design · Build · Package · Learn · Ship' },
-  4: { start:'2026-12-07', verbs:'Reflect · Level up · Design · Build · Present' },
+  4: { start:'2026-12-07', verbs:'Define · Instruct · Test · Package · Deploy' },
 };
 const BREAK_START = '2026-11-23', BREAK_END = '2026-11-27';
 const DOWS = ['Mon','Tue','Wed','Thu','Fri'];
@@ -776,11 +776,11 @@ function stepsHtml(text) {
 }
 
 /* ══ AUDIO BRIEFS ══ */
-const DUR = { welcome:42, w1:26, w2:22, w3:25, w4:22,
+const DUR = { welcome:42, w1:26, w2:22, w3:25, w4:28,
   w1d1:33, w1d2:32, w1d3:30, w1d4:31, w1d5:38,
   w2d1:33, w2d2:32, w2d3:30, w2d4:32, w2d5:37,
   w3d1:31, w3d2:28, w3d3:29, w3d4:24, w3d5:29,
-  w4d1:31, w4d2:30, w4d3:28, w4d4:29, w4d5:33 };
+  w4d1:35, w4d2:35, w4d3:32, w4d4:35, w4d5:32 };
 let curAudio = null, curBtn = null;
 function fmtTime(s) { s = Math.max(0, Math.round(s)); return Math.floor(s/60) + ':' + String(s%60).padStart(2,'0'); }
 function stopBrief() {
@@ -826,6 +826,8 @@ function listenHtml(key, label, sub, extra) {
 /* ══ INLINE VIDEO ══ */
 const VIDEOS = {
   w3d4: { yt:'Oaj3RBIoGFc', title:'GitHub Basics Made Easy', by:'Skill Foundry' },
+  w4d1: { yt:'dlS2meHJWAk', title:'Create agents fast with Agent Builder in Copilot', by:'Microsoft Mechanics · 9 min 35 s' },
+  w4d4: { yt:'211EGT_2x9c', title:'Build Your Own AI Agents with Microsoft 365 Copilot', by:'Lisa Crosbie · 18 min 23 s' },
 };
 function openVideo(id) {
   stopBrief();

@@ -19,8 +19,9 @@ time, and changing week or day stops playback.
 
 - **Track 1 — Weekly AI Practice**: W1 Rewire Your Thinking (Nov 9–13) ·
   W2 Customer Intelligence (Nov 16–20) · 🦃 Thanksgiving break (Nov 23–27) ·
-  W3 From Idea to Production (Nov 30 – Dec 4) · W4 Absorb, Reflect, Multiply
-  (Dec 7–11). 20 activities with full briefs — Mon–Thu builds toward the
+  W3 From Idea to Production (Nov 30 – Dec 4) · W4 Build Your CS Agent
+  (Dec 7–11, ending with your QBR/Account agent running a live business
+  review). 20 activities with full briefs — Mon–Thu builds toward the
   Friday synthesis, submitted in the channel.
 - **Track 2 — Capstone or Certification**: the deeper-path choice, at the
   bottom of the page.
