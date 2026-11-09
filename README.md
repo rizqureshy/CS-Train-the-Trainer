@@ -1,23 +1,25 @@
-# CS AI Activation — Train-the-Trainer Cohort
+# AI Activation — Customer Success Cohort 2
 
-The standalone participant site for the Customer Success **Train-the-Trainer Cohort**
-(Jul 13 – Aug 7 · facilitated by Chris + Rizwan).
+The standalone participant site for **AI Activation · Customer Success Cohort 2**
+(Nov 9 – Dec 11, with a Thanksgiving break Nov 23–27 · facilitated by Chris + Rizwan).
 
-One page plus a vendored `three.min.js` (WebGL starfield background — the page
-degrades gracefully to a CSS star field without it):
+One fully self-contained `index.html` — polar-aurora theme: canvas-drawn
+northern-lights ribbons and drifting snow over an arctic-night sky (degrades
+gracefully to a CSS star field without canvas).
 
-- **Track 1 — Weekly AI Practice**: all four weeks (AI Thinking Modes · Data
-  Intelligence · Design It, Build It, Ship It · From Participant to Program
-  Designer), 20 activities with full briefs, recommended AI tools, and the
-  Mon–Thu optional / Friday mandatory rhythm.
+- **Track 1 — Weekly AI Practice**: W1 Rewire Your Thinking (Nov 9–13) ·
+  W2 Customer Intelligence (Nov 16–20) · 🦃 Thanksgiving break (Nov 23–27) ·
+  W3 From Idea to Production (Nov 30 – Dec 4) · W4 Absorb, Reflect, Multiply
+  (Dec 7–11). 20 activities with full briefs and the Mon–Thu optional /
+  Friday mandatory rhythm.
 - **Track 2 — Capstone or Certification**: the deeper-path choice, at the
   bottom of the page.
-- Weekly rhythm, AI drop-in sessions, the Equinix data rule, and key dates.
+- Weekly rhythm, AI drop-in sessions, the data rule, and key dates.
 
 ## Publish
 
-GitHub Pages → Settings → Pages → deploy from the `cs-ttt-cohort` branch, root.
+GitHub Pages → Settings → Pages → deploy from the `cs-cohort-2` branch, root.
 Or copy `index.html` anywhere — it's fully self-contained.
 
-*This branch intentionally contains only the cohort site. The AI Activation
-Studio lives on `main`.*
+*This branch intentionally contains only the Cohort 2 site. The Cohort 1
+Train-the-Trainer site lives on `main`.*

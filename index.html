@@ -3,37 +3,37 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CS AI Activation — Train-the-Trainer Cohort</title>
-<meta name="description" content="Four weeks. Two tracks. A program you'll own. The Customer Success AI Activation Train-the-Trainer Cohort.">
+<title>AI Activation — CS Cohort 2</title>
+<meta name="description" content="Four weeks, two tracks, a Thanksgiving break in the middle. AI Activation — Customer Success Cohort 2.">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* ══════════════════════════════════════
-   TOKENS — glass purple / studio theme
+   TOKENS — polar aurora theme
 ══════════════════════════════════════ */
 :root {
-  --bg:      #07071a;
-  --bg2:     #0b0b22;
+  --bg:      #04101d;
+  --bg2:     #081826;
   --glass:   rgba(255,255,255,0.04);
   --glass2:  rgba(255,255,255,0.07);
   --border:  rgba(255,255,255,0.09);
   --border2: rgba(255,255,255,0.17);
-  --text:    #f2f1fb;
-  --text2:   #cdcbe8;
-  --muted:   #918fb8;
+  --text:    #eef7fd;
+  --text2:   #c9dfec;
+  --muted:   #84a7bd;
 
-  --vio:   #a78bfa;
-  --vio2:  #8b5cf6;
-  --lav:   #c4b5fd;
-  --pink:  #f472b6;
+  --vio:   #38bdf8;
+  --vio2:  #0ea5e9;
+  --lav:   #a5e3ff;
+  --pink:  #e879f9;
   --rose:  #fb7185;   /* mandatory */
   --teal:  #2dd4bf;
   --sky:   #7dd3fc;
 
   /* week accents */
-  --w1: #a78bfa;
-  --w2: #38bdf8;
-  --w3: #2dd4bf;
-  --w4: #f472b6;
+  --w1: #38bdf8;
+  --w2: #5eead4;
+  --w3: #a78bfa;
+  --w4: #e879f9;
 
   --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --mono: 'DM Mono', ui-monospace, Menlo, monospace;
@@ -68,12 +68,12 @@ body::before {
 body::after {
   content:''; position:fixed; inset:0; z-index:0; pointer-events:none;
   background:
-    radial-gradient(ellipse 60% 45% at 75% -8%,  rgba(139,92,246,.16), transparent 65%),
-    radial-gradient(ellipse 50% 40% at 12% 12%,  rgba(167,139,250,.09), transparent 60%),
-    radial-gradient(ellipse 70% 50% at 50% 110%, rgba(139,92,246,.10), transparent 65%);
+    radial-gradient(ellipse 60% 45% at 75% -8%,  rgba(14,165,233,.16), transparent 65%),
+    radial-gradient(ellipse 50% 40% at 12% 12%,  rgba(125,211,252,.09), transparent 60%),
+    radial-gradient(ellipse 70% 50% at 50% 110%, rgba(52,211,153,.10), transparent 65%);
 }
-/* WebGL starfield canvas — sits above the CSS fallback stars, below content */
-#stars-canvas { position:fixed; inset:0; z-index:0; pointer-events:none; }
+/* aurora + snow canvas — sits above the CSS fallback stars, below content */
+#fx-canvas { position:fixed; inset:0; z-index:0; pointer-events:none; }
 
 .wrap { max-width:1240px; margin:0 auto; padding:0 32px; position:relative; z-index:1; }
 
@@ -82,7 +82,7 @@ body::after {
 ══════════════════════════════════════ */
 header.top {
   position:sticky; top:0; z-index:600;
-  background:rgba(7,7,26,.82);
+  background:rgba(4,16,29,.82);
   backdrop-filter:blur(22px); -webkit-backdrop-filter:blur(22px);
   border-bottom:1px solid var(--border);
   height:62px;
@@ -94,9 +94,9 @@ header.top {
 .logo { display:flex; align-items:center; gap:12px; font-weight:800; font-size:15.5px; letter-spacing:-.01em; }
 .logo-mark {
   width:34px; height:34px; border-radius:10px; flex-shrink:0;
-  background:linear-gradient(135deg,#c4b5fd,#8b5cf6);
+  background:linear-gradient(135deg,#a5e3ff,#0ea5e9);
   display:grid; place-items:center; font-size:15px; color:#fff;
-  box-shadow:0 0 22px rgba(139,92,246,.45), inset 0 1px 0 rgba(255,255,255,.35);
+  box-shadow:0 0 22px rgba(14,165,233,.45), inset 0 1px 0 rgba(255,255,255,.35);
 }
 .logo span.dim { color:var(--muted); font-weight:600; }
 .top-nav { display:flex; gap:4px; }
@@ -107,8 +107,8 @@ header.top {
 .top-nav a:hover { color:var(--text); background:var(--glass2); }
 .hbadge {
   font-family:var(--mono); font-size:10px; letter-spacing:2px; text-transform:uppercase;
-  color:var(--lav); border:1px solid rgba(167,139,250,.35);
-  background:rgba(167,139,250,.08);
+  color:var(--lav); border:1px solid rgba(125,211,252,.35);
+  background:rgba(125,211,252,.08);
   padding:5px 14px; border-radius:100px; white-space:nowrap;
 }
 
@@ -129,14 +129,14 @@ h1.hero-title {
   line-height:1.06; max-width:24ch;
 }
 h1.hero-title .grad {
-  background:linear-gradient(100deg,#e9e4ff 0%,#c4b5fd 35%,#a78bfa 65%,#8b5cf6 100%);
+  background:linear-gradient(100deg,#e8f7ff 0%,#a5e3ff 35%,#38bdf8 65%,#0ea5e9 100%);
   -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
-  filter:drop-shadow(0 0 28px rgba(139,92,246,.35));
+  filter:drop-shadow(0 0 28px rgba(14,165,233,.35));
 }
 .hero-sub { margin-top:20px; font-size:16.5px; color:var(--text2); max-width:64ch; font-weight:400; }
 .hero-sub .verbs {
   display:inline-block; margin-top:8px; font-weight:700; letter-spacing:.02em;
-  background:linear-gradient(100deg,#e9e4ff,#c4b5fd 50%,#a78bfa);
+  background:linear-gradient(100deg,#e8f7ff,#a5e3ff 50%,#38bdf8);
   -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
 }
 
@@ -173,7 +173,7 @@ h1.hero-title .grad {
 .info-card ul { list-style:none; }
 .info-card li { padding:3px 0 3px 18px; position:relative; }
 .info-card li::before { content:""; position:absolute; left:0; top:11px; width:5px; height:5px; border-radius:50%;
-  background:var(--vio); box-shadow:0 0 8px rgba(167,139,250,.6); }
+  background:var(--vio); box-shadow:0 0 8px rgba(125,211,252,.6); }
 .info-card a { color:var(--lav); text-decoration:none; font-weight:600; }
 .info-card a:hover { text-decoration:underline; }
 .rhythm { display:flex; flex-direction:column; gap:7px; }
@@ -182,8 +182,8 @@ h1.hero-title .grad {
   color:var(--vio); min-width:84px; font-weight:500; }
 
 .guard {
-  margin-top:16px; border:1px solid rgba(167,139,250,.35);
-  background:linear-gradient(135deg, rgba(139,92,246,.12), rgba(167,139,250,.05));
+  margin-top:16px; border:1px solid rgba(125,211,252,.35);
+  background:linear-gradient(135deg, rgba(14,165,233,.12), rgba(125,211,252,.05));
   border-radius:16px; padding:15px 20px; font-size:13.5px; color:var(--text2);
   backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
   box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
@@ -198,7 +198,7 @@ h1.hero-title .grad {
 
 .tabbar-outer {
   position:sticky; top:62px; z-index:500;
-  background:rgba(7,7,26,.85);
+  background:rgba(4,16,29,.85);
   backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
   border-bottom:1px solid var(--border);
   margin-top:26px;
@@ -221,11 +221,15 @@ h1.hero-title .grad {
 }
 .wtab:hover { color:var(--text); border-color:var(--border2); }
 .wtab.on {
-  color:#f4f1ff; border-color:rgba(167,139,250,.55);
-  background:linear-gradient(135deg, rgba(139,92,246,.30), rgba(167,139,250,.12));
-  box-shadow:0 0 24px rgba(139,92,246,.25), inset 0 1px 0 rgba(255,255,255,.12);
+  color:#f4f1ff; border-color:rgba(125,211,252,.55);
+  background:linear-gradient(135deg, rgba(14,165,233,.30), rgba(125,211,252,.12));
+  box-shadow:0 0 24px rgba(14,165,233,.25), inset 0 1px 0 rgba(255,255,255,.12);
 }
 .wtab.on .wt-num { color:var(--lav); opacity:1; }
+.wtab.brk {
+  cursor:default; border-style:dashed; background:transparent;
+  color:var(--muted); opacity:.9;
+}
 
 /* ══════════════════════════════════════
    WEEK PANELS
@@ -251,9 +255,9 @@ h1.hero-title .grad {
 .week-head { display:flex; align-items:center; gap:16px; margin-bottom:14px; flex-wrap:wrap; }
 .week-ghost {
   font-size:46px; font-weight:900; letter-spacing:-.04em; line-height:1;
-  background:linear-gradient(135deg,#e9e4ff 0%,#a78bfa 55%,#8b5cf6 100%);
+  background:linear-gradient(135deg,#e8f7ff 0%,#38bdf8 55%,#0ea5e9 100%);
   -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
-  filter:drop-shadow(0 0 16px rgba(139,92,246,.45));
+  filter:drop-shadow(0 0 16px rgba(14,165,233,.45));
   flex-shrink:0;
 }
 .week-meta h2 { font-size:clamp(19px,2.4vw,25px); font-weight:800; letter-spacing:-.02em; line-height:1.15; }
@@ -294,7 +298,7 @@ h1.hero-title .grad {
 /* frosted sheen */
 .face::after {
   content:''; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
-  background:linear-gradient(115deg, rgba(255,255,255,.14) 0%, rgba(255,255,255,0) 34%, rgba(255,255,255,0) 66%, rgba(167,139,250,.10) 100%);
+  background:linear-gradient(115deg, rgba(255,255,255,.14) 0%, rgba(255,255,255,0) 34%, rgba(255,255,255,0) 66%, rgba(125,211,252,.10) 100%);
 }
 .fcard:hover .face { border-color:var(--border2); }
 .fcard:not(.flipped):hover .fcard-inner { transform:translateY(-4px); }
@@ -341,9 +345,9 @@ h1.hero-title .grad {
 
 /* BACK */
 .face.back { padding:0; }
-.back-scroll { padding:18px; overflow-y:auto; height:100%; scrollbar-width:thin; scrollbar-color:rgba(167,139,250,.35) transparent; }
+.back-scroll { padding:18px; overflow-y:auto; height:100%; scrollbar-width:thin; scrollbar-color:rgba(125,211,252,.35) transparent; }
 .back-scroll::-webkit-scrollbar { width:4px; }
-.back-scroll::-webkit-scrollbar-thumb { background:rgba(167,139,250,.35); border-radius:100px; }
+.back-scroll::-webkit-scrollbar-thumb { background:rgba(125,211,252,.35); border-radius:100px; }
 .b-title { font-size:13px; font-weight:700; margin-bottom:10px; display:flex; align-items:center; gap:8px; }
 .b-title .bt-emoji { font-size:16px; }
 .sec { margin-bottom:12px; }
@@ -353,7 +357,7 @@ h1.hero-title .grad {
 }
 .sec p { font-size:11.5px; color:var(--text2); line-height:1.6; }
 .sec.tip {
-  background:rgba(167,139,250,.07); border-left:2px solid var(--vio);
+  background:rgba(125,211,252,.07); border-left:2px solid var(--vio);
   border-radius:0 10px 10px 0; padding:9px 11px;
 }
 .back-foot {
@@ -391,7 +395,7 @@ h1.hero-title .grad {
 .t2-icon {
   width:52px; height:52px; border-radius:14px; display:grid; place-items:center;
   font-size:24px; margin-bottom:16px;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.3), 0 0 26px rgba(139,92,246,.3);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.3), 0 0 26px rgba(14,165,233,.3);
 }
 .t2-card h3 { font-size:22px; font-weight:800; letter-spacing:-.015em; margin-bottom:10px; }
 .t2-card > p { font-size:13.5px; color:var(--text2); margin-bottom:14px; }
@@ -400,7 +404,7 @@ h1.hero-title .grad {
 .t2-card li::before { content:"✓"; position:absolute; left:0; color:var(--vio); font-size:12px; font-weight:700; }
 .t2-badge {
   display:inline-block; font-family:var(--mono); font-size:9.5px; letter-spacing:1.8px; text-transform:uppercase;
-  color:var(--lav); border:1px solid rgba(167,139,250,.4); background:rgba(167,139,250,.09);
+  color:var(--lav); border:1px solid rgba(125,211,252,.4); background:rgba(125,211,252,.09);
   border-radius:100px; padding:5px 13px;
 }
 .t2-note { margin-top:24px; text-align:center; font-size:13.5px; color:var(--muted); }
@@ -459,36 +463,36 @@ footer b {
 </head>
 <body>
 
-<canvas id="stars-canvas" aria-hidden="true"></canvas>
+<canvas id="fx-canvas" aria-hidden="true"></canvas>
 
 <!-- HEADER -->
 <header class="top">
   <div class="top-inner">
     <div class="logo">
       <div class="logo-mark">◈</div>
-      <div>CS AI Activation&nbsp;<span class="dim">· Train-the-Trainer</span></div>
+      <div>CS AI Activation&nbsp;<span class="dim">· Cohort 2</span></div>
     </div>
     <nav class="top-nav">
       <a href="#weeks">Weekly Activities</a>
       <a href="#track-2">Track 2</a>
       <a href="#timeline">Key Dates</a>
     </nav>
-    <div class="hbadge">Jul 13 – Aug 7</div>
+    <div class="hbadge">Nov 9 – Dec 11</div>
   </div>
 </header>
 
 <!-- HERO -->
 <section class="hero">
   <div class="wrap">
-    <div class="hero-eyebrow"><span class="eyebrow-dot"></span>Train-the-Trainer Cohort · Facilitated by Chris + Rizwan</div>
-    <h1 class="hero-title">Customer Success — <span class="grad">AI Activation Train&nbsp;the&nbsp;Trainer</span></h1>
-    <p class="hero-sub">Four weeks. Two tracks. A program you'll own — custom-designed to take your AI skilling to the next stage.<br><span class="verbs">Come · Learn · Play · Build · Share.</span></p>
+    <div class="hero-eyebrow"><span class="eyebrow-dot"></span>Customer Success · Cohort 2 · Facilitated by Chris + Rizwan</div>
+    <h1 class="hero-title">AI Activation — <span class="grad">Customer Success Cohort&nbsp;2</span></h1>
+    <p class="hero-sub">Four weeks, two tracks, and a Thanksgiving break in the middle — custom-designed to take your AI skilling to the next stage.<br><span class="verbs">Come · Learn · Play · Build · Share.</span></p>
     <div class="kpi-row">
       <div class="kpi"><div class="kpi-n" style="color:var(--lav)">4</div><div class="kpi-l">Weeks</div></div>
       <div class="kpi"><div class="kpi-n">20</div><div class="kpi-l">Activities</div></div>
       <div class="kpi"><div class="kpi-n" style="color:var(--rose)">4</div><div class="kpi-l">Mandatory Fridays</div></div>
       <div class="kpi"><div class="kpi-n" style="color:var(--sky)">2</div><div class="kpi-l">Tracks</div></div>
-      <div class="kpi"><div class="kpi-n" style="color:var(--teal)">1</div><div class="kpi-l">Program You Own</div></div>
+      <div class="kpi"><div class="kpi-n" style="color:var(--teal)">🦃</div><div class="kpi-l">Break Week</div></div>
     </div>
   </div>
 </section>
@@ -552,7 +556,7 @@ footer b {
     <div class="t2-grid">
       <div class="t2-card">
         <div class="tbar" style="background:linear-gradient(90deg,var(--vio2),transparent)"></div>
-        <div class="t2-icon" style="background:linear-gradient(135deg,#c4b5fd,#8b5cf6)">🏗️</div>
+        <div class="t2-icon" style="background:linear-gradient(135deg,#a5e3ff,#0ea5e9)">🏗️</div>
         <h3>Team Capstone Project</h3>
         <p>Form a team of <b>3–5 people</b> and build or design an applied AI solution — a working tool, a workflow, a prototype, or a business-improvement concept your team could actually use.</p>
         <ul>
@@ -565,7 +569,7 @@ footer b {
       </div>
       <div class="t2-card">
         <div class="tbar" style="background:linear-gradient(90deg,var(--pink),transparent)"></div>
-        <div class="t2-icon" style="background:linear-gradient(135deg,#f9a8d4,#db2777)">📜</div>
+        <div class="t2-icon" style="background:linear-gradient(135deg,#f0abfc,#c026d3)">📜</div>
         <h3>Certification of Choice</h3>
         <p>Pursue an AI-related certification or learning credential — <b>your choice</b>, aligned to your own development goals and where you want your AI capability to go next.</p>
         <ul>
@@ -586,37 +590,38 @@ footer b {
   <div class="wrap">
     <h2>Key dates</h2>
     <div class="tl-card">
-      <div class="tl-row"><span class="tl-date">Thu · Jul 9</span><span class="tl-what"><b>Soft launch</b> — teaser + AI Journey Assessment</span></div>
-      <div class="tl-row"><span class="tl-date">Mon · Jul 13</span><span class="tl-what"><b>Start of the Monthly Marathon</b> — welcome + Day 1 activity</span></div>
-      <div class="tl-row"><span class="tl-date">Fri · Jul 17</span><span class="tl-what">Friday submission · <b>Week 1</b></span></div>
-      <div class="tl-row"><span class="tl-date">Fri · Jul 24</span><span class="tl-what">Friday submission · <b>Week 2</b></span></div>
-      <div class="tl-row"><span class="tl-date">Fri · Jul 31</span><span class="tl-what">Friday submission · <b>Week 3</b></span></div>
-      <div class="tl-row"><span class="tl-date">Fri · Aug 7</span><span class="tl-what">Friday submission · <b>Week 4</b> — present your AI Activation Program</span></div>
-      <div class="tl-row"><span class="tl-date">Aug 10–14</span><span class="tl-what"><b>Week 5 · Catch-up week</b> — finish anything outstanding</span></div>
-      <div class="tl-row"><span class="tl-date">Aug 17–21</span><span class="tl-what"><b>Week 6 · AI Demo Day &amp; Reflections</b> — closing ceremony and callouts <span style="color:var(--muted)">(tentative)</span></span></div>
+      <div class="tl-row"><span class="tl-date">Mon · Nov 9</span><span class="tl-what"><b>Cohort 2 kickoff</b> — welcome + Day 1 activity</span></div>
+      <div class="tl-row"><span class="tl-date">Fri · Nov 13</span><span class="tl-what">Friday submission · <b>Week 1</b></span></div>
+      <div class="tl-row"><span class="tl-date">Fri · Nov 20</span><span class="tl-what">Friday submission · <b>Week 2</b></span></div>
+      <div class="tl-row"><span class="tl-date">Nov 23–27</span><span class="tl-what"><b>🦃 Thanksgiving break</b> — no activities, the program pauses for the week</span></div>
+      <div class="tl-row"><span class="tl-date">Mon · Nov 30</span><span class="tl-what"><b>Back from the break</b> — Week 3 begins</span></div>
+      <div class="tl-row"><span class="tl-date">Fri · Dec 4</span><span class="tl-what">Friday submission · <b>Week 3</b></span></div>
+      <div class="tl-row"><span class="tl-date">Fri · Dec 11</span><span class="tl-what">Friday submission · <b>Week 4</b> — present your AI Activation Plan</span></div>
+      <div class="tl-row"><span class="tl-date">Dec 14–18</span><span class="tl-what"><b>Catch-up week</b> — finish anything outstanding</span></div>
+      <div class="tl-row"><span class="tl-date">Early January</span><span class="tl-what"><b>AI Demo Day &amp; Reflections</b> — closing ceremony and callouts <span style="color:var(--muted)">(tentative)</span></span></div>
     </div>
   </div>
 </section>
 
 <footer>
-  <b>CS AI Activation</b> · Train the Trainer · The program multiplies
+  <b>CS AI Activation</b> · Cohort 2 · Come · Learn · Play · Build · Share
 </footer>
 
 <script>
 /* ══ WEEKS ══ */
 const WEEKS = [
-  { num:1, name:'Rewire Your Thinking', short:'Rewire Your Thinking', dates:'Jul 13–17', accent:'var(--w1)',
-    days:['JUL 13','JUL 14','JUL 15','JUL 16','JUL 17'],
+  { num:1, name:'Rewire Your Thinking', short:'Rewire Your Thinking', dates:'Nov 9–13', accent:'var(--w1)',
+    days:['NOV 9','NOV 10','NOV 11','NOV 12','NOV 13'],
     intro:'Four thinking modes — challenge, translate, simplify, reverse-engineer — converging in Friday’s Situation Room. This week rewires how you think with AI, not just what you produce with it.' },
-  { num:2, name:'Customer Intelligence', short:'Customer Intelligence', dates:'Jul 20–24', accent:'var(--w2)',
-    days:['JUL 20','JUL 21','JUL 22','JUL 23','JUL 24'],
+  { num:2, name:'Customer Intelligence', short:'Customer Intelligence', dates:'Nov 16–20', accent:'var(--w2)',
+    days:['NOV 16','NOV 17','NOV 18','NOV 19','NOV 20'],
     intro:'Engineer a dataset, hunt its patterns, wire in the real world, write the intelligence report — then bring the whole week to life in Friday’s live dashboard.' },
-  { num:3, name:'From Idea to Production', short:'Idea to Production', dates:'Jul 27–31', accent:'var(--w3)',
-    days:['JUL 27','JUL 28','JUL 29','JUL 30','JUL 31'],
+  { num:3, name:'From Idea to Production', short:'Idea to Production', dates:'Nov 30 – Dec 4', accent:'var(--w3)',
+    days:['NOV 30','DEC 1','DEC 2','DEC 3','DEC 4'],
     intro:'A complete product lifecycle in five days: a hand-drawn CS process becomes a live application at a real URL. Every day has one job. All five connect.' },
-  { num:4, name:'Absorb, Reflect, Multiply', short:'Absorb · Reflect · Multiply', dates:'Aug 3–7', accent:'var(--w4)',
-    days:['AUG 3','AUG 4','AUG 5','AUG 6','AUG 7'],
-    intro:'Not a graduation week — a launch. Reflect on what you built, map where you’re going, design your own AI Activation Program, and present it to the cohort. The program multiplies.' },
+  { num:4, name:'Absorb, Reflect, Multiply', short:'Absorb · Reflect · Multiply', dates:'Dec 7–11', accent:'var(--w4)',
+    days:['DEC 7','DEC 8','DEC 9','DEC 10','DEC 11'],
+    intro:'Not a graduation week — a launch. Reflect on what you built, map where you’re going, design your own AI Activation Program, and present it to the cohort. Finish strong.' },
 ];
 
 /* ══ ACTIVITIES ══ */
@@ -752,7 +757,7 @@ const ACTS = [
     mission:'Using everything you’ve learned — the thinking modes, the data skills, the building capabilities, the reflection practice — design 3–4 themed tracks for your own AI Activation Program. Each track needs a clear theme, a weekly arc, and 3–5 activities that build on each other. Design for your specific sub-team: what they need most, what would land, what pushes them just far enough without losing them. Use AI as your curriculum partner throughout — have it challenge your activity ideas, improve the sequencing, find the gaps, and kill anything that’s a time-waster rather than a skill-builder. (Internal or customer specifics? ACE, Copilot, or SideKick only.)',
     submission:'Your 3–4 track designs with themes, arcs, and activities. Post in the channel.',
     tip:'Before designing any activity, ask AI: “what is the one AI skill that would create the most immediate productivity lift for a CS professional who has never used AI seriously?” Anchor your first track there — start where the participant is, not where the designer wishes they were.',
-    skill:'Using AI as a curriculum design and quality-assurance partner. Designing a program for others forces you to deeply understand what you’ve learned yourself — and that understanding is exactly what Train the Trainer is built on.',
+    skill:'Using AI as a curriculum design and quality-assurance partner. Designing a program for others forces you to deeply understand what you’ve learned yourself — and that understanding is exactly what turns a participant into an activator.',
     },
   { week:4, dow:'THU', mand:false, time:'45 min', emoji:'🏗️', title:'Build the Foundation',
     hook:'From tracks on paper to a program your team could start Monday.',
@@ -766,7 +771,7 @@ const ACTS = [
     mission:'The moment the entire program has been building toward: present your AI Activation Program to Chris and the cohort. Not a summary of what you learned. Not a reflection on three weeks. A real, deployable program you could run with your sub-team starting next week. Cover four things: what your program achieves and for whom; your 3–4 tracks and why you sequenced them that way; one activity from each track you’re most proud of and the skill it builds; and your personal commitment — what you’re doing differently from this point forward as an AI practitioner AND an AI activator. The program doesn’t end today. It multiplies — every person leaves with a program they own and a team they’re ready to activate.',
     submission:'Your program blueprint + your presentation. Post in the channel — with the live link if your blueprint ships on GitHub Pages.',
     tip:'Open with the one moment from the past three weeks where AI genuinely surprised you — not the best output, the moment something shifted. That’s the moment your audience will remember, and the most honest answer to why any of this matters.',
-    skill:'Turning three weeks of learning into a program you can run, a capability you can teach, and a commitment you can keep. That’s what Train the Trainer looks like in the AI era.',
+    skill:'Turning three weeks of learning into a program you can run, a capability you can teach, and a commitment you can keep. That’s what AI activation looks like in practice.',
     },
 ];
 
@@ -816,15 +821,20 @@ function cardHtml(a, accent, idx, date) {
 }
 
 function accentHex(v) {
-  return { 'var(--w1)':'#a78bfa', 'var(--w2)':'#38bdf8', 'var(--w3)':'#2dd4bf', 'var(--w4)':'#f472b6' }[v] || '#a78bfa';
+  return { 'var(--w1)':'#38bdf8', 'var(--w2)':'#5eead4', 'var(--w3)':'#a78bfa', 'var(--w4)':'#e879f9' }[v] || '#38bdf8';
 }
 
 function render() {
   const tabbar = document.getElementById('tabbar');
-  tabbar.innerHTML = WEEKS.map((w,i) =>
+  const tabs = WEEKS.map((w,i) =>
     `<button class="wtab${i===0?' on':''}" id="wtab-${w.num}" onclick="setWeek(${w.num})">
        <span class="wt-num">Week ${w.num}</span>${w.short}
-     </button>`).join('');
+     </button>`);
+  tabs.splice(2, 0,
+    `<span class="wtab brk" aria-label="Thanksgiving break, November 23 to 27, no activities">
+       <span class="wt-num">Nov 23–27</span>🦃 Thanksgiving break
+     </span>`);
+  tabbar.innerHTML = tabs.join('');
 
   const panels = document.getElementById('panels');
   panels.innerHTML = WEEKS.map((w,i) => {
@@ -874,127 +884,116 @@ function setWeek(n) {
 render();
 </script>
 
-<script src="three.min.js" defer></script>
 <script>
-/* ══ WEBGL STARFIELD ══
-   Shader-based twinkling stars with depth + mouse parallax.
-   Degrades gracefully: if three.js or WebGL is unavailable,
-   the CSS star field behind it still shows. */
-window.addEventListener('load', function initStars() {
-  if (typeof THREE === 'undefined') return;
-  const canvas = document.getElementById('stars-canvas');
-  let renderer;
-  try {
-    renderer = new THREE.WebGLRenderer({ canvas, alpha:true, antialias:true });
-  } catch (e) { return; }
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setSize(window.innerWidth, window.innerHeight);
+/* ══ AURORA ══
+   Canvas-2D northern lights: three undulating ribbons rendered to a
+   low-res offscreen buffer and scaled up soft, plus drifting snow sparks.
+   Degrades gracefully: without canvas, the CSS star field still shows. */
+window.addEventListener('load', function initAurora() {
+  const canvas = document.getElementById('fx-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
 
-  const scene  = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 1, 2000);
-  camera.position.z = 320;
+  const DPR = Math.min(window.devicePixelRatio || 1, 2);
+  const off = document.createElement('canvas');
+  const octx = off.getContext('2d');
+  let W, H;
 
-  // star palette: mostly white-lavender, accents of violet / sky / pink
-  const PALETTE = [
-    [0.92,0.91,1.00], [0.92,0.91,1.00], [0.92,0.91,1.00], [0.92,0.91,1.00],
-    [0.82,0.76,1.00],                      // lavender
-    [0.65,0.55,0.98],                      // violet
-    [0.49,0.83,0.99],                      // sky
-    [0.96,0.67,0.99],                      // orchid
+  function resize() {
+    W = canvas.width  = Math.floor(window.innerWidth  * DPR);
+    H = canvas.height = Math.floor(window.innerHeight * DPR);
+    canvas.style.width  = window.innerWidth + 'px';
+    canvas.style.height = window.innerHeight + 'px';
+    off.width  = Math.max(4, Math.floor(W * 0.22));
+    off.height = Math.max(4, Math.floor(H * 0.22));
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // ribbons: emerald, ice-cyan, magenta
+  const RIBBONS = [
+    { c:[52,211,153],  base:.24, amp:.075, thick:.17, f1:1.6, f2:3.2, sp:.085, ph:0.0, a:.52 },
+    { c:[56,189,248],  base:.40, amp:.095, thick:.21, f1:1.2, f2:2.4, sp:.065, ph:2.1, a:.44 },
+    { c:[232,121,249], base:.16, amp:.055, thick:.10, f1:2.1, f2:3.8, sp:.110, ph:4.2, a:.30 },
   ];
 
-  const N = Math.min(2400, Math.max(900, Math.floor(window.innerWidth * window.innerHeight / 800)));
-  const pos    = new Float32Array(N*3);
-  const col    = new Float32Array(N*3);
-  const size   = new Float32Array(N);
-  const phase  = new Float32Array(N);
-  const speed  = new Float32Array(N);
+  // snow sparks
+  const FLAKES = [];
+  const NF = Math.min(130, Math.max(55, Math.floor(window.innerWidth / 13)));
+  for (let i = 0; i < NF; i++) FLAKES.push({
+    x: Math.random(), y: Math.random(),
+    r: 0.6 + Math.random() * 1.6,
+    vy: 0.006 + Math.random() * 0.016,     // screen-heights per second
+    sway: Math.random() * Math.PI * 2,
+    tw: Math.random() * Math.PI * 2,
+    ts: 0.5 + Math.random() * 1.8,
+  });
 
-  for (let i = 0; i < N; i++) {
-    pos[i*3]   = (Math.random()-0.5) * 1400;
-    pos[i*3+1] = (Math.random()-0.5) * 900;
-    pos[i*3+2] = -Math.random() * 500 + 100;
-    const c = PALETTE[Math.floor(Math.random()*PALETTE.length)];
-    col[i*3] = c[0]; col[i*3+1] = c[1]; col[i*3+2] = c[2];
-    // a small population of bright "hero" stars, the rest fine dust
-    size[i]  = Math.random() < 0.08 ? 6.0 + Math.random()*4.5 : 1.8 + Math.random()*2.8;
-    phase[i] = Math.random() * Math.PI * 2;
-    speed[i] = 0.4 + Math.random() * 1.6;
+  // mouse parallax — nudges the ribbon phase
+  let tx = 0;
+  window.addEventListener('pointermove', e => {
+    tx = (e.clientX / window.innerWidth - 0.5) * 0.6;
+  }, { passive: true });
+
+  function drawRibbons(t) {
+    const w = off.width, h = off.height;
+    octx.clearRect(0, 0, w, h);
+    octx.globalCompositeOperation = 'lighter';
+    for (const R of RIBBONS) {
+      const edge = x => h * (
+        R.base
+        + Math.sin((x / w) * Math.PI * R.f1 + t * R.sp + R.ph + tx) * R.amp
+        + Math.sin((x / w) * Math.PI * R.f2 - t * R.sp * 0.6 + R.ph * 1.7) * R.amp * 0.55
+      );
+      octx.beginPath();
+      octx.moveTo(0, edge(0));
+      for (let x = 0; x <= w; x += 4) octx.lineTo(x, edge(x));
+      for (let x = w; x >= 0; x -= 4)
+        octx.lineTo(x, edge(x) + h * R.thick * (1 + 0.35 * Math.sin((x / w) * 6.3 + t * 0.4 + R.ph)));
+      octx.closePath();
+      const g = octx.createLinearGradient(0, h * (R.base - R.amp - .04), 0, h * (R.base + R.thick + R.amp + .12));
+      g.addColorStop(0,   'rgba(' + R.c + ',0)');
+      g.addColorStop(0.3, 'rgba(' + R.c + ',' + R.a + ')');
+      g.addColorStop(1,   'rgba(' + R.c + ',0)');
+      octx.fillStyle = g;
+      octx.fill();
+    }
+    octx.globalCompositeOperation = 'source-over';
   }
 
-  const geo = new THREE.BufferGeometry();
-  geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-  geo.setAttribute('color',    new THREE.BufferAttribute(col, 3));
-  geo.setAttribute('aSize',    new THREE.BufferAttribute(size, 1));
-  geo.setAttribute('aPhase',   new THREE.BufferAttribute(phase, 1));
-  geo.setAttribute('aSpeed',   new THREE.BufferAttribute(speed, 1));
-
-  const mat = new THREE.ShaderMaterial({
-    transparent: true,
-    depthWrite: false,
-    blending: THREE.AdditiveBlending,
-    uniforms: {
-      uTime: { value: 0 },
-      uPx:   { value: Math.min(window.devicePixelRatio, 2) }  // gl_PointSize is in physical px — scale for hi-DPI
-    },
-    vertexShader: `
-      uniform float uPx;
-      attribute float aSize;
-      attribute float aPhase;
-      attribute float aSpeed;
-      attribute vec3  color;
-      varying vec3  vColor;
-      varying float vPhase;
-      varying float vSpeed;
-      void main() {
-        vColor = color; vPhase = aPhase; vSpeed = aSpeed;
-        vec4 mv = modelViewMatrix * vec4(position, 1.0);
-        gl_PointSize = aSize * uPx * (340.0 / -mv.z);
-        gl_Position = projectionMatrix * mv;
-      }`,
-    fragmentShader: `
-      uniform float uTime;
-      varying vec3  vColor;
-      varying float vPhase;
-      varying float vSpeed;
-      void main() {
-        float d = length(gl_PointCoord - 0.5);
-        if (d > 0.5) discard;
-        float glow = pow(smoothstep(0.5, 0.0, d), 1.7);
-        float tw = 0.65 + 0.35 * sin(uTime * vSpeed + vPhase);
-        gl_FragColor = vec4(vColor, glow * tw);
-      }`
-  });
-
-  const stars = new THREE.Points(geo, mat);
-  scene.add(stars);
-
-  // mouse parallax
-  let tx = 0, ty = 0;
-  window.addEventListener('pointermove', e => {
-    tx = (e.clientX / window.innerWidth  - 0.5) * 24;
-    ty = (e.clientY / window.innerHeight - 0.5) * 14;
-  }, { passive:true });
-
-  window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-  });
+  function drawFrame(t, dt) {
+    drawRibbons(t);
+    ctx.clearRect(0, 0, W, H);
+    ctx.save();
+    ctx.globalAlpha = 0.85;
+    if ('filter' in ctx) ctx.filter = 'blur(' + Math.round(9 * DPR) + 'px)';
+    ctx.drawImage(off, 0, 0, W, H);
+    ctx.restore();
+    for (const f of FLAKES) {
+      f.y += f.vy * dt;
+      f.sway += dt * 0.6;
+      if (f.y > 1.02) { f.y = -0.02; f.x = Math.random(); }
+      const x = (f.x + Math.sin(f.sway) * 0.006) * W;
+      const y = f.y * H;
+      const a = 0.25 + 0.3 * (0.5 + 0.5 * Math.sin(t * f.ts + f.tw));
+      ctx.beginPath();
+      ctx.arc(x, y, f.r * DPR, 0, 6.29);
+      ctx.fillStyle = 'rgba(235,248,255,' + a.toFixed(3) + ')';
+      ctx.fill();
+    }
+  }
 
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduced) { mat.uniforms.uTime.value = 1; renderer.render(scene, camera); return; }
+  if (reduced) { drawFrame(1.5, 0); return; }
 
-  const clock = new THREE.Clock();
-  (function tick() {
+  let last = performance.now();
+  (function tick(now) {
     requestAnimationFrame(tick);
-    mat.uniforms.uTime.value = clock.getElapsedTime();
-    stars.rotation.z += 0.00012;
-    camera.position.x += (tx - camera.position.x) * 0.03;
-    camera.position.y += (-ty - camera.position.y) * 0.03;
-    camera.lookAt(0, 0, -200);
-    renderer.render(scene, camera);
-  })();
+    const dt = Math.min(0.05, (now - last) / 1000);
+    last = now;
+    drawFrame(now / 1000, dt);
+  })(last);
 });
 </script>
 
