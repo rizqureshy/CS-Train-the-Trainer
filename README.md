@@ -3,9 +3,14 @@
 The standalone participant site for **AI Activation · Customer Success Cohort 2**
 (Nov 9 – Dec 11, with a Thanksgiving break Nov 23–27 · facilitated by Chris + Rizwan).
 
-One fully self-contained `index.html` — polar-aurora theme: canvas-drawn
-northern-lights ribbons and drifting snow over an arctic-night sky (degrades
-gracefully to a CSS star field without canvas).
+One fully self-contained `index.html`, built on the Equinix program-site
+design system: a dark navy program band with a live "today" pill and
+at-a-glance facts panel, a red-to-blue ribbon, then a light working surface
+with one tab per week and five expanding day cards — the open day wide, the
+rest collapsed to slim spines. The page knows the date: it opens on the
+current week with today's card open, pauses over the Thanksgiving break, and
+`?date=YYYY-MM-DD` previews any day. Every day has a shareable `#/day/...`
+link and arrow keys move between days.
 
 - **Track 1 — Weekly AI Practice**: W1 Rewire Your Thinking (Nov 9–13) ·
   W2 Customer Intelligence (Nov 16–20) · 🦃 Thanksgiving break (Nov 23–27) ·
