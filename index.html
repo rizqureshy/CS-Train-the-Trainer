@@ -374,6 +374,21 @@ footer b { color:var(--text-2); }
 .listen.onband .ls, .listen.onband .ltime { color:var(--on-navy); }
 .listen.onband .lfill { background:linear-gradient(90deg, rgba(255,255,255,.16), rgba(255,255,255,.04)); }
 .week-head .listen { flex-shrink:0; }
+
+/* inline video player */
+.vwrap { grid-column:1 / -1; display:none; }
+.vwrap.on { display:block; }
+.vbox { position:relative; width:100%; aspect-ratio:16/9; background:#000;
+  border-radius:6px; overflow:hidden; }
+.vbox iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
+.vclose { position:absolute; top:10px; right:10px; z-index:2; width:28px; height:28px;
+  border-radius:50%; border:none; cursor:pointer; background:rgba(255,255,255,.92);
+  color:var(--text); font-size:15px; font-weight:700; line-height:1;
+  display:grid; place-items:center; box-shadow:0 2px 8px rgba(0,0,0,.4); }
+.vclose:hover { background:#fff; }
+.vcap { position:absolute; left:12px; bottom:10px; z-index:2; pointer-events:none;
+  font-size:9.5px; font-weight:700; letter-spacing:1.4px; text-transform:uppercase;
+  color:rgba(255,255,255,.85); text-shadow:0 1px 4px rgba(0,0,0,.6); }
 .d-listen { margin-top:12px; position:relative; z-index:1; }
 
 /* ══ RESPONSIVE ══ */
@@ -808,6 +823,29 @@ function listenHtml(key, label, sub, extra) {
   </button>`;
 }
 
+/* ══ INLINE VIDEO ══ */
+const VIDEOS = {
+  w3d4: { yt:'Oaj3RBIoGFc', title:'GitHub Basics Made Easy', by:'Skill Foundry' },
+};
+function openVideo(id) {
+  stopBrief();
+  const v = VIDEOS[id]; if (!v) return;
+  const wrap = document.getElementById('vwrap-' + id); if (!wrap) return;
+  wrap.querySelector('.vslot').innerHTML =
+    '<iframe src="https://www.youtube.com/embed/' + v.yt + '?rel=0" title="' + v.title +
+    '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+  wrap.classList.add('on');
+  const b = document.getElementById('vbtn-' + id); if (b) b.style.display = 'none';
+}
+function closeVideos() {
+  Object.keys(VIDEOS).forEach(id => {
+    const wrap = document.getElementById('vwrap-' + id); if (!wrap) return;
+    wrap.classList.remove('on');
+    wrap.querySelector('.vslot').innerHTML = '';
+    const b = document.getElementById('vbtn-' + id); if (b) b.style.display = '';
+  });
+}
+
 /* ══ RENDER ══ */
 const open = { 1:0, 2:0, 3:0, 4:0 };
 let curWeek = 1;
@@ -844,11 +882,25 @@ function cardHtml(d) {
       <div class="d-wm">${d.dayN}</div>
     </div>
     <div class="dbody">
+      ${VIDEOS[d.id] ? `<div class="vwrap" id="vwrap-${d.id}">
+        <div class="vbox">
+          <button class="vclose" onclick="closeVideos()" aria-label="Close video">\u00d7</button>
+          <div class="vslot"></div>
+          <span class="vcap">${VIDEOS[d.id].title} \u00b7 ${VIDEOS[d.id].by}</span>
+        </div>
+      </div>` : ''}
       <div>
         <div class="col-label">The mission</div>
         <div class="steps">${stepsHtml(d.mission)}</div>
       </div>
       <div class="rcol">
+        ${VIDEOS[d.id] ? `<div>
+          <div class="col-label" style="margin-bottom:8px">Watch first</div>
+          <button class="listen red" id="vbtn-${d.id}" onclick="openVideo('${d.id}')">
+            <span class="licon"><span class="lic">&#9654;</span></span>
+            <span class="lmeta"><span class="ll">${VIDEOS[d.id].title}</span><span class="ls">${VIDEOS[d.id].by} \u00b7 YouTube \u00b7 plays in the card</span></span>
+          </button>
+        </div>` : ''}
         ${d.skill ? `<div class="skilltag"><div class="tl">The AI skill</div><p>${esc(d.skill)}</p></div>` : ''}
         <div class="keep">
           <div class="kl"><span class="ki">↑</span>Your submission</div>
@@ -925,6 +977,7 @@ function applyOpen(w) {
 function setOpen(w, j, silent) {
   if (j < 0 || j > 4) return;
   stopBrief();
+  closeVideos();
   open[w] = j;
   applyOpen(w);
   const d = DAYS.find(x => x.week === w && x.di === j);
@@ -933,6 +986,7 @@ function setOpen(w, j, silent) {
 
 function setWeek(n, silent) {
   stopBrief();
+  closeVideos();
   curWeek = n;
   document.querySelectorAll('.wtab').forEach(b => b.classList.remove('on'));
   const t = document.getElementById('wtab-' + n);
